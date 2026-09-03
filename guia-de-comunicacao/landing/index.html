@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cota de Apoiador IBITI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root{
     --mist:#EEF1EB; --card:#F8F9F6; --paper:#FFFFFF;
@@ -61,9 +61,10 @@
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--canopy)}
   h1,h2{font-family:var(--display);font-weight:400;letter-spacing:-.018em;line-height:1;margin:0 0 26px;text-wrap:balance}
   h1{font-size:clamp(46px,7vw,92px);max-width:11ch}
-  h1 em{font-style:italic;font-weight:400;color:#1B4232}
+  h1 em{font-style:italic;font-weight:500;color:#1B4232;letter-spacing:0;padding:0 .04em}
   h2{font-size:clamp(38px,5.2vw,64px);max-width:14ch}
-  h2 em{font-style:italic;font-weight:500;color:#173A2C}
+  h2 em{font-style:italic;font-weight:600;color:#173A2C;letter-spacing:0;padding:0 .05em;text-shadow:0 1px 0 rgba(255,255,255,.5)}
+  #numeros h2,#comprar h2,#usar h2,#nao h2{white-space:nowrap}
 
   /* revelação por rolagem */
   .rv{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease);transition-delay:var(--d,0s)}
