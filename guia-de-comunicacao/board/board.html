@@ -170,8 +170,7 @@
   .pontos.num li{grid-template-columns:28px 1fr}
   .pontos.num li i{width:24px;height:24px;border-radius:50%;background:var(--moss);color:var(--canopy);font-style:normal;font-family:var(--display);font-weight:600;font-size:14px;display:grid;place-items:center;margin-top:0}
   .pontos.nao li i{background:var(--amber)}
-  .phnav{display:flex;justify-content:space-between;margin-top:18px;padding-top:12px;border-top:1px solid var(--quartz2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
-  .phnav b{color:var(--canopy);font-weight:700}
+  .menu-chip{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--quartz);border-radius:999px;padding:3px 9px}
   .checkmark{width:44px;height:44px;border-radius:50%;background:var(--moss);color:var(--canopy);display:grid;place-items:center;font-size:22px;margin:6px 0 10px}
   .mark{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:700;font-family:var(--body);vertical-align:middle;margin-left:6px;flex:none;line-height:1}
   .notes{font-size:14px;line-height:1.5;padding-top:6px}
@@ -270,7 +269,7 @@
       <p class="lead">Princípios, tom de voz, terminologia, mensagens do sistema e o fluxo de compra, recebimento e resgate da cota de apoiador — tela a tela, com a decisão de comunicação por trás de cada texto.</p>
     </div>
     <aside class="meta">
-      <div><b>Versão 1.3</b> · 02/09/2026 · português do Brasil · landing única com cinco seções animadas e páginas de detalhe; copy mínima para Helena e Beatriz</div>
+      <div><b>Versão 1.4</b> · 03/09/2026 · português do Brasil · landing única com cinco seções animadas e páginas de detalhe; copy mínima para Helena e Beatriz</div>
       <div><b>Jornada principal:</b> assistida (blockchain invisível, carteira guardada pela IBITI). <b>Variações:</b> jornada expert, parceiro do território, painel público.</div>
       <div><b>Base:</b> whitepaper (Sprint 2), personas e curva de emoção (Sprint 1), riscos éticos (Sprint 2), contrato IBIToken v1.</div>
       <div><b>Voz:</b> sereno, claro, franco, discreto — nunca vendedor.</div>
@@ -433,12 +432,11 @@
       <article class="screen" data-id="L1">
         <div class="phone">
           <div class="status"><span>14:21</span><span>•••</span></div>
-          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="menu-chip">Menu</span></div>
           <div class="ph-eyebrow">IBITI Glamping · Serra da Mantiqueira, MG</div>
           <div class="h1" style="font-size:26px">Cota de apoiador do IBITI Glamping</div>
           <ul class="pontos "><li><i></i><span><b>1</b> unidade = <b>1</b> hospedagem no Glamping</span></li><li><i></i><span>Passaporte IBITI incluído</span></li><li><i></i><span>Parte do royalty do território, a cada semestre</span></li><li><i></i><span>Válida de <b>2027</b> a <b>2030</b></span></li></ul>
           <a class="btn primary">Quero apoiar<span class="mark">1</span></a><a class="btn secondary sm">Ver os números</a>
-<div class="phnav"><span>Tela 1 de 5</span><b>Próximo ›</b></div>
         </div>
         <div class="notes"><div class="stage-l">L1 · Landing, seção 1 — Início</div><h3>O nome da coisa e quatro números</h3>
           <ol><li><span class="mark">1</span><span>Título é o nome da cota; nada de "token", "blockchain" ou conceito.</span></li><li><span class="mark">2</span><span>Quatro tópicos de uma linha, com os números que importam, e um botão.</span></li></ol>
@@ -449,12 +447,11 @@
       <article class="screen" data-id="L2">
         <div class="phone">
           <div class="status"><span>14:22</span><span>•••</span></div>
-          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="menu-chip">Menu</span></div>
           <div class="ph-eyebrow">Cota de apoiador</div>
           <div class="h1" style="font-size:26px">Em números</div>
           <ul class="pontos "><li><i></i><span><b>150</b> unidades, emissão única</span></li><li><i></i><span>Máximo de <b>20</b> por pessoa</span></li><li><i></i><span><b>R$ 53.008,93</b> por unidade</span></li><li><i></i><span><b>15%</b> do faturamento do Glamping vai ao território</span></li><li><i></i><span><b>8</b> pagamentos de royalty, um por semestre</span></li></ul>
 <div class="help">Valor por unidade é referência do modelo, a confirmar.<span class="mark">1</span></div>          <a class="btn primary">Como comprar<span class="mark">2</span></a>
-<div class="phnav"><span>Tela 2 de 5</span><b>Próximo ›</b></div>
         </div>
         <div class="notes"><div class="stage-l">L2 · Landing, seção 2 — Em números</div><h3>Só números</h3>
           <ol><li><span class="mark">1</span><span>Quantidade, teto, preço, alíquota e pagamentos — cinco linhas, sem parágrafo.</span></li><li><span class="mark">2</span><span>O preço leva uma nota de referência em cinza; o botão já leva à compra.</span></li></ol>
@@ -465,12 +462,11 @@
       <article class="screen" data-id="L3">
         <div class="phone">
           <div class="status"><span>14:23</span><span>•••</span></div>
-          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="menu-chip">Menu</span></div>
           <div class="ph-eyebrow">Cota de apoiador</div>
           <div class="h1" style="font-size:26px">Como comprar</div>
           <ul class="pontos num"><li><i>1</i><span>Fale com a IBITI — verificação em até <b>5</b> dias úteis</span></li><li><i>2</i><span>Escolha de <b>1</b> a <b>20</b> unidades</span></li><li><i>3</i><span>Pague por transferência bancária</span></li><li><i>4</i><span>Receba seu Passaporte — a IBITI guarda tudo por você<span class="mark">1</span></span></li></ul>
           <a class="btn primary">Quero apoiar</a><a class="btn secondary sm">Como usar</a>
-<div class="phnav"><span>Tela 3 de 5</span><b>Próximo ›</b></div>
         </div>
         <div class="notes"><div class="stage-l">L3 · Landing, seção 3 — Como comprar</div><h3>Quatro passos, um verbo cada</h3>
           <ol><li><span class="mark">1</span><span>Quem guarda as unidades aparece como passo, não como conceito de custódia.</span></li></ol>
@@ -481,12 +477,11 @@
       <article class="screen" data-id="L4">
         <div class="phone">
           <div class="status"><span>14:24</span><span>•••</span></div>
-          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="done"></i><i class="on"></i><i class=""></i></span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="menu-chip">Menu</span></div>
           <div class="ph-eyebrow">Cota de apoiador</div>
           <div class="h1" style="font-size:26px">Como usar</div>
           <ul class="pontos "><li><i></i><span>Hospedagem: peça o voucher no seu Passaporte</span></li><li><i></i><span>Royalty: extrato e pagamento a cada semestre</span></li><li><i></i><span>Unidades só podem ser enviadas a outros membros<span class="mark">1</span></span></li><li><i></i><span>Perdeu o acesso? A IBITI recupera</span></li></ul>
           <a class="btn primary">Próximo</a>
-<div class="phnav"><span>Tela 4 de 5</span><b>Próximo ›</b></div>
         </div>
         <div class="notes"><div class="stage-l">L4 · Landing, seção 4 — Como usar</div><h3>Três usos e a rede de proteção</h3>
           <ol><li><span class="mark">1</span><span>A regra de circulação do contrato vira uma linha: só para outros membros.</span></li></ol>
@@ -497,12 +492,11 @@
       <article class="screen" data-id="L5">
         <div class="phone">
           <div class="status"><span>14:25</span><span>•••</span></div>
-          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="on"></i></span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="menu-chip">Menu</span></div>
           <div class="ph-eyebrow">Cota de apoiador</div>
           <div class="h1" style="font-size:26px">O que não é</div>
           <ul class="pontos nao"><li><i></i><span>Não é investimento com retorno garantido</span></li><li><i></i><span>Não é moeda para negociar</span></li><li><i></i><span>Não financia a obra do Glamping</span></li><li><i></i><span>Não continua depois de <b>2030</b><span class="mark">1</span></span></li></ul>
           <a class="btn primary">Quero apoiar</a><a class="btn secondary sm">Falar com o concierge</a><p class="center" style="margin:8px 0 0"><span class="link">Ler o whitepaper</span></p>
-<div class="phnav"><span>Tela 5 de 5</span><b>Quero apoiar</b></div>
         </div>
         <div class="notes"><div class="stage-l">L5 · Landing, seção 5 — O que não é</div><h3>Quatro "não" curtos</h3>
           <ol><li><span class="mark">1</span><span>A régua de honestidade fecha a landing; o whitepaper é um link, não um bloco.</span></li></ol>
@@ -901,7 +895,7 @@
   </section>
 
   <footer>
-    <div>Guia de Comunicação · IBIToken · Grupo G01 · Inteli ADMD7 · Projeto parceiro IBITI · versão 1.3 · 02/09/2026</div>
+    <div>Guia de Comunicação · IBIToken · Grupo G01 · Inteli ADMD7 · Projeto parceiro IBITI · versão 1.4 · 03/09/2026</div>
     <div>Documento completo: <code>guia-de-comunicacao/README.md</code> · Contrato: <code>smart-contract/contracts/IBIToken.sol</code></div>
   </footer>
 </div>

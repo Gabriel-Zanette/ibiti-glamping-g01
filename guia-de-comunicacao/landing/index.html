@@ -42,21 +42,28 @@
   header.top{position:fixed;top:0;left:0;right:0;z-index:5;background:color-mix(in srgb,var(--mist) 78%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--quartz) 70%,transparent)}
   header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
   .brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.06em;text-decoration:none;color:var(--ink)}
-  .progress{position:absolute;left:0;top:0;height:2px;background:var(--canopy);width:0;transition:width .15s linear}
-  .dots{display:flex;gap:8px;align-items:center}
-  .dots a{width:8px;height:8px;border-radius:50%;background:var(--quartz);display:block;transition:all .35s var(--ease)}
-  .dots a.on{background:var(--canopy);width:24px;border-radius:4px}
-  .dots a.done{background:var(--canopy);opacity:.45}
-  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+  nav.links{display:flex;gap:26px;align-items:center}
+  nav.links a{text-decoration:none;color:var(--ink2);font-size:15px;font-weight:700;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  nav.links a:hover,nav.links a[aria-current="page"]{color:var(--canopy);border-bottom-color:var(--canopy)}
+  .right{display:flex;align-items:center;gap:10px}
+  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700;white-space:nowrap}
+  .menu-btn{display:none;align-items:center;gap:8px;font:700 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--quartz);border-radius:12px;padding:8px 12px;cursor:pointer}
+  .menu-btn i{width:14px;height:2px;background:currentColor;position:relative;display:block}
+  .menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;width:14px;height:2px;background:currentColor}
+  .menu-btn i::before{top:-5px} .menu-btn i::after{top:5px}
+  .menu-panel{display:grid;gap:2px;padding:8px 22px 14px;border-top:1px solid var(--quartz2);background:color-mix(in srgb,var(--mist) 96%,transparent)}
+  .menu-panel a{text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;padding:12px 0;border-bottom:1px solid var(--quartz2)}
+  .menu-panel a:last-child{border-bottom:0}
+  .menu-panel[hidden]{display:none}
 
   section.s{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;padding:104px 0 72px;position:relative}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--canopy);margin-bottom:14px;display:flex;align-items:center;gap:10px}
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--canopy)}
   h1,h2{font-family:var(--display);font-weight:400;letter-spacing:-.018em;line-height:1;margin:0 0 26px;text-wrap:balance}
   h1{font-size:clamp(46px,7vw,92px);max-width:11ch}
-  h1 em{font-style:italic;font-weight:300;color:var(--canopy)}
+  h1 em{font-style:italic;font-weight:400;color:#1B4232}
   h2{font-size:clamp(38px,5.2vw,64px);max-width:14ch}
-  h2 em{font-style:italic;font-weight:300;color:var(--canopy)}
+  h2 em{font-style:italic;font-weight:500;color:#173A2C}
 
   /* revelação por rolagem */
   .rv{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease);transition-delay:var(--d,0s)}
@@ -131,7 +138,7 @@
   @container page (max-width:860px){
     html{scroll-snap-type:y proximity}
     .wrap{padding:0 22px}
-    header.top .wrap{height:56px} .dots{display:none}
+    header.top .wrap{height:56px} nav.links{display:none} .menu-btn{display:inline-flex}
     section.s{padding:84px 0 56px;min-height:100svh}
     .hero{grid-template-columns:1fr;gap:24px}
     .tag{justify-self:start;transform:none;min-width:0;padding:14px 16px} .tag .v{font-size:30px}
@@ -191,12 +198,12 @@
 
 <div class="page">
 <header class="top">
-  <div class="progress" id="progress"></div>
   <div class="wrap">
     <a class="brand" href="#inicio">IBITI</a>
-    <nav class="dots" aria-label="Seções"><a href="#inicio" class="on" aria-label="Início"></a><a href="#numeros" aria-label="Em números"></a><a href="#comprar" aria-label="Como comprar"></a><a href="#usar" aria-label="Como usar"></a><a href="#nao" aria-label="O que não é"></a></nav>
-    <a class="mini" href="#comprar">Quero apoiar</a>
+    <nav class="links" aria-label="Páginas"><a href="como-funciona.html">Como funciona</a><a href="perguntas.html">Perguntas frequentes</a><a href="transparencia.html">Transparência</a></nav>
+    <div class="right"><a class="mini" href="#comprar">Quero apoiar</a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><i></i>Menu</button></div>
   </div>
+  <div class="menu-panel" id="menu" hidden><a href="como-funciona.html">Como funciona</a><a href="perguntas.html">Perguntas frequentes</a><a href="transparencia.html">Transparência</a></div>
 </header>
 
 <!-- S1 · início -->
@@ -298,9 +305,9 @@
   var q = new URLSearchParams(location.search);
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sections = Array.prototype.slice.call(document.querySelectorAll('section.s'));
-  var dots = Array.prototype.slice.call(document.querySelectorAll('.dots a'));
   var layers = Array.prototype.slice.call(document.querySelectorAll('.scene .layer'));
-  var progress = document.getElementById('progress');
+  var menuBtn = document.querySelector('.menu-btn'), menu = document.getElementById('menu');
+  menuBtn.addEventListener('click', function () { var open = menu.hidden; menu.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open)); });
 
   // formatação dos contadores
   function fmt(v, f) {
@@ -327,7 +334,6 @@
       if (en.isIntersecting) {
         en.target.classList.add('in');
         document.body.dataset.s = n;
-        dots.forEach(function (d, i) { d.className = (i + 1 === +n) ? 'on' : (i + 1 < +n ? 'done' : ''); });
         en.target.querySelectorAll('.count').forEach(countUp);
       } else if (!document.body.classList.contains('export')) {
         en.target.classList.remove('in');
@@ -341,8 +347,7 @@
   function onScroll() {
     if (ticking) return; ticking = true;
     requestAnimationFrame(function () {
-      var y = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+      var y = window.scrollY;
       if (!reduce) layers.forEach(function (l) { l.style.transform = 'translateY(' + (-y * parseFloat(l.dataset.p)).toFixed(1) + 'px)'; });
       ticking = false;
     });
@@ -363,7 +368,6 @@
     document.querySelector('.page').style.height = frame + 'px';
     var pg = document.querySelector('.page');
     document.querySelectorAll('.grain, .scene').forEach(function (s) { s.style.height = frame + 'px'; pg.insertBefore(s, pg.firstChild); });
-    dots.forEach(function (d, i) { d.className = (i + 1 === tela) ? 'on' : (i + 1 < tela ? 'done' : ''); });
     target.querySelectorAll('.count').forEach(function (el) { el.textContent = fmt(parseFloat(el.dataset.to), el.dataset.fmt); });
     var foot = document.querySelector('footer'); if (tela !== 5) foot.parentNode.style.display = 'none';
   }

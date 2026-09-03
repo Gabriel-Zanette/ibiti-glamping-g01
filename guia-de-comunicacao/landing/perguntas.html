@@ -22,8 +22,19 @@
   header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--mist) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--quartz2)}
   header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
   .brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.06em;text-decoration:none;color:var(--ink)}
-  .back{font-size:14px;color:var(--ink2);text-decoration:none} .back:hover{color:var(--canopy)}
-  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+  nav.links{display:flex;gap:22px;align-items:center}
+  nav.links a{text-decoration:none;color:var(--ink2);font-size:15px;font-weight:700;padding:6px 0;border-bottom:2px solid transparent}
+  nav.links a:hover,nav.links a[aria-current="page"]{color:var(--canopy);border-bottom-color:var(--canopy)}
+  .right{display:flex;align-items:center;gap:10px}
+  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700;white-space:nowrap}
+  .menu-btn{display:none;align-items:center;gap:8px;font:700 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--quartz);border-radius:12px;padding:8px 12px;cursor:pointer}
+  .menu-btn i{width:14px;height:2px;background:currentColor;position:relative;display:block}
+  .menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;width:14px;height:2px;background:currentColor}
+  .menu-btn i::before{top:-5px} .menu-btn i::after{top:5px}
+  .menu-panel{display:grid;gap:2px;padding:8px 20px 14px;border-top:1px solid var(--quartz2)}
+  .menu-panel a{text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;padding:12px 0;border-bottom:1px solid var(--quartz2)}
+  .menu-panel a:last-child{border-bottom:0}
+  .menu-panel[hidden]{display:none}
   .hero{padding:64px 0 28px}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--canopy);margin-bottom:12px;display:flex;align-items:center;gap:10px}
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--canopy)}
@@ -66,7 +77,7 @@
   .nota{background:var(--amberTint);border-left:3px solid var(--amber);border-radius:10px;padding:12px 16px;font-size:15px;color:var(--ink2)}
   footer{padding:26px 0 36px;border-top:1px solid var(--quartz2);margin-top:24px;font-size:13px;color:var(--ink3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .rv{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)} .rv.in{opacity:1;transform:none}
-  @container page (max-width:820px){ .wrap{padding:0 20px} .cards,.two,.kpis{grid-template-columns:1fr 1fr} .hero{padding:44px 0 20px} h1{font-size:40px} }
+  @container page (max-width:820px){ .wrap{padding:0 20px} .cards,.two,.kpis{grid-template-columns:1fr 1fr} .hero{padding:44px 0 20px} h1{font-size:40px} nav.links{display:none} .menu-btn{display:inline-flex} }
   @container page (max-width:520px){ .cards,.two,.kpis{grid-template-columns:1fr} }
   @media (prefers-reduced-motion:reduce){ .rv{opacity:1;transform:none;transition:none} html{scroll-behavior:auto} }
   body.export .rv{opacity:1;transform:none;transition:none}
@@ -74,7 +85,7 @@
 </head>
 <body>
 <div class="page">
-<header class="top"><div class="wrap"><a class="brand" href="index.html">IBITI</a><a class="back" href="index.html">‹ Página inicial</a><a class="mini" href="index.html#comprar">Quero apoiar</a></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">IBITI</a><nav class="links" aria-label="Páginas"><a href="index.html">Início</a><a href="como-funciona.html">Como funciona</a><a href="perguntas.html" aria-current="page">Perguntas frequentes</a><a href="transparencia.html">Transparência</a></nav><div class="right"><a class="mini" href="index.html#comprar">Quero apoiar</a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><i></i>Menu</button></div></div><div class="menu-panel" id="menu" hidden><a href="index.html">Início</a><a href="como-funciona.html">Como funciona</a><a href="perguntas.html" aria-current="page">Perguntas frequentes</a><a href="transparencia.html">Transparência</a></div></header>
 <main class="wrap">
   <div class="hero rv"><div class="eyebrow">Cota de apoiador</div><h1>Perguntas <em>frequentes</em></h1><p class="lead">Respostas curtas para as dúvidas mais comuns antes de apoiar.</p></div>
 
@@ -104,6 +115,7 @@
   var q=new URLSearchParams(location.search);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});},{threshold:.15});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var mb=document.querySelector('.menu-btn'), mn=document.getElementById('menu'); if(mb&&mn){mb.addEventListener('click',function(){var o=mn.hidden; mn.hidden=!o; mb.setAttribute('aria-expanded',String(o));});}
   var w=q.get('w'); if(w){document.querySelector('.page').style.width=w+'px';document.body.style.background='transparent';}
   if(q.get('svg')||q.get('measure')){document.body.classList.add('export');}
   if(q.get('measure')){setTimeout(function(){document.title='H='+Math.ceil(document.querySelector('.page').getBoundingClientRect().height);},600);}

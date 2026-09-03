@@ -6,7 +6,7 @@
 > Riscos Éticos e Impacto (Sprint 2) e a implementação v1 do contrato IBIToken (`smart-contract/`).
 > **Formato:** este documento + landing page ([`landing/index.html`](landing/index.html)) + board visual com o
 > fluxo compra → recebimento → resgate ([`board/index.html`](board/index.html)) + telas em SVG e PNG
-> (`mockups/`) + tasks para o issue board. **Versão 1.3 (02/09/2026):** landing de página única com cinco seções em
+> (`mockups/`) + tasks para o issue board. **Versão 1.4 (03/09/2026):** landing de página única com cinco seções em
 > tópicos, animação de rolagem e cena do território, mais três páginas de detalhe (como funciona, perguntas,
 > transparência); referências de mercado na seção 13.
 
@@ -534,7 +534,7 @@ termo novo entra primeiro na seção 5; qualquer mensagem nova entra na seção 
    tópicos e botões aparecem em cascata (deslocamento de 26 px para cima e opacidade, 0,75 s, atraso de 80 ms
    entre itens); cena de fundo em parallax (três camadas, 5%, 12%, 22% e 36% da rolagem) com mudança de tom por
    seção (1,2 s); números da seção 2 contam até o valor final em 1,3 s; trilho da seção 3 se desenha em 1,3 s;
-   barra de progresso e pontos no cabeçalho; tudo estático com `prefers-reduced-motion`.
+   navegação entre páginas na barra do topo no cabeçalho; tudo estático com `prefers-reduced-motion`.
 
 ---
 
