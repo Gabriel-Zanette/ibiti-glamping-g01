@@ -1,0 +1,17 @@
+# Dependências
+/node_modules
+
+# Saída de compilação / artefatos do Hardhat
+/dist
+/artifacts
+/cache
+/types
+/coverage
+
+# Deployments do Ignition em redes locais (mantém os de Sepolia versionados)
+/ignition/deployments/chain-31337
+
+# Segredos
+.env
+.env.*
+!.env.example

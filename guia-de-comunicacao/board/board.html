@@ -1,0 +1,939 @@
+<title>Como o Território Fala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --mist:#EEF1EB; --card:#F8F9F6; --paper:#FFFFFF;
+    --ink:#15211B; --ink2:#4A574F; --ink3:#77837C;
+    --canopy:#1E4A38; --canopy2:#2E6A50;
+    --amber:#7B4B1F; --amberTint:#EFE3D5;
+    --quartz:#C8CEC4; --quartz2:#E3E7E0;
+    --moss:#DDE6DC; --ochre:#A6792B; --ochreTint:#F2EAD8; --brick:#8C3B31; --brickTint:#F1E1DE;
+    --display:'Fraunces','Iowan Old Style',Georgia,'Times New Roman',serif;
+    --body:'Atkinson Hyperlegible','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --mono:'IBM Plex Mono',Menlo,Consolas,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--canopy)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .board{max-width:1440px;margin:0 auto;padding:0 40px 96px}
+  /* ── navigation ─────────────────────────────────────────── */
+  nav.idx{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--mist) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--quartz);margin:0 -40px;padding:10px 40px;display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+  nav.idx a{text-decoration:none;color:var(--ink2)} nav.idx a:hover{color:var(--canopy)}
+  /* ── cover ──────────────────────────────────────────────── */
+  .cover{padding:72px 0 56px;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:end}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--canopy)}
+  .cover h1{font-family:var(--display);font-weight:500;font-size:clamp(44px,6vw,76px);line-height:.98;letter-spacing:-.015em;margin:14px 0 18px;text-wrap:balance}
+  .cover h1 em{font-style:italic;font-weight:400;color:var(--canopy)}
+  .cover .lead{font-size:18px;max-width:60ch;color:var(--ink2);margin:0}
+  .meta{border-left:1px solid var(--quartz);padding-left:24px;font-size:13.5px;color:var(--ink2);display:grid;gap:8px}
+  .meta b{color:var(--ink);font-weight:700}
+  .meta .sw{display:inline-flex;gap:6px;margin-top:6px;background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:5px}
+  .meta .sw i{width:22px;height:22px;border-radius:4px;border:1px solid rgba(21,33,27,.12)}
+  /* ── bands ──────────────────────────────────────────────── */
+  section.band{padding:56px 0 24px;border-top:1px solid var(--quartz)}
+  .band-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:start;margin-bottom:32px}
+  .band-head h2{font-family:var(--display);font-weight:500;font-size:36px;line-height:1.08;margin:8px 0 0;letter-spacing:-.01em;text-wrap:balance}
+  .band-head p{margin:0;max-width:65ch;color:var(--ink2);font-size:15.5px}
+  h3.sub{font-family:var(--display);font-weight:500;font-size:24px;margin:28px 0 14px}
+  /* ── one page ───────────────────────────────────────────── */
+  .quote{font-family:var(--display);font-size:26px;line-height:1.3;font-weight:400;max-width:34ch;margin:0 0 28px;color:var(--ink)}
+  .quote b{font-weight:600;color:var(--canopy)}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .tile{background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:20px 22px}
+  .tile h4{font-family:var(--display);font-weight:600;font-size:19px;margin:0 0 8px}
+  .tile p{margin:0;color:var(--ink2);font-size:14.5px}
+  .tile .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--amber);display:block;margin-bottom:10px}
+  .isnt{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--quartz);border-radius:6px;overflow:hidden;background:var(--paper)}
+  .isnt > div{padding:18px 22px}
+  .isnt > div + div{border-left:1px solid var(--quartz)}
+  .isnt h4{margin:0 0 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-family:var(--mono)}
+  .isnt ul{margin:0;padding-left:18px;color:var(--ink2);font-size:14.5px;display:grid;gap:6px}
+  .isnt .yes h4{color:var(--canopy)} .isnt .no h4{color:var(--brick)}
+  /* ── principles ─────────────────────────────────────────── */
+  .princ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .princ .tile p.ex{margin-top:10px;padding-top:10px;border-top:1px dashed var(--quartz);font-size:13.5px}
+  .princ .tile p.ex::before{content:"Aplicado · ";font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+  /* ── tone ───────────────────────────────────────────────── */
+  .dims{display:grid;gap:14px;max-width:720px}
+  .dim{display:grid;grid-template-columns:150px 1fr 150px;align-items:center;gap:14px;font-size:13.5px;color:var(--ink2)}
+  .dim .track{height:2px;background:var(--quartz);position:relative}
+  .dim .track i{position:absolute;top:-6px;width:14px;height:14px;border-radius:50%;background:var(--canopy);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--canopy)}
+  .dim .r{text-align:right}
+  .pairs{display:grid;gap:12px;margin-top:8px}
+  .pair{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:14px 18px;font-size:14px}
+  .pair .ok::before,.pair .no::before{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+  .pair .ok::before{content:"Assim";color:var(--canopy)} .pair .no::before{content:"Não assim";color:var(--brick)}
+  .pair .why{color:var(--ink2);font-size:13px}
+  .moments{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--quartz)}
+  .moments th,.moments td{padding:10px 14px;border-bottom:1px solid var(--quartz2);text-align:left;vertical-align:top}
+  .moments th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);font-weight:500}
+  .moments td:first-child{font-weight:700;white-space:nowrap}
+  .moments td:nth-child(2){color:var(--canopy);white-space:nowrap}
+  .moments td:last-child{color:var(--ink2)}
+  /* ── terminology ────────────────────────────────────────── */
+  .terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}
+  .term{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--quartz2);font-size:14px}
+  .term .c{color:var(--ink2)}
+  .term .use{font-weight:700} .term .use small{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--ink3);margin-left:6px}
+  .term .avoid{color:var(--brick);font-size:13px;margin-top:2px}
+  .term .avoid::before{content:"evitar: ";color:var(--ink3);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  /* ── journey ────────────────────────────────────────────── */
+  .journey{background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:22px 24px 8px;overflow-x:auto}
+  .journey svg{display:block;width:100%;height:auto;min-width:900px}
+  .stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:12px;min-width:900px}
+  .stage{font-size:13px;color:var(--ink2);border-top:2px solid var(--quartz);padding-top:8px}
+  .stage b{display:block;color:var(--ink);font-size:14px}
+  .stage em{display:block;font-style:normal;color:var(--canopy);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin:4px 0}
+  /* ── screens ────────────────────────────────────────────── */
+  .screens{display:grid;grid-template-columns:repeat(auto-fill,minmax(640px,1fr));gap:56px 40px;margin-top:8px}
+  .screen{display:grid;grid-template-columns:360px minmax(0,1fr);gap:26px;align-items:start}
+  .phone{width:360px;background:var(--paper);border:1px solid var(--quartz);border-radius:30px;padding:12px 16px 22px;box-shadow:0 1px 0 rgba(21,33,27,.05),0 18px 34px -22px rgba(21,33,27,.35);font-size:13.5px;line-height:1.45;min-height:640px}
+  .status{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);padding:2px 6px 10px;font-family:var(--mono)}
+  .topbar{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:4px 0 12px}
+  .topbar .back{width:26px;height:26px;border-radius:50%;border:1px solid var(--quartz);display:grid;place-items:center;font-weight:400;color:var(--ink2)}
+  .topbar .brand{font-family:var(--display);font-weight:600;letter-spacing:.04em}
+  .topbar .av{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--moss);color:var(--canopy);display:grid;place-items:center;font-size:12px}
+  .ph-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--canopy)}
+  .h1{font-family:var(--display);font-size:22px;line-height:1.18;font-weight:600;margin:6px 0 8px;text-wrap:balance}
+  .p{color:var(--ink2);margin:0 0 12px}
+  .card{background:var(--card);border:1px solid var(--quartz);border-radius:14px;padding:12px 14px;margin:10px 0}
+  .card h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink2);margin:0 0 8px;font-weight:700}
+  .olist{margin:0;padding-left:0;list-style:none;display:grid;gap:8px;counter-reset:f}
+  .olist li{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start}
+  .olist .num{width:20px;height:20px;border-radius:50%;background:var(--canopy);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px;font-style:normal}
+  .ulist{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink)}
+  .btn{display:block;width:100%;text-align:center;padding:12px;border-radius:12px;font-weight:700;font-size:14px;margin-top:12px;border:1px solid transparent}
+  .btn.primary{background:var(--canopy);color:#fff}
+  .btn.secondary{background:transparent;border-color:var(--canopy);color:var(--canopy)}
+  .btn.disabled{background:var(--quartz2);color:var(--ink3);border-color:var(--quartz2)}
+  .btn.sm{padding:9px;font-size:13px;margin-top:8px}
+  .link{color:var(--canopy);text-decoration:underline;font-size:13px}
+  .center{text-align:center}
+  .field{margin:12px 0}
+  .label{font-size:12.5px;font-weight:700;margin-bottom:6px}
+  .input{border:1px solid var(--quartz);border-radius:10px;padding:10px 12px;font-size:14px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .input .ph{color:var(--ink3)}
+  .input .mono{font-family:var(--mono);font-size:13px}
+  .help{font-size:12px;color:var(--ink2);margin-top:5px}
+  .stepper{display:flex;align-items:center;gap:16px}
+  .stepper b{font-size:24px;font-family:var(--display);min-width:28px;text-align:center}
+  .stepper span{width:34px;height:34px;border:1px solid var(--quartz);border-radius:50%;display:grid;place-items:center;font-size:18px;color:var(--canopy)}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--quartz2);align-items:baseline}
+  .row:last-child{border-bottom:0}
+  .row .k{color:var(--ink2)} .row .v{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
+  .row .v.strong{font-weight:500;color:var(--ink)}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .pill.ok{background:var(--moss);color:var(--canopy)} .pill.warn{background:var(--ochreTint);color:var(--ochre)} .pill.err{background:var(--brickTint);color:var(--brick)} .pill.neutral{background:var(--quartz2);color:var(--ink2)}
+  .alert{border-radius:12px;padding:12px 14px;margin:10px 0;border:1px solid var(--quartz)}
+  .alert.err{background:var(--brickTint);border-color:#DDBFB9} .alert.warn{background:var(--ochreTint);border-color:#E1CFA5} .alert.info{background:var(--moss);border-color:#BFD0BF} .alert.ok{background:var(--moss);border-color:#BFD0BF}
+  .alert h5{margin:0 0 4px;font-size:14px;font-weight:700}
+  .alert p{margin:0 0 8px;font-size:13px;color:var(--ink2)}
+  .alert .actions{display:flex;gap:14px;font-size:13px;font-weight:700;color:var(--canopy);flex-wrap:wrap}
+  .tech{border:1px dashed var(--quartz);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-top:10px;line-height:1.5}
+  .tech.open{border-style:solid;background:var(--card)}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 10px}
+  .kpi{background:var(--card);border:1px solid var(--quartz);border-radius:12px;padding:10px 10px 8px}
+  .kpi b{display:block;font-family:var(--display);font-size:26px;line-height:1;font-weight:600}
+  .kpi > span:not(.pill):not(.mark){font-size:11.5px;color:var(--ink2);display:block;margin-top:4px;line-height:1.25}
+  .big{font-family:var(--display);font-size:36px;font-weight:600;letter-spacing:-.01em;margin:2px 0 0;line-height:1.05;font-variant-numeric:tabular-nums}
+  .biglabel{font-size:12.5px;color:var(--ink2);margin-bottom:8px}
+  .steps{display:grid;gap:2px;margin:8px 0}
+  .step{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:6px 0;font-size:13px;align-items:start}
+  .step i{width:20px;height:20px;border-radius:50%;border:2px solid var(--quartz);display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--ink3)}
+  .step.done i{background:var(--canopy);border-color:var(--canopy);color:#fff}
+  .step.now i{border-color:var(--canopy);color:var(--canopy);font-weight:700}
+  .step small{display:block;color:var(--ink2);font-size:12px}
+  .email{border:1px solid var(--quartz);border-radius:12px;overflow:hidden;margin:10px 0}
+  .email .hdr{background:var(--card);padding:8px 12px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--quartz)}
+  .email .subj{font-weight:700;color:var(--ink);display:block;margin-top:2px}
+  .email .body{padding:12px;font-size:13px;line-height:1.5}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--quartz);border-radius:10px;margin:6px 0;font-size:13px}
+  .opt i{width:16px;height:16px;border-radius:50%;border:2px solid var(--quartz);margin-top:2px;flex:none}
+  .opt.on{border-color:var(--canopy);background:var(--card)} .opt.on i{border:5px solid var(--canopy)}
+  .opt.box i{border-radius:4px} .opt.box.on i{border-width:2px;background:var(--canopy)}
+  .opt small{display:block;color:var(--ink2);font-size:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1px solid var(--quartz);border-radius:999px;padding:5px 10px;font-size:12.5px}
+  .chip.on{background:var(--moss);border-color:var(--canopy);color:var(--canopy);font-weight:700}
+  .banner{background:var(--ochreTint);border:1px solid #E1CFA5;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;color:var(--ochre);display:flex;gap:8px;align-items:center}
+  .note{font-size:12.5px;color:var(--ink2);border-left:2px solid var(--quartz);padding-left:10px;margin:10px 0}
+  .dots{display:inline-flex;gap:6px;align-items:center;margin-left:auto}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--quartz);display:block}
+  .dots i.on{background:var(--canopy);width:18px;border-radius:4px} .dots i.done{background:var(--canopy);opacity:.45}
+  .pontos{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+  .pontos li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:16px;line-height:1.35;align-items:start}
+  .pontos li i{width:10px;height:10px;border-radius:50%;background:var(--canopy);display:block;margin-top:7px}
+  .pontos li b{font-family:var(--mono);font-weight:500}
+  .pontos.num li{grid-template-columns:28px 1fr}
+  .pontos.num li i{width:24px;height:24px;border-radius:50%;background:var(--moss);color:var(--canopy);font-style:normal;font-family:var(--display);font-weight:600;font-size:14px;display:grid;place-items:center;margin-top:0}
+  .pontos.nao li i{background:var(--amber)}
+  .phnav{display:flex;justify-content:space-between;margin-top:18px;padding-top:12px;border-top:1px solid var(--quartz2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+  .phnav b{color:var(--canopy);font-weight:700}
+  .checkmark{width:44px;height:44px;border-radius:50%;background:var(--moss);color:var(--canopy);display:grid;place-items:center;font-size:22px;margin:6px 0 10px}
+  .mark{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--amber);color:#fff;font-size:11px;font-weight:700;font-family:var(--body);vertical-align:middle;margin-left:6px;flex:none;line-height:1}
+  .notes{font-size:14px;line-height:1.5;padding-top:6px}
+  .notes .stage-l{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--canopy)}
+  .notes h3{font-family:var(--display);font-size:22px;font-weight:600;margin:4px 0 6px;line-height:1.15}
+  .notes .intent{color:var(--ink2);margin:0 0 6px}
+  .notes ol{padding-left:0;list-style:none;margin:12px 0 0;display:grid;gap:8px}
+  .notes li{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}
+  .notes li .mark{margin:2px 0 0}
+  .notes .pr{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .notes .pr span{font-family:var(--mono);font-size:11px;border:1px solid var(--quartz);border-radius:4px;padding:2px 7px;color:var(--ink2)}
+  /* wide panel (desktop) */
+  .panel{width:100%;max-width:760px;background:var(--paper);border:1px solid var(--quartz);border-radius:10px;padding:18px 22px 20px;box-shadow:0 1px 0 rgba(21,33,27,.05),0 18px 34px -22px rgba(21,33,27,.35);font-size:13.5px}
+  .panel .ph-eyebrow{margin-bottom:4px}
+  .panel .kpis{grid-template-columns:repeat(5,1fr)}
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  .tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--quartz2);text-align:left;vertical-align:top}
+  .tbl th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);font-weight:500}
+  .tbl td.mono{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+  .screen.wide{grid-template-columns:minmax(0,760px) minmax(280px,1fr)}
+  /* ── message catalog ────────────────────────────────────── */
+  .msgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .msg{background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:14px 16px;font-size:13.5px;display:grid;gap:6px;align-content:start}
+  .msg .id{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);display:flex;justify-content:space-between;gap:8px}
+  .msg .id code{font-family:var(--mono);color:var(--amber);text-transform:none;letter-spacing:0}
+  .msg h5{margin:0;font-size:14.5px;font-weight:700}
+  .msg p{margin:0;color:var(--ink2)}
+  .msg .act{font-weight:700;color:var(--canopy);font-size:13px}
+  .msg.err{border-top:3px solid var(--brick)} .msg.ok{border-top:3px solid var(--canopy)} .msg.fb{border-top:3px solid var(--ochre)}
+  /* ── data anatomy ───────────────────────────────────────── */
+  .anatomy{display:grid;grid-template-columns:minmax(0,560px) minmax(280px,1fr);gap:32px;align-items:start}
+  .rules{display:grid;gap:10px;font-size:14px}
+  .rules li{color:var(--ink2)} .rules li b{color:var(--ink)}
+  .never{background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:16px 20px;font-size:14px}
+  .never h4{margin:0 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick)}
+  .never ul{margin:0;padding-left:18px;color:var(--ink2);display:grid;gap:4px}
+  /* ── tokens ─────────────────────────────────────────────── */
+  .swatches{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+  .swatch{border:1px solid var(--quartz);border-radius:6px;overflow:hidden;background:var(--paper);font-size:12px}
+  .swatch i{display:block;height:54px}
+  .swatch div{padding:8px 10px} .swatch b{display:block} .swatch code{font-family:var(--mono);color:var(--ink2);font-size:11px}
+  .types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+  .type{background:var(--paper);border:1px solid var(--quartz);border-radius:6px;padding:16px 18px}
+  .type .s{font-size:28px;line-height:1.1;margin-bottom:6px}
+  .type small{color:var(--ink2);display:block}
+  .handoff{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:h}
+  .handoff .tile::before{counter-increment:h;content:counter(h);font-family:var(--display);font-size:30px;color:var(--amber);display:block;line-height:1;margin-bottom:8px}
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--quartz);font-size:13px;color:var(--ink2);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  /* ── responsive ─────────────────────────────────────────── */
+  @media (max-width:1100px){.princ,.msgs,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))} .swatches{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  @media (max-width:860px){
+    .board{padding:0 20px 64px} nav.idx{margin:0 -20px;padding:10px 20px}
+    .cover,.band-head,.anatomy,.grid2,.terms,.isnt{grid-template-columns:1fr}
+    .isnt > div + div{border-left:0;border-top:1px solid var(--quartz)}
+    .screens{grid-template-columns:1fr} .screen,.screen.wide{grid-template-columns:1fr} .phone{max-width:100%}
+    .princ,.msgs,.grid3,.types,.handoff{grid-template-columns:1fr} .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .pair{grid-template-columns:1fr} .dim{grid-template-columns:1fr} .dim .r{text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  /* ── print ──────────────────────────────────────────────── */
+  @page{size:420mm 297mm;margin:12mm}
+  @media print{
+    body{background:#fff}
+    nav.idx{display:none}
+    .board{max-width:none;padding:0}
+    section.band{break-before:page;padding-top:24px}
+    .screen,.msg,.tile,.pair,.term,.panel{break-inside:avoid}
+    .phone{box-shadow:none} .panel{box-shadow:none}
+  }
+  /* ── solo export (one screen per image) ─────────────────── */
+  body.solo{background:transparent}
+  body.solo > .board{display:none}
+  body.solo .solo-stage{padding:16px;margin:0 auto;width:392px}
+  body.solo .solo-stage .phone{box-shadow:none}
+  body.only nav.idx,body.only header.cover,body.only footer,body.only section.band:not(.only-target){display:none}
+  body.only section.band{border-top:0;padding-top:24px}
+</style>
+
+<div class="board">
+  <nav class="idx" aria-label="Seções do board">
+    <a href="#uma-pagina">Em uma página</a>
+    <a href="#principios">Princípios</a>
+    <a href="#tom">Tom de voz</a>
+    <a href="#termos">Terminologia</a>
+    <a href="#fluxo">O fluxo</a>
+    <a href="#telas">Telas</a>
+    <a href="#mensagens">Mensagens do sistema</a>
+    <a href="#dados">Dados e resultados</a>
+    <a href="#handoff">Tokens e handoff</a>
+  </nav>
+
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Guia de Comunicação · IBIToken · IBITI Glamping · Grupo G01 · Sprint 3</div>
+      <h1>Como o <em>território</em> fala</h1>
+      <p class="lead">Princípios, tom de voz, terminologia, mensagens do sistema e o fluxo de compra, recebimento e resgate da cota de apoiador — tela a tela, com a decisão de comunicação por trás de cada texto.</p>
+    </div>
+    <aside class="meta">
+      <div><b>Versão 1.3</b> · 02/09/2026 · português do Brasil · landing única com cinco seções animadas e páginas de detalhe; copy mínima para Helena e Beatriz</div>
+      <div><b>Jornada principal:</b> assistida (blockchain invisível, carteira guardada pela IBITI). <b>Variações:</b> jornada expert, parceiro do território, painel público.</div>
+      <div><b>Base:</b> whitepaper (Sprint 2), personas e curva de emoção (Sprint 1), riscos éticos (Sprint 2), contrato IBIToken v1.</div>
+      <div><b>Voz:</b> sereno, claro, franco, discreto — nunca vendedor.</div>
+      <div class="sw" aria-hidden="true"><i style="background:#EEF1EB"></i><i style="background:#15211B"></i><i style="background:#1E4A38"></i><i style="background:#7B4B1F"></i><i style="background:#C8CEC4"></i></div>
+    </aside>
+  </header>
+
+  <!-- ═══════════════════════ EM UMA PÁGINA ═══════════════════════ -->
+  <section class="band" id="uma-pagina">
+    <div class="band-head">
+      <div><div class="eyebrow">1 · Em uma página</div><h2>O que estamos comunicando</h2></div>
+      <p>Toda peça parte da mesma frase e da mesma ordem de valor. A tabela "é / não é" é a régua de honestidade: se um texto sugere algo da coluna da direita, ele está errado — por mais atraente que soe.</p>
+    </div>
+    <p class="quote">O IBIToken é a <b>cota de quem apoia o território IBITI</b> enquanto o Glamping ainda é projeto: cada unidade reserva <b>uma experiência de hospedagem</b>, torna o portador <b>membro do Passaporte IBITI</b> e lhe dá <b>uma fração do royalty</b> que o território recebe quando o Glamping opera, por quatro anos.</p>
+    <div class="grid3">
+      <div class="tile"><span class="n">Primeiro</span><h4>A experiência</h4><p>É o que se compra. Uma hospedagem no Glamping por unidade, resgatável a partir de 01/01/2027, marcada como usada depois da estadia — a unidade continua existindo.</p></div>
+      <div class="tile"><span class="n">Segundo</span><h4>O retorno do valor aportado</h4><p>Uma fração igual do royalty de 15% sobre o faturamento bruto do Glamping, apurada por semestre entre 2027 e 2030 — dita sempre como consequência da operação real, nunca como promessa.</p></div>
+      <div class="tile"><span class="n">Terceiro</span><h4>O reconhecimento como apoiador</h4><p>A captação vai para a IBITI e o ecossistema do território, não para a obra do Glamping. Quem apoia é reconhecido como apoiador do projeto IBITI, de forma permanente e verificável.</p></div>
+    </div>
+    <div class="isnt" style="margin-top:20px">
+      <div class="yes"><h4>É</h4><ul><li>uma cota de apoiador com três faces inseparáveis</li><li>um registro público de pertencimento, verificável por qualquer parceiro</li><li>um direito com prazo claro: emissão 2027–2030, oito apurações</li><li>indivisível: 1 unidade = 1 experiência + fração do royalty + Passaporte</li></ul></div>
+      <div class="no"><h4>Não é</h4><ul><li>um investimento com retorno garantido, um título ou uma ação</li><li>uma criptomoeda para negociar — não há mercado aberto</li><li>o financiamento da construção do Glamping</li><li>uma promessa de continuidade: novas emissões são decisão futura da IBITI</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ PRINCÍPIOS ═══════════════════════ -->
+  <section class="band" id="principios">
+    <div class="band-head">
+      <div><div class="eyebrow">2 · Princípios de comunicação</div><h2>Dez regras que valem para tudo</h2></div>
+      <p>Textos institucionais, interface, e‑mails e atendimento seguem os mesmos princípios. A regra de ouro (P0) vem primeiro; os códigos P0–P9 aparecem nas telas para mostrar onde cada regra foi usada.</p>
+    </div>
+    <div class="princ">
+      <div class="tile" style="border-color:var(--amber)"><span class="n">P0 · regra de ouro</span><h4>O essencial em trinta segundos</h4><p>Quem chega precisa entender, sem ler muito, o que é, o que recebe, como usa e como compra. Uma frase de contexto, no máximo três itens por bloco, um botão por tela. O detalhe fica a um toque, nunca na frente.</p><p class="ex">A landing são cinco telas separadas (L1–L5), cada uma com um título, até cinco tópicos de uma linha e um botão. O whitepaper é um link.</p></div>
+      <div class="tile"><span class="n">P1</span><h4>A experiência vem primeiro; o dinheiro é dito com sobriedade</h4><p>A ordem das informações segue a hierarquia de valor. Dinheiro aparece com número completo, base e data, sem adjetivos.</p><p class="ex">Na aquisição, "o que você recebe" lista experiência → Passaporte → fração do royalty; o preço é "valor de referência do modelo".</p></div>
+      <div class="tile"><span class="n">P2</span><h4>Dizer o que é e o que não é</h4><p>Toda peça de entrada traz o "é / não é". Projeções são hipótese; limites são ditos antes da compra, não depois.</p><p class="ex">Abaixo de "Confirmar aquisição": não é investimento com retorno garantido; unidades só circulam entre membros verificados.</p></div>
+      <div class="tile"><span class="n">P3</span><h4>Blockchain invisível por padrão, verificável sob demanda</h4><p>Nenhuma tela da jornada assistida obriga a ver endereços ou hashes — mas toda tela que registra algo tem "Ver no registro público".</p><p class="ex">A confirmação de recebimento mostra, recolhido, "Detalhes técnicos: transação 0x8f2a…c41d".</p></div>
+      <div class="tile"><span class="n">P4</span><h4>Uma palavra para cada coisa</h4><p>Cada conceito tem um único termo. Nunca sinônimos; nunca o nome do erro do contrato para o membro.</p><p class="ex">O contrato chama de <code>markRedeemed</code>; a interface e o atendimento dizem sempre "resgatar".</p></div>
+      <div class="tile"><span class="n">P5</span><h4>Todo número tem origem e data</h4><p>Um valor de royalty vem com período, base, alíquota, fração do membro, status e o hash do relatório.</p><p class="ex">O extrato do semestre é a única forma de mostrar royalty — nunca um "saldo de rendimentos" solto.</p></div>
+      <div class="tile"><span class="n">P6</span><h4>Orientar, não alarmar</h4><p>Erros dizem o que aconteceu, por que a regra existe e o próximo passo. Regras de negócio são explicadas como regras, não como falhas.</p><p class="ex"><code>RecipientNotHolder</code> vira "Essa carteira ainda não faz parte da comunidade IBITI" com dois caminhos.</p></div>
+      <div class="tile"><span class="n">P7</span><h4>Discrição por padrão</h4><p>Nada de outros membros, rankings ou nomes; endereços truncados; e‑mails sem valores. Nada pessoal vai ao registro público.</p><p class="ex">O painel público mostra "12 membros", nunca a lista; o e‑mail do voucher não cita valores.</p></div>
+      <div class="tile"><span class="n">P8</span><h4>A mesma verdade em duas profundidades</h4><p>Assistida e expert compartilham fatos, números e termos; diferem só na camada técnica e no vocabulário de carteira.</p><p class="ex">O extrato é idêntico; a expert acrescenta o evento, a transação e "Sacar para minha carteira".</p></div>
+      <div class="tile"><span class="n">P9</span><h4>Honestidade sobre o que é centralizado</h4><p>A IBITI administra o contrato e reporta o faturamento. Isso é dito: "a IBITI apura e publica; o contrato calcula; qualquer pessoa confere".</p><p class="ex">A nota fixa do extrato e o painel de transparência repetem essa frase.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TOM DE VOZ ═══════════════════════ -->
+  <section class="band" id="tom">
+    <div class="band-head">
+      <div><div class="eyebrow">3 · Tom de voz</div><h2>Um anfitrião do território</h2></div>
+      <p>Calmo, preciso, caloroso e sem pressa: fala como quem recebe alguém em casa e explica as regras da casa com naturalidade. Quatro adjetivos guiam a escrita — sereno, claro, franco, discreto — e um contraponto: nunca vendedor.</p>
+    </div>
+    <div class="grid2">
+      <div>
+        <h3 class="sub">Onde a voz fica</h3>
+        <div class="dims">
+          <div class="dim"><span>sério</span><div class="track"><i style="left:22%"></i></div><span class="r">bem‑humorado</span></div>
+          <div class="dim"><span>formal</span><div class="track"><i style="left:38%"></i></div><span class="r">informal</span></div>
+          <div class="dim"><span>respeitoso</span><div class="track"><i style="left:12%"></i></div><span class="r">irreverente</span></div>
+          <div class="dim"><span>entusiasmado</span><div class="track"><i style="left:78%"></i></div><span class="r">objetivo</span></div>
+        </div>
+        <p style="color:var(--ink2);font-size:14px;max-width:60ch;margin-top:16px">Entusiasmo só em dois momentos: a chegada ao Passaporte e o dia da experiência. Calor vem da hospitalidade, não das exclamações.</p>
+      </div>
+      <div>
+        <h3 class="sub">Assim, não assim</h3>
+        <div class="pairs">
+          <div class="pair"><div class="ok">Suas 3 unidades estão no seu Passaporte IBITI.</div><div class="no">Parabéns! Seus tokens foram mintados com sucesso 🎉</div><div class="why">jargão, entusiasmo artificial, emoji</div></div>
+          <div class="pair"><div class="ok">Cada membro pode ter no máximo 20 unidades.</div><div class="no">Erro: WalletCapExceeded</div><div class="why">o nome do erro do contrato não orienta ninguém</div></div>
+          <div class="pair"><div class="ok">Sua fração do royalty: R$ 10.196,22 (3 de 150 unidades).</div><div class="no">Rendimento do período: R$ 10.196,22 (+6,4%)</div><div class="why">"rendimento" e percentuais sugerem investimento</div></div>
+          <div class="pair"><div class="ok">Pausamos por segurança. Suas unidades estão preservadas.</div><div class="no">Contrato pausado temporariamente.</div><div class="why">fala do membro, não do sistema</div></div>
+        </div>
+      </div>
+    </div>
+    <h3 class="sub">Tom por momento da jornada</h3>
+    <div style="overflow-x:auto">
+    <table class="moments">
+      <thead><tr><th>Momento</th><th>Tom</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Descoberta</td><td>convidativo e concreto</td><td>Seis mil hectares em regeneração. O Glamping nasce em 2027. Você pode apoiar o território agora.</td></tr>
+        <tr><td>Verificação</td><td>respeitoso e explicativo</td><td>Quem apoia o IBITI, a IBITI conhece. A verificação leva até 5 dias úteis e é feita pela nossa equipe.</td></tr>
+        <tr><td>Aquisição</td><td>claro, sem pressão</td><td>Escolha quantas unidades quer adquirir — de 1 a 20. Nada é cobrado até você confirmar.</td></tr>
+        <tr><td>Recebimento</td><td>acolhedor, celebração contida</td><td>Suas 3 unidades estão no seu Passaporte IBITI. Bem‑vindo(a) à comunidade.</td></tr>
+        <tr><td>Resgate</td><td>serviço de hospitalidade</td><td>A equipe do Glamping vai combinar as datas com você em até 3 dias úteis.</td></tr>
+        <tr><td>Apuração</td><td>sóbrio, contábil</td><td>Apuração do 1º semestre de 2027 publicada. Sua fração: R$ 10.196,22.</td></tr>
+        <tr><td>Erro</td><td>calmo e orientador</td><td>Essa carteira ainda não faz parte da comunidade IBITI. Escolha outro membro ou indique a verificação.</td></tr>
+        <tr><td>Incidente</td><td>transparente e factual</td><td>Pausamos envios, resgates e saques por segurança. Suas unidades e valores estão preservados.</td></tr>
+        <tr><td>Encerramento</td><td>grato e claro</td><td>A emissão 2027–2030 se encerrou. Obrigado por ter apoiado o território. Seu histórico permanece registrado.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TERMINOLOGIA ═══════════════════════ -->
+  <section class="band" id="termos">
+    <div class="band-head">
+      <div><div class="eyebrow">4 · Terminologia</div><h2>Uma palavra para cada coisa</h2></div>
+      <p>Dois registros da mesma palavra: o da <b>interface</b> (cotidiano: hospedagem, usada, sua parte do royalty) e o dos <b>documentos e do contrato</b> (experiência, resgate, fração do royalty). Nunca misturar os dois na mesma tela. Formatos: unidades inteiras, "R$ 3.398,74", "15/07/2027", "1º semestre de 2027", endereços e hashes truncados ("0x8f2a…c41d").</p>
+    </div>
+    <div class="terms">
+      <div class="term"><div class="c">O ativo</div><div><div class="use">IBIToken · unidade(s) <small>IBT</small></div><div class="avoid">moeda, coin, cripto, ficha, "token" sozinho</div></div></div>
+      <div class="term"><div class="c">Natureza</div><div><div class="use">cota de apoiador</div><div class="avoid">investimento, ação, título, cota de fundo</div></div></div>
+      <div class="term"><div class="c">Quem detém</div><div><div class="use">apoiador(a) · membro <small>holders</small></div><div class="avoid">investidor, holder, cliente</div></div></div>
+      <div class="term"><div class="c">Condição de membro</div><div><div class="use">Passaporte IBITI <small>isMember</small></div><div class="avoid">NFT, membership, VIP, tier</div></div></div>
+      <div class="term"><div class="c">Direito de uso</div><div><div class="use">hospedagem (interface) · experiência (documentos)</div><div class="avoid">diária grátis, brinde, benefício, voucher</div></div></div>
+      <div class="term"><div class="c">Usar a experiência</div><div><div class="use">pedir hospedagem · usar (interface) · resgatar (documentos) <small>markRedeemed</small></div><div class="avoid">queimar, burn, gastar, consumir, usar o token</div></div></div>
+      <div class="term"><div class="c">Estado das unidades</div><div><div class="use">hospedagens disponíveis · usadas (interface) · disponíveis para resgate · já resgatadas (documentos) <small>activeUnitsOf / redeemedUnitsOf</small></div><div class="avoid">ativas/resgatadas (interno), queimadas</div></div></div>
+      <div class="term"><div class="c">Direito econômico</div><div><div class="use">sua parte do royalty (interface) · fração do royalty do território · apuração semestral (documentos) <small>royaltyDue</small></div><div class="avoid">dividendo, rendimento, yield, juros, lucro, APY</div></div></div>
+      <div class="term"><div class="c">Base do royalty</div><div><div class="use">faturamento bruto reportado (diárias e consumo) <small>grossRevenue</small></div><div class="avoid">receita líquida, lucro, resultado</div></div></div>
+      <div class="term"><div class="c">Documento da apuração</div><div><div class="use">relatório assinado pela IBITI · impressão digital (hash) <small>reportHash</small></div><div class="avoid">prova criptográfica, hash sem explicação</div></div></div>
+      <div class="term"><div class="c">Receber o royalty</div><div><div class="use">receber (assistida) · sacar para minha carteira (expert) <small>claimRoyalty / settleOffChain</small></div><div class="avoid">claim, withdraw, resgatar</div></div></div>
+      <div class="term"><div class="c">Onde o registro vive</div><div><div class="use">registro público (blockchain)</div><div class="avoid">on‑chain, ledger, "a blockchain", Web3</div></div></div>
+      <div class="term"><div class="c">Onde ficam as unidades</div><div><div class="use">carteira · carteira verificada · carteira guardada pela IBITI</div><div class="avoid">wallet, custódia, seed phrase (assistida)</div></div></div>
+      <div class="term"><div class="c">Circulação</div><div><div class="use">enviar unidades para outro membro <small>transfer</small></div><div class="avoid">transferir tokens, vender, mercado secundário, trade</div></div></div>
+      <div class="term"><div class="c">Limite de posse</div><div><div class="use">no máximo 20 unidades por membro (2 dos 15 pontos) <small>maxPerWallet</small></div><div class="avoid">holding cap, "2%"</div></div></div>
+      <div class="term"><div class="c">Entrada</div><div><div class="use">verificação · aquisição direta com a IBITI <small>primaryPurchase</small></div><div class="avoid">KYC, compliance, whitelist, compra primária</div></div></div>
+      <div class="term"><div class="c">Perda de chave / herança</div><div><div class="use">recuperação de acesso <small>reissue</small></div><div class="avoid">reemissão, revogação, reissue</div></div></div>
+      <div class="term"><div class="c">Emergência</div><div><div class="use">pausa de segurança <small>pause</small></div><div class="avoid">contrato pausado, freeze</div></div></div>
+      <div class="term"><div class="c">Prazo</div><div><div class="use">emissão 2027–2030 · "encerra em 31/12/2030" <small>validUntil</small></div><div class="avoid">leva, temporada, lote, expira</div></div></div>
+      <div class="term"><div class="c">Custo (expert)</div><div><div class="use">taxa da rede</div><div class="avoid">gas, gwei</div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ O FLUXO ═══════════════════════ -->
+  <section class="band" id="fluxo">
+    <div class="band-head">
+      <div><div class="eyebrow">5 · O fluxo</div><h2>A jornada e o vale de confiança</h2></div>
+      <p>A curva de emoção mapeada na Sprint 1 mostra onde a comunicação decide a adoção: a etapa de fricção tecnológica, em que o interessado pesquisa sobre tokens e carteiras e recua. Cada etapa tem um tom e uma prova; as telas da seção seguinte foram desenhadas a partir desse mapa.</p>
+    </div>
+    <div class="journey">
+      <svg viewBox="0 0 960 200" role="img" aria-label="Curva de emoção ao longo de seis etapas, com o ponto mais baixo na fricção tecnológica">
+        <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1E4A38" stop-opacity=".18"/><stop offset="1" stop-color="#1E4A38" stop-opacity="0"/></linearGradient></defs>
+        <g stroke="#E3E7E0" stroke-width="1"><line x1="40" y1="40" x2="920" y2="40"/><line x1="40" y1="95" x2="920" y2="95"/><line x1="40" y1="150" x2="920" y2="150"/></g>
+        <path d="M80,120 C160,100 200,64 240,66 C300,70 320,140 400,146 C470,150 500,110 560,96 C640,78 680,40 720,38 C780,36 820,34 880,30 L880,170 L80,170 Z" fill="url(#fill)"/>
+        <path d="M80,120 C160,100 200,64 240,66 C300,70 320,140 400,146 C470,150 500,110 560,96 C640,78 680,40 720,38 C780,36 820,34 880,30" fill="none" stroke="#1E4A38" stroke-width="2.5"/>
+        <g fill="#1E4A38"><circle cx="80" cy="120" r="5"/><circle cx="240" cy="66" r="5"/><circle cx="560" cy="96" r="5"/><circle cx="720" cy="38" r="5"/><circle cx="880" cy="30" r="5"/></g>
+        <circle cx="400" cy="146" r="7" fill="#7B4B1F"/>
+        <text x="400" y="185" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="#7B4B1F">VALE DE CONFIANÇA</text>
+        <text x="48" y="36" font-family="IBM Plex Mono, monospace" font-size="10" fill="#77837C">feliz</text>
+        <text x="48" y="156" font-family="IBM Plex Mono, monospace" font-size="10" fill="#77837C">neutro</text>
+      </svg>
+      <div class="stages">
+        <div class="stage"><b>Descoberta</b><em>convidativo · concreto</em>Território antes do token; a cota em uma frase; "é / não é". Prova: o whitepaper aberto.</div>
+        <div class="stage"><b>Avaliação</b><em>claro · sem pressão</em>Hierarquia de valor, preço como referência, limites ditos antes. Prova: extrato‑modelo, regras imutáveis.</div>
+        <div class="stage"><b>Fricção tecnológica</b><em>respeitoso · explicativo</em>Blockchain invisível; verificação e guarda explicadas em linguagem de casa. Prova: pessoas da IBITI, sem jargão.</div>
+        <div class="stage"><b>Aquisição</b><em>preciso · acolhedor</em>Confirmação com fato e próximos marcos; técnica recolhida. Prova: registro público a um toque.</div>
+        <div class="stage"><b>Pertencimento</b><em>hospitaleiro</em>Passaporte, benefícios em vigor, apuração com base e hash. Prova: verificação silenciosa por parceiros.</div>
+        <div class="stage"><b>Imersão</b><em>serviço</em>Voucher, datas combinadas, experiência registrada sem "queima". Prova: a estadia.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TELAS ═══════════════════════ -->
+  <section class="band" id="telas">
+    <div class="band-head">
+      <div><div class="eyebrow">6 · Telas</div><h2>Compra, recebimento e resgate, tela a tela</h2></div>
+      <p>Landing de página única com cinco seções em tópicos (L1–L5, aqui em celular), jornada assistida (A2–A11), variações expert (E1–E2), parceiro (P1) e painel público (T1). Regra: cada tela cabe em uma olhada — um título, até cinco tópicos de uma linha, um botão. A landing animada (encaixe por seção, revelação em cascata, cena do território em parallax) está em <code>landing/index.html</code>; o detalhe fica nas páginas <code>como-funciona</code>, <code>perguntas</code> e <code>transparencia</code>.</p>
+    </div>
+    <div class="screens">
+
+      <!-- L1 -->
+      <article class="screen" data-id="L1">
+        <div class="phone">
+          <div class="status"><span>14:21</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+          <div class="ph-eyebrow">IBITI Glamping · Serra da Mantiqueira, MG</div>
+          <div class="h1" style="font-size:26px">Cota de apoiador do IBITI Glamping</div>
+          <ul class="pontos "><li><i></i><span><b>1</b> unidade = <b>1</b> hospedagem no Glamping</span></li><li><i></i><span>Passaporte IBITI incluído</span></li><li><i></i><span>Parte do royalty do território, a cada semestre</span></li><li><i></i><span>Válida de <b>2027</b> a <b>2030</b></span></li></ul>
+          <a class="btn primary">Quero apoiar<span class="mark">1</span></a><a class="btn secondary sm">Ver os números</a>
+<div class="phnav"><span>Tela 1 de 5</span><b>Próximo ›</b></div>
+        </div>
+        <div class="notes"><div class="stage-l">L1 · Landing, seção 1 — Início</div><h3>O nome da coisa e quatro números</h3>
+          <ol><li><span class="mark">1</span><span>Título é o nome da cota; nada de "token", "blockchain" ou conceito.</span></li><li><span class="mark">2</span><span>Quatro tópicos de uma linha, com os números que importam, e um botão.</span></li></ol>
+          <div class="pr"><span>P0</span></div></div>
+      </article>
+
+      <!-- L2 -->
+      <article class="screen" data-id="L2">
+        <div class="phone">
+          <div class="status"><span>14:22</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
+          <div class="ph-eyebrow">Cota de apoiador</div>
+          <div class="h1" style="font-size:26px">Em números</div>
+          <ul class="pontos "><li><i></i><span><b>150</b> unidades, emissão única</span></li><li><i></i><span>Máximo de <b>20</b> por pessoa</span></li><li><i></i><span><b>R$ 53.008,93</b> por unidade</span></li><li><i></i><span><b>15%</b> do faturamento do Glamping vai ao território</span></li><li><i></i><span><b>8</b> pagamentos de royalty, um por semestre</span></li></ul>
+<div class="help">Valor por unidade é referência do modelo, a confirmar.<span class="mark">1</span></div>          <a class="btn primary">Como comprar<span class="mark">2</span></a>
+<div class="phnav"><span>Tela 2 de 5</span><b>Próximo ›</b></div>
+        </div>
+        <div class="notes"><div class="stage-l">L2 · Landing, seção 2 — Em números</div><h3>Só números</h3>
+          <ol><li><span class="mark">1</span><span>Quantidade, teto, preço, alíquota e pagamentos — cinco linhas, sem parágrafo.</span></li><li><span class="mark">2</span><span>O preço leva uma nota de referência em cinza; o botão já leva à compra.</span></li></ol>
+          <div class="pr"><span>P0</span></div></div>
+      </article>
+
+      <!-- L3 -->
+      <article class="screen" data-id="L3">
+        <div class="phone">
+          <div class="status"><span>14:23</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
+          <div class="ph-eyebrow">Cota de apoiador</div>
+          <div class="h1" style="font-size:26px">Como comprar</div>
+          <ul class="pontos num"><li><i>1</i><span>Fale com a IBITI — verificação em até <b>5</b> dias úteis</span></li><li><i>2</i><span>Escolha de <b>1</b> a <b>20</b> unidades</span></li><li><i>3</i><span>Pague por transferência bancária</span></li><li><i>4</i><span>Receba seu Passaporte — a IBITI guarda tudo por você<span class="mark">1</span></span></li></ul>
+          <a class="btn primary">Quero apoiar</a><a class="btn secondary sm">Como usar</a>
+<div class="phnav"><span>Tela 3 de 5</span><b>Próximo ›</b></div>
+        </div>
+        <div class="notes"><div class="stage-l">L3 · Landing, seção 3 — Como comprar</div><h3>Quatro passos, um verbo cada</h3>
+          <ol><li><span class="mark">1</span><span>Quem guarda as unidades aparece como passo, não como conceito de custódia.</span></li></ol>
+          <div class="pr"><span>P0</span></div></div>
+      </article>
+
+      <!-- L4 -->
+      <article class="screen" data-id="L4">
+        <div class="phone">
+          <div class="status"><span>14:24</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="done"></i><i class="on"></i><i class=""></i></span></div>
+          <div class="ph-eyebrow">Cota de apoiador</div>
+          <div class="h1" style="font-size:26px">Como usar</div>
+          <ul class="pontos "><li><i></i><span>Hospedagem: peça o voucher no seu Passaporte</span></li><li><i></i><span>Royalty: extrato e pagamento a cada semestre</span></li><li><i></i><span>Unidades só podem ser enviadas a outros membros<span class="mark">1</span></span></li><li><i></i><span>Perdeu o acesso? A IBITI recupera</span></li></ul>
+          <a class="btn primary">Próximo</a>
+<div class="phnav"><span>Tela 4 de 5</span><b>Próximo ›</b></div>
+        </div>
+        <div class="notes"><div class="stage-l">L4 · Landing, seção 4 — Como usar</div><h3>Três usos e a rede de proteção</h3>
+          <ol><li><span class="mark">1</span><span>A regra de circulação do contrato vira uma linha: só para outros membros.</span></li></ol>
+          <div class="pr"><span>P0</span></div></div>
+      </article>
+
+      <!-- L5 -->
+      <article class="screen" data-id="L5">
+        <div class="phone">
+          <div class="status"><span>14:25</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span><span class="dots"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="on"></i></span></div>
+          <div class="ph-eyebrow">Cota de apoiador</div>
+          <div class="h1" style="font-size:26px">O que não é</div>
+          <ul class="pontos nao"><li><i></i><span>Não é investimento com retorno garantido</span></li><li><i></i><span>Não é moeda para negociar</span></li><li><i></i><span>Não financia a obra do Glamping</span></li><li><i></i><span>Não continua depois de <b>2030</b><span class="mark">1</span></span></li></ul>
+          <a class="btn primary">Quero apoiar</a><a class="btn secondary sm">Falar com o concierge</a><p class="center" style="margin:8px 0 0"><span class="link">Ler o whitepaper</span></p>
+<div class="phnav"><span>Tela 5 de 5</span><b>Quero apoiar</b></div>
+        </div>
+        <div class="notes"><div class="stage-l">L5 · Landing, seção 5 — O que não é</div><h3>Quatro "não" curtos</h3>
+          <ol><li><span class="mark">1</span><span>A régua de honestidade fecha a landing; o whitepaper é um link, não um bloco.</span></li></ol>
+          <div class="pr"><span>P0</span></div></div>
+      </article>
+
+      <!-- A2 -->
+      <article class="screen" data-id="A2">
+        <div class="phone">
+          <div class="status"><span>14:22</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Verificação</div>
+          <div class="h1">Vamos nos conhecer.<span class="mark">1</span></div>
+          <p class="p">Verificamos quem entra no território. Leva até 5 dias úteis.</p>
+          <div class="steps">
+            <div class="step done"><i>✓</i><div>Dados enviados<small>02/09/2026</small></div></div>
+            <div class="step now"><i>2</i><div>Conversa com o concierge<small>04/09, 15h</small></div></div>
+            <div class="step"><i>3</i><div>Pronto<small>você recebe um e‑mail</small></div></div>
+          </div>
+          <div class="field"><div class="label">Quem guarda suas unidades?<span class="mark">2</span></div>
+            <div class="opt on"><i></i><div>A IBITI, por mim<small>Recomendado. Sem senhas técnicas; a IBITI recupera seu acesso se precisar.</small></div></div>
+            <div class="opt"><i></i><div>Eu mesma, na minha carteira</div></div>
+          </div>
+          <span class="pill warn">Em análise — até 5 dias úteis</span><span class="mark">3</span>
+        </div>
+        <div class="notes"><div class="stage-l">A2 · Verificação</div><h3>Regra da casa, com prazo</h3><p class="intent">A etapa que mais assusta cabe em duas frases.</p>
+          <ol><li><span class="mark">1</span><span>"Vamos nos conhecer" no lugar de "KYC" ou "cadastro".</span></li><li><span class="mark">2</span><span>A custódia vira uma pergunta simples: quem guarda.</span></li><li><span class="mark">3</span><span>Estado com cor de atenção e o prazo repetido.</span></li></ol>
+          <div class="pr"><span>P6</span><span>P7</span></div></div>
+      </article>
+
+      <!-- A3 -->
+      <article class="screen" data-id="A3">
+        <div class="phone">
+          <div class="status"><span>09:10</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Adquirir unidades</div>
+          <div class="h1">Quantas unidades?</div>
+          <div class="field"><div class="stepper"><span>−</span><b>3</b><span>+</span></div><div class="help">De 1 a 20.<span class="mark">1</span></div></div>
+          <div class="card">
+            <div class="row"><span class="k">Por unidade</span><span class="v">R$ 53.008,93</span></div>
+            <div class="row"><span class="k">Total</span><span class="v strong">R$ 159.026,79</span></div>
+            <div class="help">Valor de referência do modelo.<span class="mark">2</span></div>
+          </div>
+          <div class="card"><h4>Com 3 unidades você recebe<span class="mark">3</span></h4>
+            <ol class="olist"><li><b class="num">1</b><span>3 hospedagens no Glamping, a partir de 2027</span></li><li><b class="num">2</b><span>Passaporte IBITI</span></li><li><b class="num">3</b><span>3 de 150 partes do royalty, até 2030</span></li></ol></div>
+          <div class="field"><div class="label">Pagamento</div>
+            <div class="opt on"><i></i><div>Transferência bancária<small>Os dados chegam por e‑mail.</small></div></div>
+            <div class="opt"><i></i><div>Minha carteira</div></div>
+          </div>
+          <div class="note">Não é investimento com retorno garantido. Nada é cobrado até você confirmar.<span class="mark">4</span></div>
+          <a class="btn primary">Confirmar</a>
+        </div>
+        <div class="notes"><div class="stage-l">A3 · Aquisição</div><h3>Escolher e confirmar</h3><p class="intent">Quantidade, preço, o que recebe, como paga. Nada mais.</p>
+          <ol><li><span class="mark">1</span><span>O limite aparece como faixa, não como erro depois.</span></li><li><span class="mark">2</span><span>Preço fixo, rotulado como referência — nunca "promoção".</span></li><li><span class="mark">3</span><span>O que recebe, com os números da compra ("3 de 150").</span></li><li><span class="mark">4</span><span>Uma linha de honestidade antes do botão.</span></li></ol>
+          <div class="pr"><span>P0</span><span>P2</span><span>P5</span></div></div>
+      </article>
+
+      <!-- A4 -->
+      <article class="screen" data-id="A4">
+        <div class="phone">
+          <div class="status"><span>09:14</span><span>•••</span></div>
+          <div class="checkmark">✓</div>
+          <div class="h1">Pronto. Suas 3 unidades estão no seu Passaporte.<span class="mark">1</span></div>
+          <p class="p">A IBITI guarda tudo por você. Hospedagens a partir de 01/01/2027.<span class="mark">2</span></p>
+          <a class="btn primary">Ver meu Passaporte</a>
+          <div class="tech">▸ Detalhes técnicos<span class="mark">3</span></div>
+        </div>
+        <div class="notes"><div class="stage-l">A4 · Recebimento</div><h3>Um fato e um botão</h3><p class="intent">Celebração contida: o título é o que aconteceu.</p>
+          <ol><li><span class="mark">1</span><span>Número e lugar, sem "parabéns" nem "sucesso".</span></li><li><span class="mark">2</span><span>Duas informações: quem guarda e desde quando pode usar.</span></li><li><span class="mark">3</span><span>A técnica existe, recolhida; na jornada expert vem aberta.</span></li></ol>
+          <div class="pr"><span>P3</span><span>P8</span></div></div>
+      </article>
+
+      <!-- A5 -->
+      <article class="screen" data-id="A5">
+        <div class="phone">
+          <div class="status"><span>10:05</span><span>•••</span></div>
+          <div class="topbar">Seu Passaporte<span class="av">H</span></div>
+          <div class="kpis"><div class="kpi"><b>3</b><span>unidades</span></div><div class="kpi"><b>2</b><span>hospedagens disponíveis</span></div><div class="kpi"><b>1</b><span>usada</span></div></div>
+          <div class="help" style="margin-top:0">Válido até 31/12/2030<span class="mark">1</span></div>
+          <div class="card"><h4>Royalty · 1º semestre de 2027</h4>
+            <div class="row"><span class="k">Sua parte</span><span class="v strong">R$ 10.196,22</span></div>
+            <div class="row"><span class="k">Status</span><span class="pill ok">Disponível</span></div>
+            <span class="link">Ver extrato</span><span class="mark">2</span></div>
+          <div class="card"><h4>Seu Passaporte dá<span class="mark">3</span></h4>
+            <ul class="ulist"><li>Prioridade de reserva — próxima janela em 15/09</li><li>Rituais e eventos do território</li><li>Vantagens em outros empreendimentos do território</li></ul></div>
+          <a class="btn primary">Pedir hospedagem</a>
+          <a class="btn secondary sm">Enviar unidades a outro membro</a>
+        </div>
+        <div class="notes"><div class="stage-l">A5 · Passaporte</div><h3>A tela de todo dia</h3><p class="intent">Quantas, quantas dá para usar, o que há para receber.</p>
+          <ol><li><span class="mark">1</span><span>"Hospedagens disponíveis" e "usada" no lugar de "ativas/resgatadas".</span></li><li><span class="mark">2</span><span>O royalty aparece como "sua parte", com status; o detalhe vive no extrato.</span></li><li><span class="mark">3</span><span>Só benefícios em vigor, com a próxima data.</span></li></ol>
+          <div class="pr"><span>P1</span><span>P4</span></div></div>
+      </article>
+
+      <!-- A6 -->
+      <article class="screen" data-id="A6">
+        <div class="phone">
+          <div class="status"><span>10:07</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Pedir hospedagem</div>
+          <p class="p">Cada unidade vale uma hospedagem. A equipe do Glamping combina as datas com você.<span class="mark">1</span></p>
+          <div class="field"><div class="label">Quantas unidades?</div><div class="stepper"><span>−</span><b>1</b><span>+</span></div><div class="help">Você tem 2 disponíveis.<span class="mark">2</span></div></div>
+          <div class="field"><div class="label">Quando?</div><div class="chips"><span class="chip on">Mar 2027</span><span class="chip">Abr 2027</span><span class="chip">Sem preferência</span></div></div>
+          <div class="opt box"><i></i><div>Juntar 2 unidades em uma experiência maior<small>Sob consulta.<span class="mark">3</span></small></div></div>
+          <a class="btn primary">Pedir voucher</a>
+        </div>
+        <div class="notes"><div class="stage-l">A6 · Hospedagem — pedir</div><h3>Serviço, não transação</h3><p class="intent">A hospitalidade fala; a regra do contrato vira disponibilidade.</p>
+          <ol><li><span class="mark">1</span><span>Nenhuma menção a "queimar" ou "gastar".</span></li><li><span class="mark">2</span><span>A trava aparece como "você tem 2 disponíveis".</span></li><li><span class="mark">3</span><span>A agregação entra como opção sob consulta — direção em estudo.</span></li></ol>
+          <div class="pr"><span>P4</span><span>P6</span></div></div>
+      </article>
+
+      <!-- A7 -->
+      <article class="screen" data-id="A7">
+        <div class="phone">
+          <div class="status"><span>16:40</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Voucher IBT‑2027‑0148</div>
+          <div class="email"><div class="hdr">IBITI Glamping <span class="subj">Seu voucher IBT‑2027‑0148<span class="mark">1</span></span></div>
+            <div class="body">Helena, este voucher vale 1 hospedagem no Glamping. Guarde o código. Entramos em contato em até 3 dias úteis para combinar as datas.</div></div>
+          <div class="steps">
+            <div class="step done"><i>✓</i><div>Voucher emitido<small>02/03/2027</small></div></div>
+            <div class="step done"><i>✓</i><div>Datas confirmadas<small>estadia 16–18/03</small></div></div>
+            <div class="step done"><i>✓</i><div>Hospedagem registrada<small>18/03/2027</small></div></div>
+          </div>
+          <div class="alert ok"><h5>Hospedagem registrada<span class="mark">2</span></h5><p>1 unidade usada. Ela continua valendo Passaporte e royalty.</p></div>
+        </div>
+        <div class="notes"><div class="stage-l">A7 · Hospedagem — voucher e registro</div><h3>O voucher é o documento</h3><p class="intent">A ponte entre o sistema da IBITI e o registro no contrato.</p>
+          <ol><li><span class="mark">1</span><span>Assunto = fato; o e‑mail não cita valores nem outros hóspedes.</span></li><li><span class="mark">2</span><span>"Registrada" e "usada", nunca "queimada": a unidade continua existindo.</span></li></ol>
+          <div class="pr"><span>P4</span><span>P7</span></div></div>
+      </article>
+
+      <!-- A8 -->
+      <article class="screen" data-id="A8">
+        <div class="phone">
+          <div class="status"><span>08:30</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Extrato</div>
+          <div class="ph-eyebrow">1º semestre de 2027 · publicado em 10/07/2027</div>
+          <div class="big">R$ 10.196,22<span class="mark">1</span></div>
+          <div class="biglabel">Sua parte do royalty</div>
+          <div class="card">
+            <div class="row"><span class="k">Suas unidades</span><span class="v">3 de 150</span></div>
+            <div class="row"><span class="k">Faturamento do Glamping<span class="mark">2</span></span><span class="v">R$ 3.398.738,38</span></div>
+            <div class="row"><span class="k">Royalty do território (15%)</span><span class="v">R$ 509.810,76</span></div>
+            <div class="row"><span class="k">Status</span><span class="pill ok">Disponível</span></div>
+            <div class="row"><span class="k">Pagamento</span><span class="v" style="font-family:var(--body)">na conta cadastrada, até 15/07</span></div>
+          </div>
+          <div class="row"><span class="k">Relatório assinado pela IBITI</span><span class="v">a91f…c2e0 · <span class="link">conferir</span></span></div>
+          <div class="help">Qualquer pessoa pode conferir no registro público.<span class="mark">3</span></div>
+        </div>
+        <div class="notes"><div class="stage-l">A8 · Extrato</div><h3>Sua parte, a base, o documento</h3><p class="intent">A única forma de mostrar royalty — sem percentual anualizado.</p>
+          <ol><li><span class="mark">1</span><span>"Sua parte" antes do total, em destaque.</span></li><li><span class="mark">2</span><span>Base, alíquota e fração inteira: qualquer pessoa refaz a conta.</span></li><li><span class="mark">3</span><span>O relatório tem hash e ação; a frase final diz quem confere.</span></li></ol>
+          <div class="pr"><span>P5</span><span>P9</span></div></div>
+      </article>
+
+      <!-- A9 -->
+      <article class="screen" data-id="A9">
+        <div class="phone">
+          <div class="status"><span>11:48</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Enviar unidades</div>
+          <div class="field"><div class="label">Para quem?<span class="mark">1</span></div><div class="input"><span class="mono">0x3c1e…88ab</span><span class="pill ok">Ana P. · membro</span></div></div>
+          <div class="field"><div class="label">Quantas?</div><div class="stepper"><span>−</span><b>2</b><span>+</span></div><div class="help">Você tem 3 (1 usada).</div></div>
+          <div class="alert info"><h5>Enviar 2 unidades para Ana P.?<span class="mark">2</span></h5><p>1 disponível e 1 usada. Não dá para desfazer.</p><div class="actions"><span>Confirmar envio</span><span style="color:var(--ink2)">Voltar</span></div></div>
+          <div class="alert err"><h5>Essa carteira ainda não é membro<span class="mark">3</span></h5><p>Só membros verificados recebem unidades. Ela pode pedir verificação à IBITI.</p><div class="actions"><span>Escolher outro membro</span></div></div>
+          <div class="alert err"><h5>Limite de 20 por membro</h5><p>Com esse envio, Ana P. ficaria com 23.</p><div class="actions"><span>Ajustar</span></div></div>
+        </div>
+        <div class="notes"><div class="stage-l">A9 · Enviar a outro membro</div><h3>Regras ditas como regras</h3><p class="intent">Os dois erros mais prováveis do contrato, em uma frase cada.</p>
+          <ol><li><span class="mark">1</span><span>"Para quem?" e a confirmação de que é membro, antes do envio.</span></li><li><span class="mark">2</span><span>Confirmação com o estado das unidades e a consequência.</span></li><li><span class="mark">3</span><span><code>RecipientNotHolder</code> e <code>WalletCapExceeded</code> viram uma regra e um próximo passo.</span></li></ol>
+          <div class="pr"><span>P6</span></div></div>
+      </article>
+
+      <!-- A10 -->
+      <article class="screen" data-id="A10">
+        <div class="phone">
+          <div class="status"><span>15:02</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Recuperação de acesso</div>
+          <div class="h1">Perdeu o acesso? A IBITI recupera para você.<span class="mark">1</span></div>
+          <p class="p">Confirmamos sua identidade e movemos tudo para uma nova carteira. Vale também para herdeiros.<span class="mark">2</span></p>
+          <div class="steps">
+            <div class="step done"><i>✓</i><div>Identidade confirmada com o concierge</div></div>
+            <div class="step done"><i>✓</i><div>Nova carteira criada em seu nome</div></div>
+            <div class="step done"><i>✓</i><div>Unidades e valores movidos</div></div>
+          </div>
+          <div class="alert ok"><h5>Acesso recuperado</h5><p>3 unidades (1 usada) e R$ 10.196,22 pendentes na nova carteira. A anterior foi desativada.<span class="mark">3</span></p></div>
+          <a class="btn primary">Ver meu Passaporte</a>
+        </div>
+        <div class="notes"><div class="stage-l">A10 · Recuperação de acesso</div><h3>Sem pânico</h3><p class="intent">A reemissão do contrato, contada como serviço da casa.</p>
+          <ol><li><span class="mark">1</span><span>Responde à pergunta da pessoa; "chave privada" não aparece.</span></li><li><span class="mark">2</span><span>Sucessão dita com naturalidade.</span></li><li><span class="mark">3</span><span>"Desativada" no lugar de "revogada".</span></li></ol>
+          <div class="pr"><span>P6</span><span>P7</span></div></div>
+      </article>
+
+      <!-- A11 -->
+      <article class="screen" data-id="A11">
+        <div class="phone">
+          <div class="status"><span>09:00</span><span>•••</span></div>
+          <div class="topbar">Seu Passaporte<span class="av">H</span></div>
+          <div class="banner">Pausa de segurança<span class="mark">1</span></div>
+          <div class="card"><p style="margin:0 0 8px">Pausamos envios, hospedagens e saques. Suas unidades e valores estão preservados. Avisamos por e‑mail quando voltar.<span class="mark">2</span></p><div class="help">Atualizado em 12/05/2027, 9h</div><a class="btn secondary sm">Entendi</a></div>
+          <div class="kpis"><div class="kpi"><b>3</b><span>unidades</span></div><div class="kpi"><b>2</b><span>hospedagens disponíveis</span></div><div class="kpi"><b>1</b><span>usada</span></div></div>
+          <a class="btn disabled">Pedir hospedagem</a>
+          <div class="help center">Indisponível durante a pausa<span class="mark">3</span></div>
+        </div>
+        <div class="notes"><div class="stage-l">A11 · Pausa de segurança</div><h3>O que parou, o que não muda</h3><p class="intent">A função <code>pause</code> do contrato, sem alarme.</p>
+          <ol><li><span class="mark">1</span><span>Cor de atenção, não de erro: é proteção, não falha.</span></li><li><span class="mark">2</span><span>Três frases e a data da última atualização.</span></li><li><span class="mark">3</span><span>Botões visíveis e desabilitados, com o motivo.</span></li></ol>
+          <div class="pr"><span>P6</span><span>P9</span></div></div>
+      </article>
+
+      <!-- E1 -->
+      <article class="screen" data-id="E1">
+        <div class="phone">
+          <div class="status"><span>21:15</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Minha carteira</div>
+          <div class="card"><h4>Conectar carteira</h4><a class="btn primary sm" style="margin-top:0">Conectar</a><div class="help">Rede: Ethereum (Sepolia no piloto)</div></div>
+          <div class="tech open"><b style="color:var(--ink)">Contrato IBIToken (verificado)<span class="mark">1</span></b><br>0x5FbD…0aa3 · copiar · explorador<br>150 unidades · seu saldo 3 (2 disponíveis, 1 usada)<br>máx. 20 por membro · envio só entre membros · até 31/12/2030<span class="mark">2</span><br>administração: IBITI</div>
+          <div class="alert warn"><h5>Troque para a rede Ethereum<span class="mark">3</span></h5><div class="actions"><span>Trocar de rede</span></div></div>
+          <div class="alert warn"><h5>Falta ETH para a taxa da rede</h5><p>A taxa vai para a rede Ethereum, não para a IBITI.</p><div class="actions"><span>Como obter ETH</span></div></div>
+        </div>
+        <div class="notes"><div class="stage-l">E1 · Jornada expert</div><h3>A técnica visível, as palavras iguais</h3><p class="intent">Para quem quer ver o contrato, ele aparece — com o mesmo vocabulário.</p>
+          <ol><li><span class="mark">1</span><span>Endereço verificado com copiar e conferir.</span></li><li><span class="mark">2</span><span>Regras fixas listadas como fatos; administração da IBITI dita.</span></li><li><span class="mark">3</span><span>"Taxa da rede" no lugar de "gas", com ação direta.</span></li></ol>
+          <div class="pr"><span>P3</span><span>P8</span><span>P9</span></div></div>
+      </article>
+
+      <!-- E2 -->
+      <article class="screen" data-id="E2">
+        <div class="phone">
+          <div class="status"><span>08:30</span><span>•••</span></div>
+          <div class="topbar"><span class="back">‹</span>Extrato</div>
+          <div class="ph-eyebrow">1º semestre de 2027</div>
+          <div class="big">R$ 10.196,22</div>
+          <div class="biglabel">Sua parte · 3 de 150 unidades<span class="mark">1</span></div>
+          <div class="tech open">RevenueReported · período 1 · 0x5be1…7a90<br>relatório a91f…c2e0 · conferir</div>
+          <a class="btn primary">Sacar para minha carteira<span class="mark">2</span></a>
+          <div class="help center">Em stablecoin. Taxa da rede: cerca de R$ 1,20.</div>
+          <div class="card"><span class="pill neutral">Registrando… cerca de 30 segundos</span></div>
+          <div class="alert ok"><h5>R$ 10.196,22 na sua carteira</h5><p>Comprovante <span style="font-family:var(--mono)">0x9a11…3f0c</span><span class="mark">3</span></p></div>
+        </div>
+        <div class="notes"><div class="stage-l">E2 · Jornada expert — saque</div><h3>O mesmo extrato, outra ação</h3><p class="intent">Mesmos números da A8; muda o meio de pagamento.</p>
+          <ol><li><span class="mark">1</span><span>Mesma hierarquia, mesma fração inteira.</span></li><li><span class="mark">2</span><span>"Sacar", nunca "claim"; a taxa da rede é dita antes.</span></li><li><span class="mark">3</span><span>O comprovante é o hash da transação.</span></li></ol>
+          <div class="pr"><span>P5</span><span>P8</span></div></div>
+      </article>
+
+      <!-- P1 -->
+      <article class="screen" data-id="P1">
+        <div class="phone">
+          <div class="status"><span>19:30</span><span>•••</span></div>
+          <div class="topbar"><span class="brand">IBITI</span> · Parceiros</div>
+          <div class="h1">Conferir membro</div>
+          <div class="field"><div class="input"><span class="mono">0x3c1e…88ab</span><span class="link">Ler QR</span></div></div>
+          <div class="alert ok"><h5>Membro: sim<span class="mark">1</span></h5><p>3 unidades · 2 hospedagens disponíveis · válido até 2030</p></div>
+          <div class="note">Lê o registro público. Sem nome, sem dados pessoais, sem depender da IBITI.<span class="mark">2</span></div>
+          <a class="btn primary">Liberar benefício</a>
+          <div class="help center" style="margin-top:10px">Não peça documentos. Não anote o endereço.</div>
+        </div>
+        <div class="notes"><div class="stage-l">P1 · Parceiro do território</div><h3>Sim ou não, sem dado pessoal</h3><p class="intent">A consulta pública do contrato como ferramenta de quem recebe o membro.</p>
+          <ol><li><span class="mark">1</span><span>Resposta binária primeiro, depois o estado.</span></li><li><span class="mark">2</span><span>O que a consulta é e o que não mostra, na tela.</span></li></ol>
+          <div class="pr"><span>P7</span><span>P9</span></div></div>
+      </article>
+
+      <!-- T1 -->
+      <article class="screen wide" data-id="T1">
+        <div class="panel">
+          <div class="ph-eyebrow">Painel público · IBIToken · atualizado em 12/01/2028</div>
+          <div class="h1" style="font-size:24px">O que qualquer pessoa pode conferir<span class="mark">1</span></div>
+          <div class="kpis"><div class="kpi"><b>150</b><span>unidades</span></div><div class="kpi"><b>50</b><span>reserva da IBITI</span></div><div class="kpi"><b>12</b><span>membros</span></div><div class="kpi"><b>2 <small style="font-size:14px;font-family:var(--body)">de 8</small></b><span>apurações</span></div><div class="kpi"><span class="pill ok" style="margin-top:6px">Em operação</span><span>situação</span></div></div>
+          <table class="tbl">
+            <thead><tr><th>Apuração</th><th>Publicada em</th><th>Faturamento do Glamping</th><th>Royalty (15%)</th><th>Relatório<span class="mark">2</span></th></tr></thead>
+            <tbody>
+              <tr><td>1º semestre de 2027</td><td class="mono">10/07/2027</td><td class="mono">R$ 3.398.738,38</td><td class="mono">R$ 509.810,76</td><td class="mono">a91f…c2e0 · <span class="link">conferir</span></td></tr>
+              <tr><td>2º semestre de 2027</td><td class="mono">12/01/2028</td><td class="mono">R$ 3.398.738,38</td><td class="mono">R$ 509.810,76</td><td class="mono">7d3b…10aa · <span class="link">conferir</span></td></tr>
+            </tbody>
+          </table>
+          <div class="row" style="margin-top:8px"><span class="k">Contrato IBIToken (verificado)</span><span class="v">0x5FbD…0aa3</span></div>
+          <div class="row"><span class="k">Regras fixas</span><span class="v" style="font-family:var(--body)">150 unidades · máx. 20 por membro · envio só entre membros · 15% do faturamento · até 31/12/2030</span></div>
+          <div class="help">A IBITI apura e publica; o contrato calcula; qualquer pessoa confere.<span class="mark">3</span></div>
+        </div>
+        <div class="notes"><div class="stage-l">T1 · Painel público</div><h3>Agregados, hashes, situação</h3><p class="intent">A trilha do dinheiro para quem quer conferir — sem nada individual.</p>
+          <ol><li><span class="mark">1</span><span>Contagens, nunca listas de pessoas.</span></li><li><span class="mark">2</span><span>Cada apuração leva o hash do relatório com ação de conferir.</span></li><li><span class="mark">3</span><span>Quem faz o quê, em uma linha.</span></li></ol>
+          <div class="pr"><span>P5</span><span>P7</span><span>P9</span></div></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MENSAGENS ═══════════════════════ -->
+  <section class="band" id="mensagens">
+    <div class="band-head">
+      <div><div class="eyebrow">7 · Mensagens do sistema</div><h2>Erro, confirmação e andamento</h2></div>
+      <p>Catálogo canônico. Cada erro nasce de uma trava do contrato IBIToken ou de uma etapa fora da blockchain; cada confirmação nasce de um evento. Estrutura fixa: título com o fato, texto com o porquê, ação com o próximo passo.</p>
+    </div>
+    <h3 class="sub">Erros — o que aconteceu, por que, próximo passo</h3>
+    <div class="msgs">
+      <div class="msg err"><div class="id"><span>E1</span><code>RecipientNotHolder</code></div><h5>Essa carteira ainda não é membro</h5><p>Só membros verificados recebem unidades. Ela pode pedir verificação à IBITI.</p><div class="act">Escolher outro membro</div></div>
+      <div class="msg err"><div class="id"><span>E2</span><code>WalletCapExceeded</code></div><h5>Limite de 20 unidades por membro</h5><p>Com esse envio, Ana P. ficaria com 23.</p><div class="act">Ajustar a quantidade</div></div>
+      <div class="msg err"><div class="id"><span>E3</span><code>InsufficientActiveUnits</code></div><h5>Você tem 1 hospedagem disponível</h5><p>As outras 2 já foram usadas e continuam valendo Passaporte e royalty.</p><div class="act">Pedir 1 hospedagem</div></div>
+      <div class="msg err"><div class="id"><span>E4</span><code>TokenNotYetValid</code></div><h5>Hospedagens a partir de 1º de janeiro de 2027</h5><p>Suas unidades já valem como Passaporte.</p><div class="act">Ver meu Passaporte</div></div>
+      <div class="msg err"><div class="id"><span>E5</span><code>TokenExpired</code></div><h5>Esta emissão encerrou em 31/12/2030</h5><p>Não dá mais para enviar unidades nem pedir hospedagens. Valores ainda não recebidos continuam disponíveis.</p><div class="act">Ver extrato</div></div>
+      <div class="msg err"><div class="id"><span>E6</span><code>WalletRevoked</code></div><h5>Esta carteira foi substituída</h5><p>O acesso foi recuperado em outra carteira. Se você é o titular e não reconhece isso, fale com a IBITI agora.</p><div class="act">Falar com a IBITI</div></div>
+      <div class="msg err"><div class="id"><span>E7</span><code>EnforcedPause</code></div><h5>Pausa de segurança</h5><p>Pausamos envios, hospedagens e saques. Suas unidades e valores estão preservados. Avisamos por e‑mail quando voltar.</p><div class="act">Entendi</div></div>
+      <div class="msg err"><div class="id"><span>E8</span><code>ERC20InsufficientBalance</code></div><h5>Você tem 3 unidades</h5><p>Escolha até 3.</p><div class="act">Ajustar</div></div>
+      <div class="msg err"><div class="id"><span>E9</span><code>NothingToClaim</code></div><h5>Nada a receber neste semestre</h5><p>Sua carteira não tinha unidades na data da apuração.</p><div class="act">Ver extrato</div></div>
+      <div class="msg err"><div class="id"><span>E10</span><code>PeriodNotOnChain</code></div><h5>Este semestre é pago na conta cadastrada</h5><p>O extrato mostra a data prevista.</p><div class="act">Ver extrato</div></div>
+      <div class="msg err"><div class="id"><span>E11 · operação IBITI</span><code>ReserveProtected</code></div><h5>Reserva da IBITI protegida</h5><p>Restam 65 unidades para venda; as 50 da reserva exigem decisão da direção.</p><div class="act">Ver reserva</div></div>
+      <div class="msg err"><div class="id"><span>E12 · operação IBITI</span><code>AllPeriodsReported</code></div><h5>As 8 apurações já foram publicadas</h5><p>Esta emissão encerrou seu ciclo.</p><div class="act">Ver histórico</div></div>
+      <div class="msg err"><div class="id"><span>E13 · expert</span><code>carteira não conectada</code></div><h5>Conecte sua carteira</h5><p>Use a carteira verificada pela IBITI.</p><div class="act">Conectar</div></div>
+      <div class="msg err"><div class="id"><span>E14 · expert</span><code>rede errada</code></div><h5>Troque para a rede Ethereum</h5><p>Sua carteira está em outra rede.</p><div class="act">Trocar de rede</div></div>
+      <div class="msg err"><div class="id"><span>E15 · expert</span><code>sem ETH para a taxa</code></div><h5>Falta ETH para a taxa da rede</h5><p>A taxa vai para a rede Ethereum, não para a IBITI.</p><div class="act">Como obter ETH</div></div>
+      <div class="msg err"><div class="id"><span>E16 · expert</span><code>transação cancelada</code></div><h5>Você cancelou na carteira</h5><p>Nada foi alterado.</p><div class="act">Tentar de novo</div></div>
+      <div class="msg err"><div class="id"><span>E17 · fora da chain</span><code>verificação não concluída</code></div><h5>Não foi possível concluir sua verificação</h5><p>Nossa equipe entra em contato para explicar os próximos passos.</p><div class="act">Entendi</div></div>
+      <div class="msg err"><div class="id"><span>E18</span><code>indisponibilidade</code></div><h5>Não conseguimos consultar o registro público agora</h5><p>Tente de novo em instantes. Suas unidades não são afetadas.</p><div class="act">Tentar de novo</div></div>
+    </div>
+    <h3 class="sub">Confirmações — fato + próximo passo</h3>
+    <div class="msgs">
+      <div class="msg ok"><div class="id"><span>C1</span><code>verificação concluída</code></div><h5>Verificação concluída</h5><p>Boas‑vindas à comunidade IBITI. Agora você pode adquirir unidades.</p></div>
+      <div class="msg ok"><div class="id"><span>C2</span><code>PrimaryPurchase</code></div><h5>Pronto. Suas 3 unidades estão no seu Passaporte.</h5><p>Hospedagens a partir de 01/01/2027; primeiro royalty no 1º semestre de 2027.</p></div>
+      <div class="msg ok"><div class="id"><span>C3</span><code>voucher emitido</code></div><h5>Seu voucher IBT‑2027‑0148 foi enviado</h5><p>Guarde o código. Entramos em contato em até 3 dias úteis para combinar as datas.</p></div>
+      <div class="msg ok"><div class="id"><span>C4</span><code>RedemptionMarked</code></div><h5>Hospedagem registrada</h5><p>1 unidade usada em 18/03/2027. Ela continua valendo Passaporte e royalty.</p></div>
+      <div class="msg ok"><div class="id"><span>C5</span><code>Transfer · UnitsMoved</code></div><h5>2 unidades enviadas para Ana P.</h5><p>1 disponível e 1 usada.</p></div>
+      <div class="msg ok"><div class="id"><span>C6</span><code>RevenueReported</code></div><h5>Royalty do 1º semestre de 2027 publicado</h5><p>Sua parte: R$ 10.196,22 (3 de 150 unidades).</p></div>
+      <div class="msg ok"><div class="id"><span>C7</span><code>RoyaltyClaimed</code></div><h5>R$ 10.196,22 na sua carteira</h5><p>Pagos em stablecoin em 15/07/2027. Comprovante disponível.</p></div>
+      <div class="msg ok"><div class="id"><span>C8</span><code>RoyaltySettledOffChain</code></div><h5>Pagamento registrado</h5><p>R$ 10.196,22 na conta cadastrada em 15/07/2027.</p></div>
+      <div class="msg ok"><div class="id"><span>C9</span><code>Reissued</code></div><h5>Acesso recuperado</h5><p>3 unidades (1 usada) e R$ 10.196,22 pendentes na nova carteira. A anterior foi desativada.</p></div>
+      <div class="msg ok"><div class="id"><span>C10</span><code>Unpaused</code></div><h5>Operação retomada</h5><p>Envios, hospedagens e saques voltaram.</p></div>
+    </div>
+    <h3 class="sub">Andamento e estados</h3>
+    <div class="msgs">
+      <div class="msg fb"><div class="id"><span>F1</span><code>verificação</code></div><p>Em análise — até 5 dias úteis. Avisamos por e‑mail.</p></div>
+      <div class="msg fb"><div class="id"><span>F2</span><code>pagamento (assistida)</code></div><p>Aguardando pagamento — os dados chegaram por e‑mail. Unidades registradas até 1 dia útil após a confirmação.</p></div>
+      <div class="msg fb"><div class="id"><span>F3</span><code>transação</code></div><p>Registrando… cerca de 30 segundos.</p></div>
+      <div class="msg fb"><div class="id"><span>F4</span><code>antes da validade</code></div><p>Hospedagens a partir de 01/01/2027.</p></div>
+      <div class="msg fb"><div class="id"><span>F5</span><code>próximo royalty</code></div><p>Próximo royalty: julho de 2027.</p></div>
+      <div class="msg fb"><div class="id"><span>F6</span><code>estado vazio</code></div><p>Você ainda não usou nenhuma hospedagem.</p></div>
+      <div class="msg fb"><div class="id"><span>F7</span><code>estado vazio</code></div><p>Nenhum royalty publicado ainda. O primeiro sai em julho de 2027.</p></div>
+      <div class="msg fb"><div class="id"><span>F8</span><code>carregando</code></div><p>Consultando o registro público…</p></div>
+      <div class="msg fb"><div class="id"><span>F9</span><code>voucher</code></div><p>Voucher IBT‑2027‑0148 · aguardando as datas do Glamping.</p></div>
+      <div class="msg fb"><div class="id"><span>F10</span><code>encerramento próximo</code></div><p>A emissão encerra em 31/12/2030. Você tem 2 hospedagens disponíveis até lá.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ DADOS ═══════════════════════ -->
+  <section class="band" id="dados">
+    <div class="band-head">
+      <div><div class="eyebrow">8 · Dados, métricas e resultados</div><h2>Todo número tem origem e data</h2></div>
+      <p>Como apresentar apurações, posse e transparência sem ambiguidade: a anatomia do extrato é a especificação do componente; as regras valem para qualquer número da operação.</p>
+    </div>
+    <div class="anatomy">
+      <div class="panel" style="max-width:560px">
+        <div class="ph-eyebrow">Apuração do 1º semestre de 2027 · publicada em 10/07/2027<span class="mark">1</span></div>
+        <div class="big">R$ 10.196,22<span class="mark">2</span></div>
+        <div class="biglabel">Sua fração do royalty do território</div>
+        <div class="row"><span class="k">Suas unidades na data da apuração<span class="mark">3</span></span><span class="v">3 de 150</span></div>
+        <div class="row"><span class="k">Faturamento bruto reportado (diárias e consumo)<span class="mark">4</span></span><span class="v">R$ 3.398.738,38</span></div>
+        <div class="row"><span class="k">Royalty do território (15%)<span class="mark">5</span></span><span class="v">R$ 509.810,76</span></div>
+        <div class="row"><span class="k">Status<span class="mark">6</span></span><span class="pill ok">Disponível para receber</span></div>
+        <div class="row"><span class="k">Meio de pagamento<span class="mark">7</span></span><span class="v" style="font-family:var(--body)">Depósito na conta cadastrada · até 15/07/2027</span></div>
+        <div class="row"><span class="k">Relatório<span class="mark">8</span></span><span class="v">a91f…c2e0 · <span class="link">conferir</span></span></div>
+        <div class="note" style="margin-bottom:0">A IBITI apura e publica o faturamento; o contrato calcula a divisão automaticamente; qualquer pessoa pode conferir.<span class="mark">9</span></div>
+      </div>
+      <div>
+        <ol class="rules" style="padding-left:0;list-style:none">
+          <li><span class="mark" style="margin:0 8px 0 0">1</span><b>Período com data de publicação.</b> Nunca "último período".</li>
+          <li><span class="mark" style="margin:0 8px 0 0">2</span><b>Sua parte antes do total</b>, em destaque: é o número da decisão.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">3</span><b>Fração inteira</b> ("3 de 150"), nunca percentual — e nunca comparação com outros membros.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">4</span><b>Base com o que inclui</b> (diárias e consumo): é a definição do whitepaper, dita em palavras.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">5</span><b>Alíquota explícita</b> (15%): qualquer pessoa refaz a conta.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">6</span><b>Status com forma e texto</b>: disponível / pago em data / pendente / encerrado.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">7</span><b>Meio de pagamento conforme a jornada</b>: depósito (assistida) ou saque em stablecoin (expert).</li>
+          <li><span class="mark" style="margin:0 8px 0 0">8</span><b>Documento com hash e ação</b>: "impressão digital" explicada a um toque.</li>
+          <li><span class="mark" style="margin:0 8px 0 0">9</span><b>Nota fixa de honestidade</b> sobre quem apura, quem calcula e quem confere.</li>
+        </ol>
+        <div class="never" style="margin-top:20px"><h4>O que nunca mostramos</h4><ul><li>dados de hóspedes ou reservas individuais</li><li>faturamento diário ou por categoria de estadia</li><li>nomes ou endereços completos de membros; rankings</li><li>"valorização", percentuais anualizados, gráficos de preço</li><li>projeções sem o rótulo "hipótese de modelagem — não é promessa de retorno"</li><li>métricas de impacto que o modelo não mede: fala‑se do mecanismo (o royalty financia a regeneração) com a métrica que a IBITI já publica para o território</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TOKENS E HANDOFF ═══════════════════════ -->
+  <section class="band" id="handoff">
+    <div class="band-head">
+      <div><div class="eyebrow">9 · Tokens visuais e handoff</div><h2>Para recriar no Figma</h2></div>
+      <p>Paleta tirada da Serra do Ibitipoca: névoa como fundo, verde‑copa como cor principal, o âmbar das águas escuras como único acento (usado aqui só nos marcadores de anotação), quartzito nas linhas. Tipografia desenhada para legibilidade: Fraunces nos títulos, Atkinson Hyperlegible no texto e na interface, IBM Plex Mono em hashes, endereços e valores.</p>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#EEF1EB"></i><div><b>névoa</b><code>#EEF1EB · fundo</code></div></div>
+      <div class="swatch"><i style="background:#F8F9F6"></i><div><b>cartão</b><code>#F8F9F6</code></div></div>
+      <div class="swatch"><i style="background:#15211B"></i><div><b>tinta</b><code>#15211B · texto</code></div></div>
+      <div class="swatch"><i style="background:#1E4A38"></i><div><b>copa</b><code>#1E4A38 · principal</code></div></div>
+      <div class="swatch"><i style="background:#7B4B1F"></i><div><b>âmbar</b><code>#7B4B1F · acento</code></div></div>
+      <div class="swatch"><i style="background:#C8CEC4"></i><div><b>quartzito</b><code>#C8CEC4 · linhas</code></div></div>
+      <div class="swatch"><i style="background:#A6792B"></i><div><b>ocre</b><code>#A6792B · atenção</code></div></div>
+      <div class="swatch"><i style="background:#8C3B31"></i><div><b>tijolo</b><code>#8C3B31 · erro</code></div></div>
+    </div>
+    <div class="types">
+      <div class="type"><div class="s" style="font-family:var(--display);font-weight:600">Suas 3 unidades estão no seu Passaporte</div><small>Fraunces 600 · títulos de tela 22px · títulos do board 36px</small></div>
+      <div class="type"><div class="s" style="font-size:18px;line-height:1.4">Cada membro pode ter no máximo 20 unidades — 2 dos 15 pontos do royalty.</div><small>Atkinson Hyperlegible 400/700 · texto e interface 13,5–15px</small></div>
+      <div class="type"><div class="s" style="font-family:var(--mono);font-size:18px">R$ 10.196,22 · 0x8f2a…c41d</div><small>IBM Plex Mono 400/500 · valores, hashes, endereços, rótulos</small></div>
+    </div>
+    <h3 class="sub">Handoff</h3>
+    <div class="handoff">
+      <div class="tile"><h4>Importar o board</h4><p>No Figma, plugin <b>html.to.design</b> (Community): importar por URL (artefato publicado) ou por arquivo (<code>board/index.html</code> e <code>landing/index.html</code>). As telas chegam como frames editáveis, com textos e estilos.</p></div>
+      <div class="tile"><h4>Ou importar os SVGs</h4><p>Cada tela está em <code>mockups/svg/</code>: arraste para o Figma e ela chega como vetores e textos editáveis (fontes Fraunces, Atkinson Hyperlegible e IBM Plex Mono existem no Figma). PNGs em <code>mockups/png/</code> servem de referência.</p></div>
+      <div class="tile"><h4>Criar os estilos</h4><p>Cores e tipografia acima viram estilos do arquivo. Componentes: botão (principal, secundário, desabilitado), campo, cartão, linha de extrato, pílula de estado, alerta (erro, atenção, informação, êxito), camada técnica, passo, e‑mail.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Guia de Comunicação · IBIToken · Grupo G01 · Inteli ADMD7 · Projeto parceiro IBITI · versão 1.3 · 02/09/2026</div>
+    <div>Documento completo: <code>guia-de-comunicacao/README.md</code> · Contrato: <code>smart-contract/contracts/IBIToken.sol</code></div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var id = new URLSearchParams(location.search).get('screen');
+    if (!id) return;
+    var art = document.querySelector('.screen[data-id="' + id + '"]');
+    if (!art) return;
+    var el = art.querySelector('.phone, .panel');
+    var stage = document.createElement('div');
+    stage.className = 'solo-stage';
+    stage.style.width = el.classList.contains('panel') ? '792px' : '392px';
+    stage.appendChild(el.cloneNode(true));
+    document.body.classList.add('solo');
+    document.body.appendChild(stage);
+  })();
+  (function () {
+    var sec = new URLSearchParams(location.search).get('section');
+    if (!sec) return;
+    var el = document.getElementById(sec);
+    if (!el) return;
+    el.classList.add('only-target');
+    document.body.classList.add('only');
+  })();
+  (function () {
+    if (!new URLSearchParams(location.search).get('measure')) return;
+    setTimeout(function () {
+      var stage = document.querySelector('.solo-stage');
+      var h = stage ? stage.getBoundingClientRect().height : document.documentElement.scrollHeight;
+      document.title = 'H=' + Math.ceil(h);
+    }, 300);
+  })();
+</script>

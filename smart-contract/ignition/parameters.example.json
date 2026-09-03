@@ -1,0 +1,16 @@
+{
+  "IBITokenModule": {
+    "admin": "0x0000000000000000000000000000000000000000",
+    "emissionCap": 150,
+    "validFrom": 1798761600,
+    "validUntil": 1924991999,
+    "stablecoin": "0x0000000000000000000000000000000000000000"
+  },
+  "IBITokenSepoliaDemoModule": {
+    "admin": "0x0000000000000000000000000000000000000000",
+    "emissionCap": 150,
+    "validFrom": 1788220800,
+    "validUntil": 1914451200,
+    "initialStablecoinSupply": 100000000000000
+  }
+}

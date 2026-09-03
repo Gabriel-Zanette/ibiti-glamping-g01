@@ -1,0 +1,30 @@
+{
+  "name": "ibitoken-smart-contract",
+  "private": true,
+  "version": "1.0.0",
+  "description": "IBIToken — implementação ERC-20 (v1) da tokenização do IBITI Glamping · Inteli ADMD7 · Grupo G01",
+  "type": "module",
+  "scripts": {
+    "build": "hardhat build",
+    "test": "hardhat test",
+    "demo": "hardhat run scripts/demo-flow.ts",
+    "deploy:local": "hardhat ignition deploy ignition/modules/IBITokenSepoliaDemo.ts",
+    "deploy:sepolia": "hardhat ignition deploy ignition/modules/IBITokenSepoliaDemo.ts --network sepolia",
+    "deploy:sepolia:producao": "hardhat ignition deploy ignition/modules/IBIToken.ts --network sepolia",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.15",
+    "@nomicfoundation/hardhat-ignition": "^3.1.8",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.7",
+    "@openzeppelin/contracts": "^5.6.1",
+    "@types/chai": "^5.2.3",
+    "@types/mocha": ">=10.0.10",
+    "@types/node": "^22.8.5",
+    "chai": "^6.2.2",
+    "ethers": "^6.14.0",
+    "hardhat": "^3.15.0",
+    "mocha": "^11.0.0",
+    "typescript": "~6.0.3"
+  }
+}

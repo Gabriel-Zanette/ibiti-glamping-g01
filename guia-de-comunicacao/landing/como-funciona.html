@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como funciona · Cota de Apoiador IBITI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --mist:#EEF1EB; --card:#F8F9F6; --paper:#FFFFFF; --ink:#15211B; --ink2:#4A574F; --ink3:#77837C;
+    --canopy:#1E4A38; --canopy2:#2E6A50; --amber:#7B4B1F; --amberTint:#EFE3D5; --quartz:#C8CEC4; --quartz2:#E3E7E0; --moss:#DDE6DC;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif; --body:'Atkinson Hyperlegible','Helvetica Neue',Helvetica,Arial,sans-serif; --mono:'IBM Plex Mono',Menlo,Consolas,monospace;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--canopy)} a:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .page{container-type:inline-size;container-name:page;margin:0 auto;background:var(--mist);min-height:100vh}
+  .wrap{max-width:820px;margin:0 auto;padding:0 28px;width:100%}
+  header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--mist) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--quartz2)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
+  .brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.06em;text-decoration:none;color:var(--ink)}
+  .back{font-size:14px;color:var(--ink2);text-decoration:none} .back:hover{color:var(--canopy)}
+  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+  .hero{padding:64px 0 28px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--canopy);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--canopy)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1;letter-spacing:-.018em;margin:0 0 16px;text-wrap:balance}
+  h1 em{font-style:italic;font-weight:300;color:var(--canopy)}
+  .lead{font-size:19px;color:var(--ink2);max-width:58ch;margin:0}
+  section{padding:36px 0;border-top:1px solid var(--quartz2)}
+  h2{font-family:var(--display);font-weight:400;font-size:32px;line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+  h3{font-family:var(--display);font-weight:600;font-size:20px;margin:0 0 6px}
+  p{margin:0 0 12px;max-width:65ch} p.small{font-size:14px;color:var(--ink3)}
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .card{background:var(--paper);border:1px solid var(--quartz);border-radius:18px;padding:20px 22px}
+  .card p{font-size:15.5px;color:var(--ink2);margin:0}
+  .card .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:8px}
+  .timeline{list-style:none;margin:0;padding:0;display:grid;gap:0;position:relative}
+  .timeline li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:14px 0;position:relative}
+  .timeline li i{width:34px;height:34px;border-radius:50%;background:var(--paper);border:2px solid var(--canopy);color:var(--canopy);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-style:normal;font-size:16px}
+  .timeline li + li::before{content:"";position:absolute;left:16px;top:-14px;height:28px;width:2px;background:var(--quartz)}
+  .timeline b{display:block;font-size:17px} .timeline p{margin:2px 0 0;color:var(--ink2);font-size:15.5px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  table{width:100%;border-collapse:collapse;font-size:15px;background:var(--paper);border:1px solid var(--quartz);border-radius:14px;overflow:hidden}
+  th,td{padding:10px 14px;border-bottom:1px solid var(--quartz2);text-align:left;vertical-align:top}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);font-weight:500}
+  td.v{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  .big{font-family:var(--display);font-size:40px;line-height:1;font-variant-numeric:tabular-nums;margin:4px 0}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--moss);color:var(--canopy)}
+  .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .kpi{background:var(--paper);border:1px solid var(--quartz);border-radius:16px;padding:16px}
+  .kpi b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1;font-variant-numeric:tabular-nums} .kpi span{font-size:13px;color:var(--ink2);display:block;margin-top:6px}
+  details{background:var(--paper);border:1px solid var(--quartz);border-radius:14px;padding:0 20px;margin:0 0 10px}
+  summary{cursor:pointer;font-weight:700;font-size:17px;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--display);font-size:24px;color:var(--canopy);line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 0 16px;color:var(--ink2);font-size:15.5px;margin:0}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .btn{display:inline-flex;align-items:center;padding:14px 22px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid transparent}
+  .btn.primary{background:var(--canopy);color:var(--paper)} .btn.secondary{border-color:var(--canopy);color:var(--canopy)}
+  .nota{background:var(--amberTint);border-left:3px solid var(--amber);border-radius:10px;padding:12px 16px;font-size:15px;color:var(--ink2)}
+  footer{padding:26px 0 36px;border-top:1px solid var(--quartz2);margin-top:24px;font-size:13px;color:var(--ink3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)} .rv.in{opacity:1;transform:none}
+  @container page (max-width:820px){ .wrap{padding:0 20px} .cards,.two,.kpis{grid-template-columns:1fr 1fr} .hero{padding:44px 0 20px} h1{font-size:40px} }
+  @container page (max-width:520px){ .cards,.two,.kpis{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ .rv{opacity:1;transform:none;transition:none} html{scroll-behavior:auto} }
+  body.export .rv{opacity:1;transform:none;transition:none}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top"><div class="wrap"><a class="brand" href="index.html">IBITI</a><a class="back" href="index.html">‹ Página inicial</a><a class="mini" href="index.html#comprar">Quero apoiar</a></div></header>
+<main class="wrap">
+  <div class="hero rv"><div class="eyebrow">Cota de apoiador · em detalhe</div><h1>Como <em>funciona</em></h1><p class="lead">Tudo o que a página inicial resume, explicado por partes: a cota, o passo a passo, quem guarda as unidades, o extrato, a circulação, a validade e a recuperação de acesso.</p></div>
+
+  <section class="rv"><h2>A cota, por dentro</h2>
+    <div class="cards">
+      <div class="card"><span class="k">1 · Hospedagem</span><p>Cada unidade vale uma hospedagem no Glamping, a partir de 2027. Depois da estadia, a unidade fica marcada como usada — ela continua existindo e valendo Passaporte e royalty.</p></div>
+      <div class="card"><span class="k">2 · Passaporte IBITI</span><p>Você é membro desde a compra: prioridade nas janelas de reserva, rituais e eventos do território e vantagens em outros empreendimentos. Vale até 31/12/2030.</p></div>
+      <div class="card"><span class="k">3 · Parte do royalty</span><p>O Glamping paga 15% do que fatura ao território. Esse valor é dividido entre as 150 unidades: sua parte é proporcional ao que você tem, a cada semestre.</p></div>
+    </div>
+  </section>
+  <section class="rv"><h2>Passo a passo</h2>
+    <ol class="timeline">
+      <li><i>1</i><div><b>Verificação</b><p>Você fala com a IBITI, envia seus dados e conversa com o concierge. Leva até 5 dias úteis. Seus documentos ficam com a IBITI; nada pessoal vai ao registro público.</p></div></li>
+      <li><i>2</i><div><b>Escolha das unidades</b><p>De 1 a 20 por pessoa, a R$ 53.008,93 cada (valor de referência do modelo, a confirmar). Nada é cobrado até você confirmar.</p></div></li>
+      <li><i>3</i><div><b>Pagamento</b><p>Transferência bancária, com os dados enviados por e‑mail. As unidades são registradas em seu nome até 1 dia útil após a confirmação.</p></div></li>
+      <li><i>4</i><div><b>Passaporte</b><p>Suas unidades ficam na carteira guardada pela IBITI (ou na sua própria, se preferir). Você acompanha tudo no Passaporte: unidades, hospedagens disponíveis e royalty.</p></div></li>
+      <li><i>5</i><div><b>Hospedagem</b><p>Quando quiser, peça o voucher no Passaporte. A equipe do Glamping combina as datas em até 3 dias úteis. Depois da estadia, a unidade é marcada como usada.</p></div></li>
+      <li><i>6</i><div><b>Royalty</b><p>Em julho e em janeiro, a IBITI publica a apuração do semestre com o relatório assinado. Você recebe o extrato e o valor na conta cadastrada.</p></div></li>
+    </ol>
+  </section>
+  <section class="rv"><h2>Quem guarda suas unidades</h2>
+    <div class="two">
+      <div class="card"><span class="k">Guardadas pela IBITI · recomendado</span><p>Sem senhas técnicas e sem aplicativos de cripto. A IBITI cuida da carteira em seu nome e recupera seu acesso se você precisar — inclusive para herdeiros.</p></div>
+      <div class="card"><span class="k">Na sua própria carteira</span><p>Para quem já usa carteiras digitais. Você informa o endereço, cuida das suas chaves e pode sacar o royalty em stablecoin. As regras são as mesmas.</p></div>
+    </div>
+  </section>
+  <section class="rv"><h2>Exemplo de extrato</h2>
+    <p>Como o royalty de um semestre aparece para quem tem 3 unidades. Os valores são hipóteses do modelo, não uma promessa.</p>
+    <table>
+      <tr><th>Apuração</th><td>1º semestre de 2027 · publicada em 10/07/2027</td></tr>
+      <tr><th>Faturamento do Glamping</th><td class="v">R$ 3.398.738,38</td></tr>
+      <tr><th>Royalty do território (15%)</th><td class="v">R$ 509.810,76</td></tr>
+      <tr><th>Suas unidades</th><td class="v">3 de 150</td></tr>
+      <tr><th>Sua parte</th><td class="v"><strong>R$ 10.196,22</strong></td></tr>
+      <tr><th>Pagamento</th><td>Na conta cadastrada, até 15/07/2027 <span class="pill">Disponível</span></td></tr>
+      <tr><th>Relatório</th><td>Assinado pela IBITI · impressão digital a91f…c2e0 · <a href="transparencia.html">conferir</a></td></tr>
+    </table>
+    <p class="small">A IBITI apura e publica o faturamento; o contrato calcula a divisão automaticamente; qualquer pessoa pode conferir.</p>
+  </section>
+  <section class="rv"><h2>Enviar unidades a outro membro</h2>
+    <p>Você pode enviar unidades para outra pessoa, desde que ela já seja membro verificado. Cada membro pode ter no máximo 20 unidades. A unidade chega com o mesmo estado (hospedagem disponível ou usada), e o envio não pode ser desfeito. Não existe mercado aberto.</p>
+  </section>
+  <section class="rv"><h2>Validade e encerramento</h2>
+    <p>A emissão vale de 1º de janeiro de 2027 a 31 de dezembro de 2030. Nesse período: hospedagens, Passaporte e oito pagamentos de royalty. Depois de 31/12/2030, não dá mais para enviar unidades nem pedir hospedagens; valores de royalty ainda não recebidos continuam disponíveis, e o histórico permanece registrado.</p>
+    <div class="nota">Nenhuma nova emissão está prometida. Se a IBITI decidir continuar o modelo, será uma decisão futura, comunicada a todos os membros.</div>
+  </section>
+  <section class="rv"><h2>Perdeu o acesso?</h2>
+    <p>A IBITI confirma sua identidade com o concierge, cria uma nova carteira em seu nome e move para ela suas unidades, com o estado de cada uma, e os valores pendentes. A carteira anterior é desativada. O mesmo caminho vale para herdeiros.</p>
+  </section>
+
+  <section class="rv"><h2>Quer apoiar o território?</h2><p>Fale com a IBITI. A verificação leva até 5 dias úteis.</p><div class="btns"><a class="btn primary" href="#">Quero apoiar</a><a class="btn secondary" href="#">Falar com o concierge</a></div></section>
+  <footer><span>IBITI Projeto · Conceição do Ibitipoca, MG</span><span>Cota de apoiador do IBITI Glamping · emissão 2027–2030 · não é oferta pública de valores mobiliários</span></footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var q=new URLSearchParams(location.search);
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var w=q.get('w'); if(w){document.querySelector('.page').style.width=w+'px';document.body.style.background='transparent';}
+  if(q.get('svg')||q.get('measure')){document.body.classList.add('export');}
+  if(q.get('measure')){setTimeout(function(){document.title='H='+Math.ceil(document.querySelector('.page').getBoundingClientRect().height);},600);}
+})();
+</script>
+<script type="module">
+  const q = new URLSearchParams(location.search);
+  if (q.get('svg')) {
+    const { elementToSVG } = await import('https://cdn.jsdelivr.net/npm/dom-to-svg@0.12.2/+esm');
+    await document.fonts.ready; await new Promise(r => setTimeout(r, 700));
+    const svg = elementToSVG(document.querySelector('.page'));
+    const s = new XMLSerializer().serializeToString(svg);
+    document.body.innerHTML = ''; const pre = document.createElement('pre'); pre.id = 'svgout'; pre.textContent = s; document.body.appendChild(pre);
+    document.title = 'SVGREADY';
+  }
+</script>
+
+</body>
+</html>

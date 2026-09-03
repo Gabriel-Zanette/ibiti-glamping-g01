@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cota de Apoiador IBITI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --mist:#EEF1EB; --card:#F8F9F6; --paper:#FFFFFF;
+    --ink:#15211B; --ink2:#4A574F; --ink3:#77837C;
+    --canopy:#1E4A38; --canopy2:#2E6A50; --amber:#7B4B1F; --amberTint:#EFE3D5;
+    --quartz:#C8CEC4; --quartz2:#E3E7E0; --moss:#DDE6DC;
+    --display:'Fraunces','Iowan Old Style',Georgia,serif;
+    --body:'Atkinson Hyperlegible','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --mono:'IBM Plex Mono',Menlo,Consolas,monospace;
+    /* cena: cores por seção (amanhecer → dia → entardecer) */
+    --sky1:#E3EAE2; --sky2:#EEF1EB; --m1:#C3CFC4; --m2:#8AA391; --m3:#3F6C55; --sun:#F1E4C6;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  body[data-s="2"]{--sky1:#DDE7DE;--sky2:#EEF1EB;--m1:#BCCABF;--m2:#7E9A87;--m3:#35604A;--sun:#F3E7C9}
+  body[data-s="3"]{--sky1:#E0E8DC;--sky2:#EFF1EA;--m1:#C4CEBE;--m2:#8B9F86;--m3:#3B6650;--sun:#F4E3BF}
+  body[data-s="4"]{--sky1:#E6E3D6;--sky2:#EFF0EA;--m1:#C9CCBC;--m2:#94A08A;--m3:#3E6350;--sun:#F0D9AE}
+  body[data-s="5"]{--sky1:#E7D9C6;--sky2:#EEEDE6;--m1:#CFC5B0;--m2:#9A9A82;--m3:#2E4E3D;--sun:#E8B97C}
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth;scroll-padding-top:0}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  a{color:var(--canopy)} a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  /* ── cena de fundo ──────────────────────────────────────────── */
+  .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .scene svg{width:100%;height:100%;display:block}
+  .scene .layer{will-change:transform}
+  .scene stop,.scene path,.scene circle,.scene ellipse{transition:stop-color 1.2s var(--ease),fill 1.2s var(--ease)}
+  .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:multiply}
+
+  /* ── estrutura ─────────────────────────────────────────────── */
+  .page{position:relative;z-index:1;container-type:inline-size;container-name:page;margin:0 auto}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;width:100%}
+  header.top{position:fixed;top:0;left:0;right:0;z-index:5;background:color-mix(in srgb,var(--mist) 78%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--quartz) 70%,transparent)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.06em;text-decoration:none;color:var(--ink)}
+  .progress{position:absolute;left:0;top:0;height:2px;background:var(--canopy);width:0;transition:width .15s linear}
+  .dots{display:flex;gap:8px;align-items:center}
+  .dots a{width:8px;height:8px;border-radius:50%;background:var(--quartz);display:block;transition:all .35s var(--ease)}
+  .dots a.on{background:var(--canopy);width:24px;border-radius:4px}
+  .dots a.done{background:var(--canopy);opacity:.45}
+  .mini{font-size:14px;color:var(--paper);background:var(--canopy);padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+
+  section.s{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;padding:104px 0 72px;position:relative}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--canopy);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--canopy)}
+  h1,h2{font-family:var(--display);font-weight:400;letter-spacing:-.018em;line-height:1;margin:0 0 26px;text-wrap:balance}
+  h1{font-size:clamp(46px,7vw,92px);max-width:11ch}
+  h1 em{font-style:italic;font-weight:300;color:var(--canopy)}
+  h2{font-size:clamp(38px,5.2vw,64px);max-width:14ch}
+  h2 em{font-style:italic;font-weight:300;color:var(--canopy)}
+
+  /* revelação por rolagem */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease);transition-delay:var(--d,0s)}
+  section.in .rv{opacity:1;transform:none}
+
+  /* ── S1 início ─────────────────────────────────────────────── */
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end}
+  .pontos{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:36ch}
+  .pontos li{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;font-size:22px;line-height:1.3}
+  .pontos li i{width:12px;height:12px;border-radius:50%;background:var(--canopy);display:block;margin-top:11px}
+  .pontos li b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 24px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
+  .btn.primary{background:var(--canopy);color:var(--paper);box-shadow:0 10px 24px -14px rgba(30,74,56,.6)}
+  .btn.primary:hover{background:var(--canopy2);transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(30,74,56,.6)}
+  .btn.secondary{border-color:var(--canopy);color:var(--canopy);background:color-mix(in srgb,var(--paper) 55%,transparent)}
+  .btn.secondary:hover{background:var(--paper);transform:translateY(-2px)}
+  .tag{justify-self:end;background:var(--paper);border:1px solid var(--quartz);border-radius:18px;padding:18px 22px;box-shadow:0 24px 40px -28px rgba(21,33,27,.45);min-width:260px;transform:rotate(-1.2deg)}
+  .tag .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  .tag .v{font-family:var(--display);font-size:38px;line-height:1.05;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+  .tag .n{font-size:13px;color:var(--ink2)}
+  .hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:flex;flex-direction:column;align-items:center;gap:6px}
+  .hint i{width:10px;height:10px;border-right:1.5px solid var(--ink3);border-bottom:1.5px solid var(--ink3);transform:rotate(45deg);animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(45deg);opacity:.5}50%{transform:translateY(6px) rotate(45deg);opacity:1}}
+
+  /* ── S2 números ────────────────────────────────────────────── */
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .stat{background:color-mix(in srgb,var(--paper) 82%,transparent);border:1px solid var(--quartz);border-radius:20px;padding:26px 26px 22px;min-height:172px;display:flex;flex-direction:column;justify-content:flex-end;backdrop-filter:blur(4px)}
+  .stat b{font-family:var(--display);font-weight:400;font-size:clamp(44px,5vw,66px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:block}
+  .stat b small{font-size:.5em;letter-spacing:0}
+  .stat .lbl{color:var(--ink2);font-size:16px;margin-top:10px;display:block}
+  .stat b .count{display:inline}
+  .stat.wide{grid-column:span 2}
+  .stat.wide b{font-size:clamp(40px,4.6vw,58px)}
+  .note{font-size:14px;color:var(--ink3);margin:18px 0 0}
+
+  /* ── S3 como comprar ───────────────────────────────────────── */
+  .steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:8px}
+  .rail{position:absolute;left:24px;right:24px;top:24px;height:2px;background:var(--quartz)}
+  .rail i{position:absolute;inset:0;background:var(--canopy);transform:scaleX(0);transform-origin:left;transition:transform 1.3s var(--ease) .25s;display:block}
+  section.in .rail i{transform:scaleX(1)}
+  .step{position:relative;padding-top:64px}
+  .step .n{position:absolute;top:0;left:0;width:50px;height:50px;border-radius:50%;background:var(--paper);border:2px solid var(--canopy);color:var(--canopy);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:20px}
+  .step b{display:block;font-size:20px;margin-bottom:6px}
+  .step p{margin:0;color:var(--ink2);font-size:16px}
+  .step p em{font-style:normal;font-family:var(--mono);font-weight:500}
+
+  /* ── S4 como usar ──────────────────────────────────────────── */
+  .uses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  .use{background:color-mix(in srgb,var(--paper) 82%,transparent);border:1px solid var(--quartz);border-radius:20px;padding:22px;min-height:190px;display:flex;flex-direction:column;gap:12px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .use:hover{transform:translateY(-4px);box-shadow:0 22px 34px -26px rgba(21,33,27,.5)}
+  .use svg{width:30px;height:30px;stroke:var(--canopy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .use b{font-size:18px;margin-top:auto}
+  .use p{margin:0;color:var(--ink2);font-size:15.5px}
+
+  /* ── S5 o que não é ────────────────────────────────────────── */
+  .nao{list-style:none;margin:0;padding:0;display:grid;gap:8px;max-width:30ch}
+  .nao li{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:baseline;font-family:var(--display);font-size:clamp(24px,3vw,36px);line-height:1.15;font-weight:400;letter-spacing:-.01em}
+  .nao li i{font-style:normal;color:var(--amber);font-family:var(--display);font-size:1.1em;line-height:1}
+  .nao li b{font-family:var(--mono);font-size:.75em;font-weight:500}
+  .final{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+  .cta-card{background:var(--paper);border:1px solid var(--quartz);border-radius:22px;padding:28px;box-shadow:0 28px 48px -32px rgba(21,33,27,.5)}
+  .cta-card h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 6px;line-height:1.05}
+  .cta-card p{margin:0 0 18px;color:var(--ink2);font-size:15.5px}
+  .more{display:grid;gap:8px;margin-top:22px;padding-top:18px;border-top:1px solid var(--quartz2)}
+  .more a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--ink);font-size:15px;padding:6px 0}
+  .more a span{color:var(--ink3);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .more a:hover{color:var(--canopy)}
+  footer{padding:26px 0 30px;border-top:1px solid var(--quartz2);margin-top:56px;font-size:13px;color:var(--ink3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* ── responsivo ────────────────────────────────────────────── */
+  @container page (max-width:860px){
+    html{scroll-snap-type:y proximity}
+    .wrap{padding:0 22px}
+    header.top .wrap{height:56px} .dots{display:none}
+    section.s{padding:84px 0 56px;min-height:100svh}
+    .hero{grid-template-columns:1fr;gap:24px}
+    .tag{justify-self:start;transform:none;min-width:0;padding:14px 16px} .tag .v{font-size:30px}
+    .pontos li{font-size:18px} .pontos li i{margin-top:8px}
+    .btns{margin-top:24px} .btn{padding:13px 18px;font-size:15px}
+    .hint{display:none}
+    .stats{grid-template-columns:1fr 1fr;gap:12px} .stat{min-height:120px;padding:18px} .stat.wide{grid-column:span 2}
+    .steps{grid-template-columns:1fr;gap:18px;padding-left:0}
+    .rail{left:24px;right:auto;top:24px;bottom:40px;width:2px;height:auto}
+    .rail i{transform:scaleY(0);transform-origin:top} section.in .rail i{transform:scaleY(1)}
+    .step{padding:4px 0 0 68px;min-height:52px}
+    .uses{grid-template-columns:1fr 1fr;gap:12px} .use{min-height:150px;padding:16px}
+    .final{grid-template-columns:1fr;gap:26px}
+    .nao li{font-size:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    .rail i{transform:none;transition:none}
+    .hint i{animation:none}
+    .scene .layer{transform:none!important}
+    .btn,.use{transition:none}
+  }
+  /* ── modo de exportação (uma seção por vez, ?tela=N) ───────── */
+  body.export{background:transparent}
+  body.export .scene,body.export .grain{position:absolute}
+  body.export header.top{position:absolute}
+  body.export .page{overflow:hidden;background:transparent}
+  body.export .page > *{position:relative;z-index:1}
+  body.export .page > .scene,body.export .page > .grain{position:absolute;inset:0;z-index:0;height:var(--frame,800px)}
+  body.export section.s{display:none}
+  body.export section.s.only{display:flex;min-height:0;height:var(--frame,800px)}
+  body.export .rv,body.export .rail i{opacity:1;transform:none;transition:none}
+  body.export html{scroll-snap-type:none}
+</style>
+</head>
+<body data-s="1">
+
+<div class="scene" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky1)"/><stop offset="1" style="stop-color:var(--sky2)"/></linearGradient>
+      <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".55"/></linearGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="26"/></filter>
+    </defs>
+    <rect width="1440" height="900" fill="url(#sky)"/>
+    <g class="layer" data-p="0.05"><circle id="sun" cx="1080" cy="230" r="86" style="fill:var(--sun)"/></g>
+    <g class="layer" data-p="0.12"><path style="fill:var(--m1)" d="M0,560 C120,520 200,470 320,480 C430,490 470,430 560,420 C660,410 700,470 800,450 C900,430 940,380 1040,390 C1140,400 1180,450 1280,430 C1360,415 1400,440 1440,430 L1440,900 L0,900 Z"/></g>
+    <ellipse cx="700" cy="620" rx="720" ry="70" fill="#FFFFFF" opacity=".35" filter="url(#blur)"/>
+    <g class="layer" data-p="0.22"><path style="fill:var(--m2)" d="M0,660 C90,640 160,580 260,590 C360,600 400,560 500,570 C600,580 640,640 740,620 C840,600 880,540 980,550 C1080,560 1120,620 1220,600 C1320,580 1380,610 1440,600 L1440,900 L0,900 Z"/></g>
+    <ellipse cx="760" cy="760" rx="800" ry="80" fill="#FFFFFF" opacity=".4" filter="url(#blur)"/>
+    <g class="layer" data-p="0.36"><path style="fill:var(--m3)" d="M0,780 C120,760 200,720 300,730 C400,740 460,700 560,710 C660,720 720,770 820,750 C920,730 980,690 1080,700 C1180,710 1240,760 1340,740 C1400,730 1420,745 1440,740 L1440,900 L0,900 Z"/></g>
+    <rect y="700" width="1440" height="200" fill="url(#mist)"/>
+  </svg>
+</div>
+<svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+
+<div class="page">
+<header class="top">
+  <div class="progress" id="progress"></div>
+  <div class="wrap">
+    <a class="brand" href="#inicio">IBITI</a>
+    <nav class="dots" aria-label="Seções"><a href="#inicio" class="on" aria-label="Início"></a><a href="#numeros" aria-label="Em números"></a><a href="#comprar" aria-label="Como comprar"></a><a href="#usar" aria-label="Como usar"></a><a href="#nao" aria-label="O que não é"></a></nav>
+    <a class="mini" href="#comprar">Quero apoiar</a>
+  </div>
+</header>
+
+<!-- S1 · início -->
+<section class="s" id="inicio" data-n="1">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow rv">IBITI Glamping · Serra da Mantiqueira, MG</div>
+      <h1 class="rv" style="--d:.08s">Cota de apoiador do <em>IBITI Glamping</em></h1>
+      <ul class="pontos">
+        <li class="rv" style="--d:.18s"><i></i><span><b>1</b> unidade = <b>1</b> hospedagem no Glamping</span></li>
+        <li class="rv" style="--d:.26s"><i></i><span>Passaporte IBITI incluído</span></li>
+        <li class="rv" style="--d:.34s"><i></i><span>Parte do royalty do território, a cada semestre</span></li>
+        <li class="rv" style="--d:.42s"><i></i><span>Válida de <b>2027</b> a <b>2030</b></span></li>
+      </ul>
+      <div class="btns rv" style="--d:.52s"><a class="btn primary" href="#comprar">Quero apoiar</a><a class="btn secondary" href="#numeros">Ver os números</a></div>
+    </div>
+    <div class="tag rv" style="--d:.4s"><div class="l">Por unidade · referência</div><div class="v">R$ 53.008,93</div><div class="n">Emissão única de 150 unidades</div></div>
+  </div>
+  <div class="hint">Role<i></i></div>
+</section>
+
+<!-- S2 · em números -->
+<section class="s" id="numeros" data-n="2">
+  <div class="wrap">
+    <div class="eyebrow rv">Cota de apoiador</div>
+    <h2 class="rv" style="--d:.06s">Em <em>números</em></h2>
+    <div class="stats">
+      <div class="stat rv" style="--d:.12s"><b class="count" data-to="150" data-fmt="int">150</b><span class="lbl">unidades, emissão única</span></div>
+      <div class="stat rv" style="--d:.18s"><b class="count" data-to="20" data-fmt="int">20</b><span class="lbl">no máximo, por pessoa</span></div>
+      <div class="stat rv" style="--d:.24s"><b class="count" data-to="15" data-fmt="pct">15%</b><span class="lbl">do faturamento do Glamping vai ao território</span></div>
+      <div class="stat wide rv" style="--d:.30s"><b><small>R$</small> <span class="count" data-to="53008.93" data-fmt="brl">53.008,93</span></b><span class="lbl">por unidade — valor de referência do modelo, a confirmar</span></div>
+      <div class="stat rv" style="--d:.36s"><b class="count" data-to="8" data-fmt="int">8</b><span class="lbl">pagamentos de royalty, um por semestre</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- S3 · como comprar -->
+<section class="s" id="comprar" data-n="3">
+  <div class="wrap">
+    <div class="eyebrow rv">Cota de apoiador</div>
+    <h2 class="rv" style="--d:.06s">Como <em>comprar</em></h2>
+    <div class="steps">
+      <div class="rail"><i></i></div>
+      <div class="step rv" style="--d:.15s"><div class="n">1</div><b>Fale com a IBITI</b><p>Verificação em até <em>5</em> dias úteis.</p></div>
+      <div class="step rv" style="--d:.30s"><div class="n">2</div><b>Escolha suas unidades</b><p>De <em>1</em> a <em>20</em>.</p></div>
+      <div class="step rv" style="--d:.45s"><div class="n">3</div><b>Pague por transferência</b><p>Os dados chegam por e‑mail.</p></div>
+      <div class="step rv" style="--d:.60s"><div class="n">4</div><b>Receba seu Passaporte</b><p>A IBITI guarda tudo por você.</p></div>
+    </div>
+    <div class="btns rv" style="--d:.75s"><a class="btn primary" href="#nao">Quero apoiar</a><a class="btn secondary" href="como-funciona.html">Ver em detalhe</a></div>
+  </div>
+</section>
+
+<!-- S4 · como usar -->
+<section class="s" id="usar" data-n="4">
+  <div class="wrap">
+    <div class="eyebrow rv">Cota de apoiador</div>
+    <h2 class="rv" style="--d:.06s">Como <em>usar</em></h2>
+    <div class="uses">
+      <div class="use rv" style="--d:.12s"><svg viewBox="0 0 24 24"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M10 6v12"/></svg><b>Hospedagem</b><p>Peça o voucher no seu Passaporte. O Glamping combina as datas com você.</p></div>
+      <div class="use rv" style="--d:.20s"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h7"/></svg><b>Royalty</b><p>Extrato e pagamento a cada semestre, na conta cadastrada.</p></div>
+      <div class="use rv" style="--d:.28s"><svg viewBox="0 0 24 24"><path d="M4 9h13l-3-3"/><path d="M20 15H7l3 3"/></svg><b>Enviar unidades</b><p>Só para outros membros verificados.</p></div>
+      <div class="use rv" style="--d:.36s"><svg viewBox="0 0 24 24"><circle cx="8" cy="13" r="4"/><path d="M11 10l9-6M17 7l2 2M14 9l2 2"/></svg><b>Perdeu o acesso?</b><p>A IBITI recupera, inclusive para herdeiros.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S5 · o que não é -->
+<section class="s" id="nao" data-n="5">
+  <div class="wrap final">
+    <div>
+      <div class="eyebrow rv">Cota de apoiador</div>
+      <h2 class="rv" style="--d:.06s">O que <em>não</em> é</h2>
+      <ul class="nao">
+        <li class="rv" style="--d:.14s"><i>×</i><span>investimento com retorno garantido</span></li>
+        <li class="rv" style="--d:.22s"><i>×</i><span>moeda para negociar</span></li>
+        <li class="rv" style="--d:.30s"><i>×</i><span>financiamento da obra do Glamping</span></li>
+        <li class="rv" style="--d:.38s"><i>×</i><span>algo que continua depois de <b>2030</b></span></li>
+      </ul>
+    </div>
+    <div class="cta-card rv" style="--d:.3s">
+      <h3>Quer apoiar o território?</h3>
+      <p>Fale com a IBITI. A verificação leva até 5 dias úteis.</p>
+      <div class="btns" style="margin-top:0"><a class="btn primary" href="#">Quero apoiar</a><a class="btn secondary" href="#">Falar com o concierge</a></div>
+      <div class="more">
+        <a href="como-funciona.html">Como funciona, em detalhe<span>página</span></a>
+        <a href="perguntas.html">Perguntas frequentes<span>página</span></a>
+        <a href="transparencia.html">Transparência: números e relatórios<span>página</span></a>
+        <a href="#">Whitepaper técnico<span>pdf</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><footer><span>IBITI Projeto · Conceição do Ibitipoca, MG</span><span>Cota de apoiador do IBITI Glamping · emissão 2027–2030 · não é oferta pública de valores mobiliários</span></footer></div>
+</div>
+
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.s'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.dots a'));
+  var layers = Array.prototype.slice.call(document.querySelectorAll('.scene .layer'));
+  var progress = document.getElementById('progress');
+
+  // formatação dos contadores
+  function fmt(v, f) {
+    if (f === 'brl') return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (f === 'pct') return Math.round(v) + '%';
+    return Math.round(v).toString();
+  }
+  function countUp(el) {
+    var to = parseFloat(el.dataset.to), f = el.dataset.fmt, t0 = null, dur = 1300;
+    if (reduce || document.body.classList.contains('export')) { el.textContent = fmt(to, f); return; }
+    function tick(t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * e, f);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // seção ativa: revelação, pontos, tintas da cena, contadores
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var n = en.target.dataset.n;
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        document.body.dataset.s = n;
+        dots.forEach(function (d, i) { d.className = (i + 1 === +n) ? 'on' : (i + 1 < +n ? 'done' : ''); });
+        en.target.querySelectorAll('.count').forEach(countUp);
+      } else if (!document.body.classList.contains('export')) {
+        en.target.classList.remove('in');
+      }
+    });
+  }, { threshold: 0.45 });
+  sections.forEach(function (s) { io.observe(s); });
+
+  // parallax e progresso
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+      if (!reduce) layers.forEach(function (l) { l.style.transform = 'translateY(' + (-y * parseFloat(l.dataset.p)).toFixed(1) + 'px)'; });
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // modo de exportação: ?tela=N mostra só a seção N (e ?w=390 força largura de celular)
+  var tela = parseInt(q.get('tela') || '0', 10), w = q.get('w');
+  if (w) { document.querySelector('.page').style.width = w + 'px'; }
+  if (tela) {
+    document.body.classList.add('export');
+    document.documentElement.style.scrollSnapType = 'none';
+    var target = sections[tela - 1];
+    target.classList.add('only', 'in');
+    document.body.dataset.s = String(tela);
+    var frame = (w ? 844 : 800);
+    document.querySelector('.page').style.setProperty('--frame', frame + 'px');
+    document.querySelector('.page').style.height = frame + 'px';
+    var pg = document.querySelector('.page');
+    document.querySelectorAll('.grain, .scene').forEach(function (s) { s.style.height = frame + 'px'; pg.insertBefore(s, pg.firstChild); });
+    dots.forEach(function (d, i) { d.className = (i + 1 === tela) ? 'on' : (i + 1 < tela ? 'done' : ''); });
+    target.querySelectorAll('.count').forEach(function (el) { el.textContent = fmt(parseFloat(el.dataset.to), el.dataset.fmt); });
+    var foot = document.querySelector('footer'); if (tela !== 5) foot.parentNode.style.display = 'none';
+  }
+  if (q.get('measure')) { setTimeout(function () { document.title = 'H=' + Math.ceil(document.querySelector('.page').getBoundingClientRect().height); }, 700); }
+})();
+</script>
+<script type="module">
+  // Exportação para SVG (uso interno, só com ?svg=1): converte a página/tela em vetores e textos editáveis.
+  const q = new URLSearchParams(location.search);
+  if (q.get('svg')) {
+    const { elementToSVG } = await import('https://cdn.jsdelivr.net/npm/dom-to-svg@0.12.2/+esm');
+    await document.fonts.ready;
+    await new Promise(r => setTimeout(r, 900));
+    // resolve as cores da cena (variáveis CSS) em valores literais, para o SVG ficar autônomo
+    document.querySelectorAll('.scene stop').forEach(st => { const c = getComputedStyle(st).stopColor; st.setAttribute('stop-color', c); st.style.stopColor = c; });
+    document.querySelectorAll('.scene path, .scene circle, .scene ellipse, .scene rect').forEach(el => { const cs = getComputedStyle(el); el.style.fill = cs.fill; el.style.fillOpacity = cs.fillOpacity; });
+    document.querySelectorAll('.grain').forEach(g => g.remove());
+    const svg = elementToSVG(document.querySelector('.page'));
+    const s = new XMLSerializer().serializeToString(svg);
+    document.body.innerHTML = '';
+    const pre = document.createElement('pre'); pre.id = 'svgout'; pre.textContent = s; document.body.appendChild(pre);
+    document.title = 'SVGREADY';
+  }
+</script>
+</body>
+</html>
