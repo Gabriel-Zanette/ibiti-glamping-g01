@@ -1,0 +1,28 @@
+{
+  "pages": 28,
+  "sourceSha256": "f60e9e961f48ac4181240ef0052d11cd61de14905f98215ffd782c72dedf2d98",
+  "pdfSha256": "83a1b61db178cb4603d690c32ad4dd7669533f4456a50b42c14e6cff1326cc7e",
+  "horizontalOverflow": [],
+  "financialSource": {
+    "source": "/Users/gabrielzanette/Library/Containers/net.whatsapp.WhatsApp/Data/tmp/documents/B9D44BEB-17A8-4ABF-A6B4-9E6529181CAC/Modelo Glamping.xlsx",
+    "sourceSha256": "db12d1b0a775f95b51b2c1ffaca3c727b5f7f3ed8d6474465f56bed1efbf81ef",
+    "sourceUnmodified": true,
+    "tokenValue": 37055.18670479985,
+    "placement100": 3705518.6704799854,
+    "wacc": 0.178609,
+    "royaltiesTotal": 8923259.161875002,
+    "presentValueTotal": 5558278.005719978,
+    "sourceFormulaErrors": [],
+    "checks": "Annual revenue, royalty, discount, token price, 100-token placement and sensitivity central cells reconciled independently."
+  },
+  "changes": "Capítulo 4.3–4.4, Apêndice B e referência financeira em D.1. Demais conteúdos preservados.",
+  "visualReview": "28 páginas renderizadas e inspecionadas; explicação de royalties por token ampliada; tabelas financeiras preservadas.",
+  "gitlab": {
+    "branch": "main",
+    "readmeCommit": "483c5c7062c8da81683f7a5835311f027164c029",
+    "directoryCommit": "b390ebb938ea8f3af7e91c755b27d7e5129c249b",
+    "whitepaperCommit": "970a600701f444af92e96c1f698358c21b969418",
+    "whitepaperPath": "Sprint 3/Whitepaper Técnico do Ativo Digital/whitepaper_ibiti_revisado.pdf"
+  },
+  "clarification": "Seção 4.3: royalties totais / 150, recebimento por IBT no quadriênio, valores em reais sem escala de milhares e distinção entre nominal e valor presente. Números preservados."
+}

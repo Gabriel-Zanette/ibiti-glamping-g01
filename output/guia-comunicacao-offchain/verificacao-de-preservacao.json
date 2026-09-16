@@ -1,0 +1,382 @@
+{
+  "scope": "Somente oito telas adicionadas; 20 páginas originais preservadas; memorial sem alterações.",
+  "originalPages": 20,
+  "addedPages": 3,
+  "totalPages": 23,
+  "newScreens": [
+    "OC1",
+    "OC2",
+    "OC3",
+    "OC4",
+    "OC5",
+    "OC6",
+    "OC7",
+    "OC8"
+  ],
+  "originalPDFPages": [
+    {
+      "page": 1,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 2,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 3,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 4,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 5,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 6,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 7,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 8,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 9,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 10,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 11,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 12,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 13,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 14,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 15,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 16,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 17,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 18,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 19,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    },
+    {
+      "page": 20,
+      "contentStreamIdentical": true,
+      "textIdentical": true,
+      "boxesIdentical": true
+    }
+  ],
+  "originalHTMLRecoveredExactlyByRemovingAddition": true,
+  "memorialIdentical": true,
+  "htmlGeometryValidation": {
+    "originalElements": 2026,
+    "originalGeometryAndTypographyUnchanged": true,
+    "fonts": [
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "unloaded"
+      },
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "unloaded"
+      },
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "unloaded"
+      },
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "loaded"
+      },
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "unloaded"
+      },
+      {
+        "family": "Atkinson Hyperlegible",
+        "status": "loaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "loaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      },
+      {
+        "family": "IBM Plex Mono",
+        "status": "unloaded"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "offchain-1",
+        "height": 991.4375,
+        "phones": [
+          {
+            "height": 640,
+            "overflow": false
+          },
+          {
+            "height": 640,
+            "overflow": false
+          },
+          {
+            "height": 640,
+            "overflow": false
+          }
+        ],
+        "screens": [
+          {
+            "id": "OC1",
+            "height": 869.296875
+          },
+          {
+            "id": "OC2",
+            "height": 869.296875
+          },
+          {
+            "id": "OC3",
+            "height": 869.296875
+          }
+        ]
+      },
+      {
+        "id": "offchain-2",
+        "height": 995.484375,
+        "phones": [
+          {
+            "height": 644.046875,
+            "overflow": false
+          },
+          {
+            "height": 640,
+            "overflow": false
+          },
+          {
+            "height": 640,
+            "overflow": false
+          }
+        ],
+        "screens": [
+          {
+            "id": "OC4",
+            "height": 873.34375
+          },
+          {
+            "id": "OC5",
+            "height": 873.34375
+          },
+          {
+            "id": "OC6",
+            "height": 873.34375
+          }
+        ]
+      },
+      {
+        "id": "offchain-3",
+        "height": 991.4375,
+        "phones": [
+          {
+            "height": 640,
+            "overflow": false
+          },
+          {
+            "height": 640,
+            "overflow": false
+          }
+        ],
+        "screens": [
+          {
+            "id": "OC7",
+            "height": 869.296875
+          },
+          {
+            "id": "OC8",
+            "height": 869.296875
+          }
+        ]
+      }
+    ]
+  },
+  "sourceHashes": {
+    "pdf": "cee5a293d40844e154965718adb031db609b082813a642ce562699127396e941",
+    "board": "89c6e0214f9a37b560a7da0bc7676646a2aa97ccfa7c9a46cffa8960e0dddee1",
+    "memorial": "02c770ddc1acdd052aa02d9bfc28065dcb5ba669eb21fe4ef0d01eb4e3120c71"
+  },
+  "outputHashes": {
+    "pdf": "277a1531df78147544bb6d4c3a082ab05560ccf31580c3a36d0e5d00222e4b39",
+    "board": "9d2709a4623e57248c96a104e0ec72b79bf325132e3b6dcc1f96d2615cbc1812",
+    "memorial": "02c770ddc1acdd052aa02d9bfc28065dcb5ba669eb21fe4ef0d01eb4e3120c71"
+  },
+  "notes": "As referências antigas a voucher/resgate no contrato permanecem intactas por instrução do usuário. As novas telas são mockups do fluxo off-chain no estilo do guia; não modificam o aplicativo.",
+  "pixelIdenticalOriginalPagesAt1000px": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "newPagesVisualReview": "Três páginas novas inspecionadas; oito telas legíveis, sem cortes ou sobreposições."
+}

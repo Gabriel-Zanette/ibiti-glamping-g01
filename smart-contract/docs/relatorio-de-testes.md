@@ -1,174 +1,54 @@
-# Relatório de testes — IBIToken v1
+# Relatório de testes — IBIToken v2 / Remix
 
-Saída integral de `npx hardhat test --gas-stats`, executado em 2026-09-02 na rede simulada do Hardhat 3
-(solc 0.8.34, perfil `default`, sem otimizador). Reproduzível com:
-
-```bash
-npm install
-npx hardhat test --gas-stats
-```
+Validação em 11/09/2026, macOS, Node 24.19.0. Instalação limpa com npm ci nos dois projetos, sem dependências, artefatos ou caches anteriores. Compilador solc **0.8.34**, EVM **Osaka**, otimizador **200**; Anvil **1.7.1**. Nenhum teste depende de Hardhat.
 
 ## Resultado
 
-```text
-No contracts to compile
+| Grupo | Casos efetivos | Resultado |
+|---|---:|---|
+| Solidity: Token | 16 | passaram |
+| Solidity: Governance | 8 | passaram |
+| Solidity: Royalties | 9 | passaram |
+| Solidity: Settlement | 4 | passaram |
+| Integração contrato + cotas | 5 | passaram |
+| Scripts JavaScript entregues ao Remix | 2 fluxos: artefatos na raiz e junto da fonte | passaram |
+| Serviço off-chain | 16 | passaram |
+| **Total atual** | **60** | **zero falhas nos casos validados** |
 
-Running Solidity tests
+A rodada inicial executou 59 casos efetivos: 44 pass no projeto do contrato, incluindo o contêiner de quatro suítes Solidity, e 16 no serviço. Na publicação foi constatado que o Remix 2.5.7 usa artifacts/ na raiz. A regressão reproduziu a falha do script nesse formato; os scripts foram corrigidos para aceitar também os caminhos anteriores. Os dois fluxos de scripts foram reexecutados e passaram, elevando o catálogo a 60 casos efetivos. As demais suítes, sem alteração, não foram repetidas. TypeScript passou novamente no projeto do contrato; a checagem do backend permanece a da rodada inicial.
 
+## O que foi exercitado
 
-Running Mocha tests
+- Emissão, indivisibilidade, reserva, teto, compras, transferências, permissões, pausa, expiração, recuperação e administração em duas etapas.
+- Ausência de funções públicas de emissão adicional, queima por uso ou resgate; hospedagem preserva os saldos de IBT.
+- Apuração de 15%, fotografia de saldos, arredondamento, depósito atômico, saque sem duplicação, oito períodos e liquidação externa.
+- Pessoa e carteira únicas, assinatura, isolamento de acesso, persistência, concorrência, consumo, cancelamento durante sincronização e transferências sem recriar cotas.
+- Rede/contrato incorretos, histórico incompleto, reorganização e consumo legado bloqueiam sincronização insegura.
+- Arquivos reais 01_publicar.js e 02_operar.js, nos dois formatos de diretório de artefatos: publicação da moeda fictícia e dos 150 IBT, compra de 5, reporte de 1.000 tBRL, saque de 5 tBRL, recuperação, pausa e retomada.
 
+## Reprodução
 
-  IBIToken
-    Emissão única (deploy)
-      ✔ tem nome IBIToken, símbolo IBT e zero casas decimais (token indivisível) (55ms)
-      ✔ cunha todo o supply (150) na carteira administrativa, com reserva 50 e teto 20 por carteira
-      ✔ emite o evento Emission com os parâmetros da emissão
-      ✔ não existe função de mint nem de burn na interface pública
-      ✔ rejeita parâmetros inválidos no deploy
-    Compra primária (porta de entrada única)
-      ✔ entrega unidades a uma carteira verificada e registra a venda
-      ✔ só a carteira administrativa pode executar a compra primária
-      ✔ rejeita quantidade zero
-      ✔ aplica o teto de 20 unidades por carteira (2/15 do supply)
-      ✔ protege a reserva da IBITI: no máximo 100 unidades vão a mercado
-      ✔ a reserva só pode ser reduzida por decisão expressa (nunca aumentada)
-      ✔ a transferência direta da carteira administrativa obedece às mesmas travas
-    Transferências entre portadores
-      ✔ permite transferir para quem já tem saldo (portador verificado)
-      ✔ rejeita transferência para carteira sem saldo (não verificada)
-      ✔ transferFrom (custodiante autorizado) segue as mesmas regras
-      ✔ aplica o teto por carteira também no mercado secundário
-      ✔ permite devolver unidades à carteira administrativa (isenta do teto)
-      ✔ saldo insuficiente reverte com o erro padrão do ERC-20
-      ✔ mantém o registro de portadores coerente com os saldos
-    Resgate da experiência (marcação sem queima)
-      ✔ move unidades de ativas para resgatadas sem alterar saldo nem supply
-      ✔ rejeita resgatar mais unidades do que as ativas (resgate único por unidade)
-      ✔ só a carteira administrativa marca resgates, e nunca zero unidades
-      ✔ rejeita resgates antes do início da validade
-    Transferência de unidades já resgatadas
-      ✔ move primeiro unidades ativas e depois resgatadas, que chegam marcadas
-      ✔ quando a quantidade cabe nas ativas, nenhuma unidade resgatada se move
-      ✔ uma unidade resgatada não pode ser resgatada de novo pelo novo portador (sem gasto duplo)
-    Royalties — reporte de receita e registro pro-rata
-      ✔ calcula 15% do faturamento bruto e registra o devido a cada carteira na fotografia de saldos
-      ✔ a fotografia é a do momento do reporte: transferências posteriores não alteram o registro
-      ✔ unidades resgatadas continuam contando para o royalty (o token não é consumido)
-      ✔ exige que a IBITI tenha aprovado a stablecoin: sem allowance o reporte inteiro reverte
-      ✔ aceita no máximo 8 semestres, em ordem
-      ✔ um semestre sem faturamento registra royalty zero e avança o período
-      ✔ só a carteira administrativa reporta; períodos não reportados não são consultáveis
-    Royalties — saque em stablecoin (pull)
-      ✔ cada portador saca o que lhe cabe; segundo saque reverte
-      ✔ a reserva da IBITI também saca a sua parte
-      ✔ quem não tinha saldo na fotografia não tem o que sacar; período inexistente reverte
-      ✔ pendingRoyaltyOf soma os períodos ainda não sacados
-      ✔ liquidação fora da chain não se aplica a período pago on-chain
-    Royalties — liquidação em reais fora da blockchain
-      ✔ sem stablecoin, o reporte apenas registra o devido e a IBITI marca os pagamentos
-      ✔ a stablecoin pode ser definida uma única vez; períodos anteriores seguem fora da chain
-    Reemissão por perda de chave ou sucessão
-      ✔ move saldo, contadores e royalties pendentes para a nova carteira e invalida a antiga
-      ✔ a carteira revogada não recebe, não transfere, não resgata nem saca
-      ✔ valida os parâmetros da reemissão (saldo, endereços, teto, carteira administrativa)
-      ✔ depois da reemissão, o próximo reporte contempla a nova carteira e não a antiga
-    Validade de 4 anos
-      ✔ após a expiração, transferências e resgates são rejeitados; membership se extingue
-      ✔ o fechamento do último semestre e os saques continuam possíveis depois da expiração
-    Pausa de emergência
-      ✔ congela transferências, compras, resgates, reportes e saques; unpause restaura
-    Administração única da IBITI
-      ✔ troca de carteira administrativa em dois passos, com entrega da reserva à nova carteira
-      ✔ a renúncia à administração está desabilitada
-    Invariantes
-      ✔ soma dos saldos = supply; resgatadas <= saldo; registro de portadores = carteiras com saldo
+Na raiz do repositório:
 
+    npm ci --prefix smart-contract
+    npm ci --prefix offchain
+    npm test --prefix smart-contract
+    npm test --prefix offchain
+    npm run typecheck --prefix smart-contract
+    npm run typecheck --prefix offchain
+    npm run package:remix --prefix smart-contract
+    npm run demo --prefix offchain
 
-  50 passing (480ms)
+Cada teste local inicia seu próprio Anvil em porta livre e o encerra ao terminar. As quatro suítes Solidity são compiladas como contratos reais e cada caso executa após beforeEach. O compilador verifica o limite EIP-170 para os contratos e testes gerados.
 
+## Limite da evidência
 
-50 passing (50 mocha)
-```
+As 37 funções Solidity foram executadas em **Anvil**. O teste dos scripts usa provider EIP-1193 conectado ao Anvil e simula somente a API de arquivos do Remix. Isso valida o bytecode e as operações, mas não comprova execução do plugin no navegador. A importação pelo seletor de pasta falhou. O workspace IBITI-v2-Sepolia foi carregado por um script de arquivos executado no próprio Remix; a compilação e a publicação do IBIToken foram concluídas no navegador. A ação status de scripts/02_operar.js foi executada com sucesso no próprio Remix contra a v2 Sepolia: 150 IBT, reserva 50, teto 20, não pausado, zero períodos. As 37 funções do plugin Solidity e o fluxo completo dos scripts de operação ainda não foram executados no navegador.
 
-## Estatísticas de gas
+A demonstração foi iniciada sem Hardhat em http://localhost:3000: 5 IBT na pessoa fictícia, 2 hospedagens usadas, 3 disponíveis e royalty pago. O endpoint /health respondeu status: ok.
 
-Valores em unidades de gas por chamada (mínimo, média, mediana, máximo e número de chamadas durante a suíte).
-Leituras: o custo de `reportRevenue` cresce com o número de carteiras com saldo (no cenário dos testes, 3 a 5
-carteiras); o limite superior é dado pelo próprio supply (150 carteiras). O tamanho do bytecode (perfil sem
-otimizador) fica abaixo do limite de 24 576 bytes da EVM; o perfil `production`, usado no deploy em Sepolia,
-liga o otimizador.
+Em seguida, a **v2 foi publicada pelo Remix/MetaMask na Sepolia**: `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, transação `0x415a6618a50981407552e4297c48ab0e66c724d03d846cc3f9c165b5a114fb5c`. Recibo status=1; 150 IBT, zero decimais, reserva 50, teto 20, proprietário, tBRL e datas conferidos por RPC. O código de criação corresponde ao local desconsiderando metadados; o Sourcify confirmou correspondência exata de criação e execução e suas 17 fontes foram comparadas às locais. O Blockscout também informou verificação concluída no Remix. Etherscan não foi submetido por falta de chave de API. Custo: 0.005952505222443527 ETH de teste. Recibos, argumentos e entrada do compilador estão em deployments/. Não houve compra ou pagamento novo de royalties nessa implantação.
 
-```text
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                           Gas Usage Statistics                            ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-╔═══════════════════════════════════════════════════════════════════════════╗
-║ contracts/IBIToken.sol:IBIToken                                           ║
-╟────────────────────┬─────────┬─────────┬─────────┬─────────┬──────────────╢
-║ Function name      │ Min     │ Average │ Median  │ Max     │ #calls       ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║ acceptOwnership    │ 28661   │ 28661   │ 28661   │ 28661   │ 1            ║
-║ accessInfo         │ 29848   │ 29848   │ 29848   │ 29848   │ 2            ║
-║ activeUnitsOf      │ 26753   │ 26762   │ 26765   │ 26765   │ 7            ║
-║ approve            │ 46936   │ 46936   │ 46936   │ 46936   │ 1            ║
-║ balanceOf          │ 24337   │ 24346   │ 24349   │ 24349   │ 23           ║
-║ claimRoyalty       │ 74908   │ 89565   │ 92008   │ 92008   │ 7            ║
-║ decimals           │ 21491   │ 21491   │ 21491   │ 21491   │ 1            ║
-║ emissionCap        │ 21502   │ 21502   │ 21502   │ 21502   │ 1            ║
-║ holderCount        │ 23661   │ 23661   │ 23661   │ 23661   │ 2            ║
-║ holders            │ 29080   │ 32526   │ 32839   │ 34092   │ 8            ║
-║ isExpired          │ 21481   │ 21481   │ 21481   │ 21481   │ 1            ║
-║ isMember           │ 24442   │ 25965   │ 26726   │ 26726   │ 6            ║
-║ lastReportedPeriod │ 23692   │ 23692   │ 23692   │ 23692   │ 5            ║
-║ markRedeemed       │ 54980   │ 55021   │ 54980   │ 55352   │ 9            ║
-║ maxPerWallet       │ 21545   │ 21545   │ 21545   │ 21545   │ 1            ║
-║ name               │ 24462   │ 24462   │ 24462   │ 24462   │ 1            ║
-║ owner              │ 23786   │ 23786   │ 23786   │ 23786   │ 3            ║
-║ pause              │ 28203   │ 28203   │ 28203   │ 28203   │ 1            ║
-║ pendingOwner       │ 23645   │ 23645   │ 23645   │ 23645   │ 1            ║
-║ pendingRoyaltyOf   │ 30022   │ 30022   │ 30022   │ 30022   │ 2            ║
-║ periodInfo         │ 40401   │ 40401   │ 40401   │ 40401   │ 5            ║
-║ primaryPurchase    │ 123111  │ 123190  │ 123123  │ 123507  │ 22           ║
-║ redeemedUnitsOf    │ 24404   │ 24413   │ 24416   │ 24416   │ 11           ║
-║ reduceReserve      │ 30579   │ 30579   │ 30579   │ 30579   │ 1            ║
-║ reissue            │ 122342  │ 146827  │ 145113  │ 174742  │ 4            ║
-║ reportRevenue      │ 137567  │ 313069  │ 314948  │ 352332  │ 35           ║
-║ reservedUnits      │ 23622   │ 23622   │ 23622   │ 23622   │ 1            ║
-║ revoked            │ 24419   │ 24419   │ 24419   │ 24419   │ 1            ║
-║ royaltyDue         │ 24711   │ 24721   │ 24723   │ 24723   │ 22           ║
-║ royaltyPaid        │ 24678   │ 24678   │ 24678   │ 24678   │ 2            ║
-║ saleableUnits      │ 28145   │ 28366   │ 28421   │ 28421   │ 5            ║
-║ setStablecoin      │ 30756   │ 30756   │ 30756   │ 30756   │ 1            ║
-║ settleOffChain     │ 55514   │ 55514   │ 55514   │ 55514   │ 1            ║
-║ symbol             │ 24438   │ 24438   │ 24438   │ 24438   │ 1            ║
-║ totalSupply        │ 23631   │ 23631   │ 23631   │ 23631   │ 3            ║
-║ transfer           │ 53237   │ 68326   │ 57209   │ 120376  │ 14           ║
-║ transferFrom       │ 59386   │ 59386   │ 59386   │ 59386   │ 1            ║
-║ transferOwnership  │ 48256   │ 48256   │ 48256   │ 48256   │ 1            ║
-║ unpause            │ 28221   │ 28221   │ 28221   │ 28221   │ 1            ║
-║ validFrom          │ 21441   │ 21441   │ 21441   │ 21441   │ 1            ║
-║ validUntil         │ 21506   │ 21506   │ 21506   │ 21506   │ 1            ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║ Deployment         │ Min     │ Average │ Median  │ Max     │ #deployments ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║                    │ 4454748 │ 4464175 │ 4454748 │ 4478315 │ 5            ║
-╟────────────────────┼─────────┼─────────┴─────────┴─────────┴──────────────╢
-║ Bytecode size      │ 18903   │                                            ║
-╚════════════════════╧═════════╧════════════════════════════════════════════╝
-╔═══════════════════════════════════════════════════════════════════════════╗
-║ contracts/mocks/MockStablecoin.sol:MockStablecoin                         ║
-╟────────────────────┬─────────┬─────────┬─────────┬─────────┬──────────────╢
-║ Function name      │ Min     │ Average │ Median  │ Max     │ #calls       ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║ approve            │ 24956   │ 41669   │ 47240   │ 47240   │ 4            ║
-║ balanceOf          │ 24282   │ 24282   │ 24282   │ 24282   │ 7            ║
-║ mint               │ 68911   │ 68911   │ 68911   │ 68911   │ 3            ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║ Deployment         │ Min     │ Average │ Median  │ Max     │ #deployments ║
-╟────────────────────┼─────────┼─────────┼─────────┼─────────┼──────────────╢
-║                    │ 933704  │ 933704  │ 933704  │ 933704  │ 3            ║
-╟────────────────────┼─────────┼─────────┴─────────┴─────────┴──────────────╢
-║ Bytecode size      │ 3765    │                                            ║
-╚════════════════════╧═════════╧════════════════════════════════════════════╝
-```
+O backend Sepolia v2 também respondeu `/health` com `status: ok` após alcançar o bloco finalizado 11684822. O banco independente registrou 150 IBT e 150 direitos potenciais na administração, zero pessoas e zero hospedagens. A conferência foi somente de leitura; não cadastrou participantes nem realizou novas transações. Evidência em `backendVerification` no registro de publicação v2.
+
+O npm audit dos dois projetos reportou zero vulnerabilidades conhecidas após atualizar dependências auxiliares. Isso não constitui auditoria do smart contract. KYC, hotel e apuração de receita reais continuam fora do protótipo.

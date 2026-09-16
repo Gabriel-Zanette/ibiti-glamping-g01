@@ -1,11 +1,13 @@
 # Guia de Comunicação — IBIToken (IBITI Glamping)
 
+> **Revisão de 10/09/2026:** hospedagens são controladas por pessoa no cadastro off-chain. Fontes HTML e o vocabulário deste guia foram ajustados. As exportações `mockups/svg/` e `mockups/png/` são históricas da v1 e precisam ser regeneradas antes de uma nova entrega visual. A interface executável atual está em [`offchain/public/`](../offchain/README.md).
+
 > **Artefato:** Guia de Comunicação da operação tokenizada · **Módulo:** ADMD7 — Blockchain, criptomoedas e
 > tokenização de ativos · Inteli · **Projeto parceiro:** IBITI (Ibiti Projeto) · **Grupo G01** · Sprint 3
 > **Base:** Whitepaper Técnico do Ativo Digital (Sprint 2), Entendimento da Experiência do Usuário (Sprint 1),
 > Riscos Éticos e Impacto (Sprint 2) e a implementação v1 do contrato IBIToken (`smart-contract/`).
 > **Formato:** este documento + landing page ([`landing/index.html`](landing/index.html)) + board visual com o
-> fluxo compra → recebimento → resgate ([`board/index.html`](board/index.html)) + telas em SVG e PNG
+> fluxo compra → recebimento → hospedagem ([`board/index.html`](board/index.html)) + telas em SVG e PNG
 > (`mockups/`) + tasks para o issue board. **Versão 1.4 (03/09/2026):** landing de página única com cinco seções em
 > tópicos, animação de rolagem e cena do território, mais três páginas de detalhe (como funciona, perguntas,
 > transparência); referências de mercado na seção 13.
@@ -75,7 +77,7 @@ Passaporte" e, para Gabriel, com a transação e o endereço do contrato a um to
 | Apoiadores de impacto | de onde vem o valor e onde estão os limites | "Cada real tem origem, data e documento." | apuração com hash do relatório, painel de transparência, whitepaper | data room, relatório semestral, painel público |
 | Apoiadores expert | que as regras estão no código e são verificáveis | "O contrato é público; as regras não mudam depois da venda." | contrato verificado, eventos, documentação técnica | camada técnica da plataforma, GitLab, exploradores |
 | Equipe IBITI (concierge, financeiro, direção) | o que dizer, com que palavras, em cada situação | "Uma palavra para cada coisa." | este guia, catálogo de mensagens, roteiros | playbook interno, treinamento |
-| Empreendedor do Glamping | como a experiência resgatada chega à operação | "O voucher é a reserva; o registro é a confirmação." | fluxo de resgate, `accessInfo` | procedimento operacional |
+| Empreendedor do Glamping | como a experiência resgatada chega à operação | "O pedido separa a cota; o atendimento confirma a reserva." | cadastro de hospedagens e saldo on-chain | procedimento operacional |
 | Parceiros do território (eventos, outros empreendimentos) | como conferir um membro sem depender da IBITI | "Membro é quem tem unidade — e você mesmo confere." | consulta pública do contrato | guia de verificação de uma página |
 | Comunidade local e imprensa | o que é e o que não é | "Não é investimento; é apoio ao território, com uma experiência e uma fração do royalty." | posicionamento, perguntas frequentes | texto institucional, porta‑voz |
 | Reguladores e assessoria jurídica | que se trata de modelagem, sem oferta pública real | linguagem prudente, sem classificação jurídica definitiva | whitepaper §11, este guia | documentação formal |
@@ -160,7 +162,7 @@ transação 0x8f2a…c41d · contrato IBIToken (verificado)".
 **P4 · Uma palavra para cada coisa.**
 Cada conceito tem um único termo (seção 5). Nunca alternar sinônimos ("resgatar" / "usar" / "consumir");
 nunca usar o nome do erro do contrato para o membro.
-*Aplicado:* o contrato chama de `markRedeemed`; a interface sempre diz "resgatar"; o atendimento também.
+*Aplicado:* o cadastro controla cotas por pessoa; a interface e o atendimento dizem "pedir hospedagem".
 
 **P5 · Todo número tem origem e data.**
 Nenhum valor aparece sozinho. Um número de royalty vem com o período, a base (faturamento bruto reportado), a
@@ -180,7 +182,7 @@ IBITI."
 Nunca mostrar dados de outros membros, rankings, nomes ou hábitos; endereços sempre truncados; e‑mails com
 valores só quando o membro pediu. O perfil médio do hóspede exige a discrição de um hotel de luxo, e a LGPD
 exige que nada pessoal vá ao registro público.
-*Aplicado:* o painel de transparência mostra "12 membros", nunca a lista; o e‑mail do voucher não menciona
+*Aplicado:* o painel de transparência mostra "12 membros", nunca a lista; a confirmação do pedido não menciona
 valores nem outros hóspedes.
 
 **P8 · A mesma verdade em duas profundidades.**
@@ -220,10 +222,10 @@ recebe alguém em casa e explica as regras da casa com naturalidade. Quatro adje
 | Aquisição | claro, sem pressão | "Escolha quantas unidades quer adquirir — de 1 a 20. Nada é cobrado até você confirmar." |
 | Recebimento | acolhedor, com celebração contida | "Suas 3 unidades estão no seu Passaporte IBITI. Bem‑vindo(a) à comunidade." |
 | Posse / Passaporte | pertencimento | "Como membro, você tem prioridade nas janelas de reserva e acesso aos rituais do território." |
-| Resgate | serviço de hospitalidade | "A equipe do Glamping vai combinar as datas com você em até 3 dias úteis." |
+| Resgate | serviço de hospitalidade | "A equipe do Glamping vai confirmar as datas conforme disponibilidade." |
 | Apuração e royalty | sóbrio, contábil | "Apuração do 1º semestre de 2027 publicada. Sua fração: R$ 10.196,22." |
 | Erro | calmo e orientador | "Essa carteira ainda não faz parte da comunidade IBITI. Escolha outro membro ou indique a verificação." |
-| Incidente / pausa | transparente e factual | "Pausamos envios, resgates e saques por segurança. Suas unidades e valores estão preservados." |
+| Incidente / pausa | transparente e factual | "Pausamos envios, novos pedidos e saques por segurança. Suas unidades e valores estão preservados." |
 | Encerramento (2030) | grato e claro | "A emissão 2027–2030 se encerrou. Obrigado por ter apoiado o território. Seu histórico permanece registrado." |
 
 ### 4.3 A mesma mensagem para cada perfil
@@ -264,9 +266,9 @@ A regra é **uma palavra para cada coisa** — em dois registros que nunca se mi
 | A natureza do ativo | **cota de apoiador** | investimento, ação, título, cota de fundo | — |
 | Quem detém | **apoiador(a)**, **membro** | investidor, holder, cliente | `holders` |
 | Condição de membro | **Passaporte IBITI**, "membro do Passaporte" | NFT, membership, VIP, tier | `isMember` |
-| Direito de uso | **hospedagem** (interface) · **experiência** (documentos e whitepaper) | diária grátis, brinde, benefício, voucher | unidades ativas |
-| Usar a experiência | **pedir hospedagem / usar** (interface) · **resgatar** (documentos e contrato) | queimar, burn, gastar, consumir, usar o token | `markRedeemed` |
-| Estado das unidades | **hospedagens disponíveis / usadas** (interface) · **disponíveis para resgate / já resgatadas** (documentos) | ativas/resgatadas (interno), queimadas | `activeUnitsOf` / `redeemedUnitsOf` |
+| Direito de uso | **hospedagem** (interface) · **experiência** (documentos e whitepaper) | diária grátis, brinde, benefício, voucher | cotas no cadastro |
+| Usar a experiência | **pedir hospedagem / usar** (interface) · **cotas por pessoa** (documentos) | queimar, burn, gastar, consumir, usar o token | cadastro off-chain |
+| Cotas de hospedagem | **hospedagens disponíveis / em pedidos / utilizadas** | ativas/resgatadas (interno), queimadas | consulta de cotas por pessoa |
 | Direito econômico | **sua parte do royalty** (interface) · **fração do royalty do território**, **apuração semestral** (documentos) | dividendo, rendimento, yield, juros, lucro, APY | `royaltyDue`, `reportRevenue` |
 | Base do royalty | **faturamento bruto reportado** (diárias e consumo) | receita líquida, lucro, resultado | `grossRevenue` |
 | Documento da apuração | **relatório assinado pela IBITI** e sua **impressão digital (hash)** | prova criptográfica, hash (sem explicar) | `reportHash` |
@@ -301,10 +303,10 @@ divisão ("2 dos 15 pontos"), em **%** quando se fala da alíquota ("15% do fatu
 | Placeholder | exemplo de formato, nunca o rótulo | "Ex.: 0x8f2a…c41d" |
 | Estado vazio | diz o que aparecerá e quando | "Nenhuma apuração publicada ainda. A primeira será em julho de 2027." |
 | Carregando / pendente | o que está acontecendo e quanto tempo leva | "Registrando no registro público… cerca de 30 segundos." |
-| Confirmação de ação irreversível | resumo + consequência + botão nomeado | "Enviar 2 unidades para Ana P. (0x3c1e…88ab)? Elas passam a pertencer a esse membro, com o mesmo estado (1 disponível, 1 já resgatada)." → "Confirmar envio" |
+| Confirmação de ação irreversível | resumo + consequência + botão nomeado | "Enviar 2 unidades para Ana P. (0x3c1e…88ab)? Elas passam a pertencer a esse membro, com membership e royalty; hospedagens livres acompanham conforme a política do cadastro." → "Confirmar envio" |
 | Mensagem de sucesso | fato + próximo passo | "2 unidades enviadas. Elas já aparecem no Passaporte de Ana P." |
 | Camada técnica | sempre recolhida na assistida, sempre visível na expert | "Detalhes técnicos ▸ transação · contrato · evento" |
-| Notificação por e‑mail | assunto = fato; primeira linha = o que fazer | Assunto: "Voucher IBT‑2027‑0148 emitido" · "Guarde este código; a equipe do Glamping entra em contato em até 3 dias úteis." |
+| Notificação por e‑mail | assunto = fato; primeira linha = o que fazer | Assunto: "Pedido de hospedagem emitido" · "Seu pedido foi registrado; a equipe confirma as datas conforme disponibilidade." |
 | Números | tabulares, com base e data (P5) | "R$ 10.196,22 · 3 de 150 unidades · 1º sem. 2027" |
 | Linguagem | frases de até 15 palavras; uma ideia por frase; "você"; sem caixa alta; sem exclamação dupla; no máximo três itens por bloco e um botão por tela (P0) | — |
 | Acessibilidade | contraste mínimo 4,5:1; foco visível; textos alternativos nos ícones; nunca cor como único sinal | ícone + texto em estados de erro |
@@ -349,13 +351,13 @@ Catálogo canônico. O board mostra as mesmas mensagens nas telas. Cada erro nas
 |---|---|---|---|
 | C1 | verificação concluída | Verificação concluída | Boas‑vindas à comunidade IBITI. Agora você pode adquirir unidades. |
 | C2 | `PrimaryPurchase` | Pronto. Suas 3 unidades estão no seu Passaporte. | Hospedagens a partir de 01/01/2027; primeiro royalty no 1º semestre de 2027. |
-| C3 | voucher emitido | Seu voucher IBT‑2027‑0148 foi enviado | Guarde o código. Entramos em contato em até 3 dias úteis para combinar as datas. |
-| C4 | `RedemptionMarked` | Hospedagem registrada | 1 unidade usada em 18/03/2027. Ela continua valendo Passaporte e royalty. |
-| C5 | Transfer · UnitsMoved | 2 unidades enviadas para Ana P. | 1 disponível e 1 usada. |
+| C3 | pedido registrado | Seu pedido foi recebido | A cota foi separada. A equipe vai confirmar as datas conforme disponibilidade. |
+| C4 | `stay.completed (cadastro)` | Hospedagem registrada | 1 hospedagem utilizada em 18/03/2027. Suas unidades continuam garantindo Passaporte e royalty. |
+| C5 | Transfer + conciliação de cotas | 2 unidades enviadas para Ana P. | Hospedagens livres conciliadas no cadastro, conforme a política vigente. |
 | C6 | `RevenueReported` | Royalty do 1º semestre de 2027 publicado | Sua parte: R$ 10.196,22 (3 de 150 unidades). |
 | C7 | `RoyaltyClaimed` | R$ 10.196,22 na sua carteira | Pagos em stablecoin em 15/07/2027. Comprovante disponível. |
 | C8 | `RoyaltySettledOffChain` | Pagamento registrado | R$ 10.196,22 na conta cadastrada em 15/07/2027. |
-| C9 | `Reissued` | Acesso recuperado | 3 unidades (1 usada) e R$ 10.196,22 pendentes na nova carteira. A anterior foi desativada. |
+| C9 | `Reissued` | Acesso recuperado | 3 unidades e R$ 10.196,22 pendentes na nova carteira. O histórico de hospedagens permanece no cadastro. A anterior foi desativada. |
 | C10 | `Unpaused` | Operação retomada | Envios, hospedagens e saques voltaram. |
 
 ### 7.3 Andamento e estados
@@ -370,7 +372,7 @@ Catálogo canônico. O board mostra as mesmas mensagens nas telas. Cada erro nas
 | F6 | estado vazio | Você ainda não usou nenhuma hospedagem. |
 | F7 | estado vazio | Nenhum royalty publicado ainda. O primeiro sai em julho de 2027. |
 | F8 | carregando | Consultando o registro público… |
-| F9 | voucher | Voucher IBT‑2027‑0148 · aguardando as datas do Glamping. |
+| F9 | pedido de hospedagem | Pedido recebido · aguardando confirmação de datas. |
 | F10 | encerramento próximo | A emissão encerra em 31/12/2030. Você tem 2 hospedagens disponíveis até lá. |
 
 ---
@@ -411,7 +413,7 @@ Catálogo canônico. O board mostra as mesmas mensagens nas telas. Cada erro nas
 
 ### 8.3 O Passaporte (dados de posse)
 
-Mostra, nesta ordem: unidades (3) · disponíveis para resgate (2) · já resgatadas (1) · emissão 2027–2030 (encerra em
+Mostra, nesta ordem: unidades (3) · hospedagens disponíveis (2) · utilizadas (1) · emissão 2027–2030 (encerra em
 31/12/2030) · próxima apuração · benefícios do Passaporte em vigor (janelas de reserva, rituais e eventos,
 experiências em outros empreendimentos, reconhecimento como apoiador). Nunca mostra "valor de mercado" das
 unidades: não há mercado.
@@ -459,8 +461,8 @@ exportado em SVG (editável no Figma) e PNG em `mockups/` — seções da landin
 | A3 Aquisição | aquisição | quantidade, preço de referência, o que recebe, pagamento, uma linha de honestidade | P0, P2, P5 |
 | A4 Recebimento | recebimento | um fato e um botão; técnica recolhida | P3, P8 |
 | A5 Passaporte | posse | unidades, hospedagens disponíveis e usadas, sua parte do royalty, benefícios em vigor | P1, P4 |
-| A6 Hospedagem — pedir | resgate | hospedagem como serviço; "você tem 2 disponíveis"; agregação sob consulta | P4, P6 |
-| A7 Hospedagem — voucher e registro | resgate | e‑mail do voucher; "hospedagem registrada", unidade "usada" | P4, P7 |
+| A6 Hospedagem — pedir | pedido | hospedagem como serviço; "você tem 2 disponíveis"; agregação sob consulta | P4, P6 |
+| A7 Hospedagem — pedido e confirmação | reserva | pedido no cadastro; cota separada; uso registrado por pessoa | P4, P7 |
 | A8 Extrato | apuração | sua parte, a base, o documento — sem percentual anualizado | P5, P9 |
 | A9 Enviar a outro membro | circulação | confirmação com o estado das unidades; erros E1 e E2 como regras | P6 |
 | A10 Recuperação de acesso | suporte | perda de chave e sucessão, sem pânico | P6, P7 |
@@ -485,7 +487,7 @@ a IBITI está fazendo · quando volta a falar · canal de contato.
 
 **Encerramento da emissão (2030).** Assunto: "A emissão 2027–2030 se encerra em 31/12/2030". Corpo: o que
 termina (envios, resgates, Passaporte) · o que permanece (histórico, valores ainda não recebidos) · unidades
-disponíveis para resgate até a data · agradecimento pelo apoio ao território · sem promessa de nova emissão.
+hospedagens disponíveis até a data · agradecimento pelo apoio ao território · sem promessa de nova emissão.
 
 **Guia do parceiro do território (uma página).** "Como conferir um membro": peça o endereço da carteira (ou o QR
 do Passaporte) → consulte no painel → confira "membro: sim", unidades disponíveis → libere o benefício. Nunca

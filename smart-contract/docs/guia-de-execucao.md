@@ -1,205 +1,52 @@
-# Guia de execução — IBIToken v1
+# Executar o IBIToken no Remix
 
-Tudo o que é preciso para compilar, testar, demonstrar e implantar o contrato, do zero, em qualquer
-máquina. Os comandos foram validados em macOS com Node.js 24; funcionam em Linux e Windows (PowerShell)
-com Node.js 22 ou superior.
+Workspace da versão 2. O fluxo principal usa somente o [Remix IDE](https://remix.ethereum.org/) no navegador. Não requer Hardhat nem Node.
 
-## 1. Requisitos
+## 1. Abrir o workspace
 
-| Item | Para quê | Onde obter |
-|---|---|---|
-| **Node.js ≥ 22** e npm | rodar o Hardhat 3 e os testes | https://nodejs.org (LTS) |
-| Git | clonar o repositório | — |
-| **MetaMask** (opcional) | operar o contrato na Sepolia pela interface da carteira | https://metamask.io |
-| **ETH de teste (Sepolia)** (só para deploy real) | pagar o gas do deploy e das transações | faucets públicos, ex.: https://cloud.google.com/application/web3/faucet/ethereum/sepolia |
-| **URL RPC da Sepolia** (só para deploy real) | conectar o Hardhat à rede | Infura, Alchemy, QuickNode ou um RPC público (ex.: `https://ethereum-sepolia-rpc.publicnode.com`) |
-| Chave de API do Etherscan (opcional) | verificar o código‑fonte no explorador | https://etherscan.io/myapikey |
+Extraia `IBITI-Remix.zip` para uma pasta chamada `IBITI-Remix` (ou use a pasta pronta em `entrega/IBITI-Remix/`). No File Explorer do Remix, abra o menu de workspaces, escolha **New workspace → Import Project** e selecione essa pasta. Import Project recebe uma pasta, não um arquivo ZIP. Preserve as subpastas `contracts/`, `scripts/` e `tests/`. Em `contracts/vendor/openzeppelin/` estão as dependências reais e versionadas do token.
 
-Nenhuma outra ferramenta é necessária: o compilador Solidity (0.8.34) é baixado automaticamente pelo
-Hardhat na primeira compilação.
+## 2. Compilar
 
-## 2. Instalação
+No Solidity Compiler, selecione **0.8.34**, EVM **Osaka**, otimizador habilitado e **200 runs**. Compile `contracts/IBIToken.sol` e `contracts/mocks/MockStablecoin.sol`. Mantenha habilitada a geração de metadados do compilador.
 
-```bash
-cd smart-contract
-npm install
-```
+O contrato principal é `IBIToken`. `MockStablecoin` representa apenas moeda de teste. Bibliotecas e contratos auxiliares de teste não são ativos a publicar.
 
-## 3. Compilar, testar e checar tipos
+## 3. Rodar testes nativos
 
-```bash
-npm run build            # compila contracts/ (perfil default)
-npm test                 # executa os 50 testes em uma rede simulada em memória
-npx hardhat test --gas-stats   # os mesmos testes, com estatísticas de gas por função
-npm run typecheck        # checagem TypeScript de testes e scripts
-```
+Ative o plugin **Solidity Unit Testing**. Selecione `tests` como diretório e execute os quatro arquivos terminados em `_test.sol`: Token, Governance, Royalties e Settlement. Eles usam `beforeEach`, `require` e retorno booleano: qualquer condição incorreta reverte o teste. São 37 testes Solidity.
 
-Saída esperada de `npm test`: `50 passing`. A saída integral está em
-[`relatorio-de-testes.md`](relatorio-de-testes.md).
+Não selecione `tests/helpers/`: contém apenas carteiras e fixtures de teste. Os testes criam suas próprias instâncias isoladas, sem usar carteiras reais nem Sepolia.
 
-## 4. Fluxo de demonstração (rede simulada)
+## 4. Demonstrar na Remix VM
 
-```bash
-npm run demo
-```
+Em Deploy & Run Transactions selecione **Remix VM**. Abra `scripts/01_publicar.js` e clique em Run. O script publica a moeda de teste e o IBIToken, cria 1.000 tBRL fictícios e salva os endereços em `deployments/remix-latest.json`. A emissão continua sendo 150 IBT.
 
-O script [`scripts/demo-flow.ts`](../scripts/demo-flow.ts) implanta a stablecoin de teste e o IBIToken,
-executa compras primárias (Helena 20, Beatriz 10, Gabriel 5), mostra as travas rejeitando operações
-inválidas, marca resgates, transfere unidades resgatadas, reporta um semestre com os números do
-whitepaper, saca royalties, reemite a carteira de Helena para uma herdeira, consulta o acesso como um
-parceiro do território faria e, por fim, avança o relógio da rede para além dos 4 anos. Cada passo é
-narrado no terminal — serve de roteiro para a apresentação em aula ou vídeo.
+Abra `scripts/02_operar.js`. O padrão `acao: 'status'` apenas consulta. Edite `config` para:
 
-## 5. Deploy local com Hardhat Ignition
-
-```bash
-npm run deploy:local
-# equivale a: npx hardhat ignition deploy ignition/modules/IBITokenSepoliaDemo.ts
-```
-
-Implanta, em uma rede simulada efêmera, a stablecoin de teste (tBRL, 6 casas) e o IBIToken já apontando
-para ela, e cunha 100 milhões de tBRL para a carteira administrativa (conta 0 do Hardhat). Os módulos
-disponíveis:
-
-| Módulo | Uso | Parâmetros padrão |
-|---|---|---|
-| `ignition/modules/IBITokenSepoliaDemo.ts` | demonstração (local ou Sepolia), com stablecoin de teste | validade iniciada em 2026‑09‑01, 4 anos; 150 unidades |
-| `ignition/modules/IBIToken.ts` | deploy de referência com os parâmetros do whitepaper | validade 2027‑01‑01 → 2030‑12‑31; 150 unidades; sem stablecoin |
-
-Todos os parâmetros podem ser sobrescritos por um arquivo JSON (modelo em
-[`ignition/parameters.example.json`](../ignition/parameters.example.json)):
-
-```bash
-npx hardhat ignition deploy ignition/modules/IBIToken.ts --parameters ignition/parameters.json
-```
-
-## 6. Configurar os segredos para a Sepolia
-
-O Hardhat 3 lê os segredos de **variáveis de configuração**. Duas formas, à escolha:
-
-**A) Keystore criptografado do Hardhat (recomendado)** — pede uma senha e guarda os valores cifrados fora
-do repositório:
-
-```bash
-npx hardhat keystore set SEPOLIA_RPC_URL
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-npx hardhat keystore set ETHERSCAN_API_KEY     # opcional
-```
-
-**B) Variáveis de ambiente** — mesmo nome, exportadas no shell antes do comando (modelo em `.env.example`):
-
-```bash
-export SEPOLIA_RPC_URL="https://ethereum-sepolia-rpc.publicnode.com"
-export SEPOLIA_PRIVATE_KEY="0x..."     # chave de uma carteira DE TESTE com ETH Sepolia
-```
-
-> Use sempre uma carteira criada só para testes. A chave privada nunca deve ir para o repositório
-> (`.env` e `.env.*` já estão no `.gitignore`).
-
-## 7. Deploy na Sepolia
-
-```bash
-npm run deploy:sepolia
-# equivale a: npx hardhat ignition deploy ignition/modules/IBITokenSepoliaDemo.ts --network sepolia
-```
-
-O Ignition pede confirmação, envia as transações e grava os endereços em
-`ignition/deployments/chain-11155111/deployed_addresses.json` (esse diretório deve ser versionado: é o
-registro da entrega). A carteira que faz o deploy vira a **carteira administrativa** (parâmetro `admin`),
-recebe as 150 unidades e o saldo de tBRL de teste.
-
-Para o deploy de referência (sem stablecoin, datas do whitepaper):
-
-```bash
-npm run deploy:sepolia:producao
-```
-
-### Verificar o código‑fonte no explorador
-
-```bash
-npx hardhat ignition verify chain-11155111 --network sepolia
-```
-
-O comando envia o código dos contratos do deployment ao Etherscan (chave `ETHERSCAN_API_KEY`) e ao
-Sourcify. Alternativa manual: `npx hardhat verify --network sepolia <endereço> <argumentos do construtor>`
-(consulte `npx hardhat verify --help`).
-
-## 8. Operar o contrato na Sepolia
-
-### Pelo script (carteira administrativa)
-
-```bash
-TOKEN=0x<endereço> ACTION=status   npx hardhat run scripts/operate-sepolia.ts --network sepolia
-TOKEN=0x<endereço> ACTION=purchase TO=0x<carteira verificada> UNITS=5 REF="venda#001" \
-  npx hardhat run scripts/operate-sepolia.ts --network sepolia
-TOKEN=0x<endereço> ACTION=redeem   HOLDER=0x<carteira> UNITS=1 REF="voucher#2027-0001" \
-  npx hardhat run scripts/operate-sepolia.ts --network sepolia
-TOKEN=0x<endereço> ACTION=report   GROSS=3398738.38 REF="relatorio-2027-S1.pdf" \
-  npx hardhat run scripts/operate-sepolia.ts --network sepolia
-TOKEN=0x<endereço> ACTION=reissue  FROM=0x<antiga> TO=0x<nova> \
-  npx hardhat run scripts/operate-sepolia.ts --network sepolia
-TOKEN=0x<endereço> ACTION=access   HOLDER=0x<carteira> \
-  npx hardhat run scripts/operate-sepolia.ts --network sepolia
-```
-
-`GROSS` é informado em unidades da stablecoin configurada (ex.: `3398738.38` tBRL); o script aprova o
-depósito do royalty automaticamente antes do reporte.
-
-### Pela MetaMask (portadores)
-
-1. *Importar tokens* → endereço do contrato → símbolo **IBT**, **0** casas decimais.
-2. Enviar unidades para **outra carteira que já tenha saldo** (transferência para carteira vazia é rejeitada
-   pelo contrato — comportamento esperado).
-3. Para sacar o royalty, use a aba *Write Contract* do Etherscan (contrato verificado) → `claimRoyalty(período)`,
-   ou o script acima com a chave do portador.
-
-### Pelo Etherscan (contrato verificado)
-
-*Read Contract* expõe `accessInfo`, `isMember`, `saleableUnits`, `periodInfo`, `royaltyDue` etc.;
-*Write Contract* permite à carteira administrativa executar `primaryPurchase`, `markRedeemed`,
-`reportRevenue`, `reissue`, `pause`.
-
-### Pelo Remix (alternativa sem Hardhat)
-
-Cole `contracts/IBIToken.sol` e `contracts/mocks/MockStablecoin.sol` no Remix; os imports
-`@openzeppelin/contracts/...` são resolvidos automaticamente. Compile com **0.8.24 ou superior** e faça o
-deploy pelo *Injected Provider (MetaMask)* informando os cinco argumentos do construtor
-(`admin`, `emissionCap`, `validFrom`, `validUntil`, `stablecoin`).
-
-## 9. Roteiro sugerido de demonstração (aula ou vídeo)
-
-| Passo | O que mostrar | Regra evidenciada |
-|---|---|---|
-| 1 | `status` do contrato recém‑implantado: supply 150, reserva 50, à venda 100 | emissão única, reserva |
-| 2 | `purchase` para a carteira A (5) e para a carteira B (3) | compra primária, porta de entrada |
-| 3 | Na MetaMask, A envia 2 unidades para B; depois tenta enviar 1 para uma carteira vazia (falha) | transferência só entre portadores |
-| 4 | B tenta receber além de 20 unidades (falha) | teto por carteira |
-| 5 | `redeem` de 1 unidade de A; `access` de A mostra 1 resgatada | resgate sem queima |
-| 6 | A envia todas as unidades para B: a resgatada chega marcada | sem gasto duplo |
-| 7 | `report` do semestre; `access`/`royaltyDue` mostram o valor por carteira; B executa `claimRoyalty(1)` | royalty pro‑rata, saque |
-| 8 | `reissue` de A para uma nova carteira; A fica revogada | perda de chave / sucessão |
-
-## 10. Solução de problemas
-
-| Sintoma | Causa provável | O que fazer |
-|---|---|---|
-| `npm install` avisa sobre `esbuild` e `allow-scripts` | política de scripts do npm 11 | inofensivo; ignore (ou `npm approve-scripts esbuild`) |
-| Erro ao baixar o `solc` | sem acesso à internet na primeira compilação | conecte‑se e rode `npm run build` de novo |
-| `HHE11 ... not in an interactive shell` | `hardhat --init` em terminal não interativo | não é necessário: o projeto já está inicializado |
-| `insufficient funds` no deploy | carteira sem ETH Sepolia | use um faucet |
-| `ERC20InsufficientAllowance` no `reportRevenue` | a IBITI não aprovou o depósito da stablecoin | `approve` no contrato da stablecoin (o script `operate-sepolia.ts` faz isso) |
-| `RecipientNotHolder` ao transferir | destino sem saldo | é a regra: só a carteira administrativa cria portadores |
-| `Reconciliation failed` no Ignition | módulo alterado após um deploy anterior na mesma rede | use `--deployment-id <novo-nome>` ou apague `ignition/deployments/<chain>` (apenas em redes de teste) |
-
-## 11. Registro da entrega na Sepolia (preencher após o deploy)
-
-| Item | Valor |
+| Ação | Conta e campos |
 |---|---|
-| Endereço do IBIToken | — |
-| Endereço da stablecoin de teste | — |
-| Tx do deploy | — |
-| Tx da compra primária | — |
-| Tx da transferência entre portadores | — |
-| Tx do resgate | — |
-| Tx do reporte de receita | — |
-| Código verificado | — |
+| `compra` | administrador; `destino`, `quantidade`, `referencia` |
+| `transferencia` | portador; `destino` já com saldo e `quantidade` |
+| `reporte` | administrador; `faturamento` na moeda de pagamento e `referencia` |
+| `saque` | portador; `periodo` já reportado |
+| `recuperacao` | administrador; `origem` e `destino` |
+| `pausar` / `retomar` | administrador |
+
+Exemplo: compre 5 IBT para a segunda conta, reporte 1.000 tBRL de faturamento com a primeira conta e saque o período 1 com a segunda. O royalty total será 150 tBRL e o portador de 5 IBT receberá 5 tBRL. Esse faturamento é fictício.
+
+As demais funções administrativas e consultas também ficam disponíveis em Deployed Contracts, no próprio Remix. O pedido de hospedagem é operado no Passaporte off-chain e não tem função de resgate neste contrato.
+
+## 5. Publicar na Sepolia
+
+Selecione Browser Extension / MetaMask na rede Sepolia. A v2 já está publicada em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811. Use esse endereço para operar a entrega atual. A v1 em `0x111B510517087a76eF7D1914849898A0718A2734` é histórica. Recibos, parâmetros e fontes estão no repositório, em `smart-contract/docs/deploy-modelo-pessoa.md`.
+
+Somente se desejar outra instância de teste, para uma nova publicação deliberada da v2, revise `scripts/01_publicar.js`, habilite `permitirSepolia`, confira o endereço da stablecoin e as datas e execute. A MetaMask apresentará a transação. O script reutiliza a tBRL existente na Sepolia e publica somente o novo IBIToken. As datas padrão são de demonstração, começando no bloco atual, por 1.460 dias.
+
+Salve o registro com endereço, rede, hash e bloco de criação. Uma nova instância tem nova emissão de teste e não migra saldos, royalties nem histórico da v1. A v2 é uma publicação de demonstração separada, não atualização do endereço antigo. Para conectar o backend, configure o novo endereço e o bloco de emissão, com um banco separado. Não reutilize um banco de outra instância. Aguarde a finalização da Sepolia antes de autorizar hospedagens.
+
+## Sistema completo
+
+O ZIP é o workspace do token. O cadastro, autenticação e controle de cotas ficam no diretório `offchain/` do repositório. Eles exigem Node 24 e suas instruções próprias. O Remix não hospeda backend nem banco de dados.
+
+Referências oficiais: [testes Solidity](https://remix-ide.readthedocs.io/en/latest/unittesting.html), [scripts no Remix](https://remix-ide.readthedocs.io/en/latest/running_js_scripts.html), [Anvil para validação local](https://getfoundry.sh/anvil/overview/).

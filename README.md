@@ -1,34 +1,42 @@
-# IBITI Glamping · Tokenização — entregas do Grupo G01 (Sprint 3)
+# IBITI Glamping · Grupo G01
 
-Repositório de trabalho do **Grupo G01** no módulo **ADMD7 — Blockchain, criptomoedas e tokenização de ativos**
-(Inteli), projeto parceiro **IBITI (Ibiti Projeto)**. Reúne os dois artefatos da Sprint 3 em revisão pelo grupo
-antes da publicação oficial no GitLab da disciplina.
+## Entrega funcional do token
 
-| Artefato | Pasta | O que tem |
-|---|---|---|
-| **Implementação do Contrato Inteligente ERC-20 — versão 1** | [`smart-contract/`](smart-contract/README.md) | contrato `IBIToken` (Solidity, OpenZeppelin 5), 50 testes automatizados, fluxo de demonstração, módulos de deploy (local e Sepolia), documentação em português |
-| **Guia de Comunicação** | [`guia-de-comunicacao/`](guia-de-comunicacao/README.md) | documento estratégico, landing page animada e páginas de detalhe, board visual com o fluxo compra → recebimento → resgate tela a tela, telas em SVG (Figma) e PNG, tasks para o issue board |
+- **[smart-contract/](smart-contract/README.md):** workspace Remix v2 com `contracts/`, `scripts/` e `tests/`; documentação e evidências de publicação.
+- **[offchain/](offchain/README.md):** cadastro, assinatura de carteira, cotas por pessoa, API e Passaporte. É necessário ao fluxo de hospedagens.
+- **[documentacao/](documentacao/README.md):** contexto, decisões, hipóteses e histórico do projeto.
+- **[guia-de-comunicacao/](guia-de-comunicacao/README.md):** artefato de comunicação separado da implementação do token.
 
-## Como ver rapidamente
+Para o Remix, extraia `entrega/IBITI-Remix.zip`, importe a pasta e siga [o guia](smart-contract/docs/guia-de-execucao.md). A compilação e os testes do token no navegador não precisam de Node. O ZIP é gerado somente com os arquivos necessários ao workspace.
 
-- **Landing page** (uma página, cinco seções com animação de rolagem): abra
-  [`guia-de-comunicacao/landing/index.html`](guia-de-comunicacao/landing/index.html) no navegador.
-  Páginas de detalhe: `como-funciona.html`, `perguntas.html`, `transparencia.html` na mesma pasta.
-- **Board do guia** (princípios, tom de voz, terminologia, telas anotadas, mensagens do sistema):
-  [`guia-de-comunicacao/board/index.html`](guia-de-comunicacao/board/index.html).
-- **Telas para o Figma**: arraste os arquivos de [`guia-de-comunicacao/mockups/svg/`](guia-de-comunicacao/mockups/svg/)
-  para o Figma (vetores e textos editáveis); PNGs de referência em `mockups/png/`.
-- **Contrato**: `cd smart-contract && npm install && npm test` (Node.js 22+). Guia completo em
-  [`smart-contract/docs/guia-de-execucao.md`](smart-contract/docs/guia-de-execucao.md).
+## Executar o sistema completo localmente
 
-## Base conceitual
+Node 24 ou superior:
 
-Whitepaper Técnico do Ativo Digital (Sprint 2), Entendimento da Experiência do Usuário (Sprint 1) e Riscos
-Éticos e Impacto (Sprint 2), no GitLab do grupo. As decisões tomadas na implementação que ainda precisam ser
-ratificadas pelo grupo, e as inconsistências encontradas nos artefatos anteriores, estão em
-[`smart-contract/docs/premissas-e-pendencias.md`](smart-contract/docs/premissas-e-pendencias.md).
+```bash
+npm ci --prefix smart-contract
+npm ci --prefix offchain
+npm test --prefix smart-contract
+npm test --prefix offchain
+npm run demo --prefix offchain
+```
 
-## Estado
+Abra http://localhost:3000. A demonstração usa **Anvil**, compila pelo **solc** e mantém o banco local em `offchain/data/`. Não há dependência de Hardhat. KYC e reservas reais do hotel não estão integrados.
 
-Versão em revisão interna (02/09/2026). Nada aqui foi entregue ainda no GitLab. Os textos das telas e a
-landing seguem a versão 1.3 do guia; números de preço e projeção são hipóteses do valuation, não promessas.
+## Estado da rede
+
+**v2 publicada na Sepolia:** IBIToken em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, 150 IBT, sem resgates ou contadores de hospedagem on-chain. Publicada pelo Remix/MetaMask e verificada no Sourcify (correspondência exata). A tBRL existente foi reutilizada. A versão 1 permanece apenas como histórico, sem migração automática. [Evidências e distinção entre versões](smart-contract/docs/deploy-modelo-pessoa.md).
+
+A política `unused-first-v1` foi confirmada: uma experiência por IBT por toda a emissão, sem renovação e com circulação apenas das cotas livres. O projeto definiu 3 noites para até 5 pessoas. Prazo de cancelamento e custódia seguem em fechamento; essas condições e os limites do software estão no whitepaper revisado.
+
+## Whitepaper e referência financeira
+
+O [whitepaper atualizado](output/pdf/whitepaper_ibiti_revisado.pdf) descreve o modelo atual e utiliza os números do arquivo Modelo Glamping.xlsx fornecido pelo grupo em 11/09/2026, sem alterar a planilha. A [fonte editável](whitepaper/whitepaper_ibiti_revisado.md) inclui as premissas e sensibilidades no capítulo 4 e no Apêndice B.
+
+A referência é de **R$ 37.055,19 por IBT**, com taxa de desconto de **17,8609% a.a.**, ocupação de 35% / 20% / 25% / 30% entre 2027 e 2030, royalties nominais projetados de R$ 8.923.259,16 e valor presente de R$ 5.558.278,01. A referência para 100 unidades é de R$ 3.705.518,67, calculada com o valor unitário integral da planilha. O desconto é anual; a planilha não detalha recebimentos semestrais. São projeções, não garantia de receita ou retorno.
+
+## Entrega acadêmica no GitLab
+
+O artefato técnico foi publicado na `main` do GitLab no [commit c9093569](https://git.inteli.edu.br/graduacao/2026-2a/t19/g01/-/commit/c9093569df8b5737bd6ca69b7680031de17434c1), em `Sprint 3/Implementação do Contrato Inteligente ERC-20 - versão 1`. O nome acadêmico “versão 1” contém a implementação técnica IBIToken v2.
+
+A entrega documental da Sprint 3 utiliza `Whitepaper Técnico do Ativo Digital`, preservando o nome da pasta histórica da Sprint 2. A cópia de preparação do README do repositório acadêmico está em `entrega/gitlab/README.md`; seus caminhos seguem a organização por sprints do GitLab, enquanto este repositório local mantém `smart-contract/`, `offchain/` e `whitepaper/`.

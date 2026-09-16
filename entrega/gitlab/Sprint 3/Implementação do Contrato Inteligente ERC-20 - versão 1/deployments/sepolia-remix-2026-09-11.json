@@ -1,0 +1,123 @@
+{
+  "network": "Sepolia",
+  "chainId": 11155111,
+  "publishedWith": "Remix + MetaMask",
+  "checkedAt": "2026-09-11T05:38:08.808Z",
+  "source": {
+    "path": "smart-contract/deployments/source/Sepolia-2026-09-11.sol",
+    "sha256": "c576135459cfc988f8484a972aee816628f4b9748b438e40e9ecaae73fa591b0",
+    "compiler": "0.8.34+commit.80d5c536",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "osaka"
+  },
+  "contracts": {
+    "MockStablecoin": {
+      "address": "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE",
+      "transactionHash": "0x799fc22fd77444f67a466e9f94a5ddf71ac3941ccdce1cbb0f2b81aea6682b40",
+      "blockNumber": 11679913,
+      "blockHash": "0xc6ca51921025f184774f8ea04b027aa69d21c3314e0489156999bd89f223cb5a",
+      "blockTimestamp": 1789104876,
+      "status": 1,
+      "from": "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+      "constructorArguments": [
+        "Stablecoin de Teste",
+        "tBRL",
+        6
+      ],
+      "valueWei": "0",
+      "gasUsed": "521174",
+      "feeWei": "1447608145644902",
+      "runtimeBytes": 1896,
+      "runtimeKeccak256": "0x98b5f7ba0334a06ced5edd33fcf938d19b9426f0a2a43caa7dd51d0b7121f844",
+      "creationInputMatchesLocalCompilation": true,
+      "verification": {
+        "sourcify": "success reported by Remix",
+        "url": "https://repo.sourcify.dev/11155111/0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE/"
+      }
+    },
+    "IBIToken": {
+      "address": "0x111B510517087a76eF7D1914849898A0718A2734",
+      "transactionHash": "0x7c9fff90fad160852a442eb1b67dd141a4a4ea72dd8d15481137efc1d5fd02d0",
+      "blockNumber": 11679925,
+      "blockHash": "0x55f02b87dc6642d9226abab8e1a9e0c67538899a32d23fca493967accc9ea7d5",
+      "blockTimestamp": 1789105020,
+      "status": 1,
+      "from": "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+      "constructorArguments": [
+        "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+        150,
+        1788220800,
+        1914451200,
+        "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE"
+      ],
+      "valueWei": "0",
+      "gasUsed": "2667477",
+      "feeWei": "7663630403577444",
+      "runtimeBytes": 10681,
+      "runtimeKeccak256": "0xff44daf6d66decee930b5a18aa4c39c0b99aaf8f4790e5c10bdb55f686a50555",
+      "creationInputMatchesLocalCompilation": true,
+      "verification": {
+        "sourcify": "success reported by Remix",
+        "url": "https://repo.sourcify.dev/11155111/0x111B510517087a76eF7D1914849898A0718A2734/"
+      },
+      "state": {
+        "name": "IBIToken",
+        "symbol": "IBT",
+        "decimals": "0",
+        "totalSupply": "150",
+        "emissionCap": "150",
+        "maxPerWallet": "20",
+        "reservedUnits": "50",
+        "validFrom": "1788220800",
+        "validUntil": "1914451200",
+        "stablecoin": "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE",
+        "owner": "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+        "paused": false,
+        "adminBalance": "150"
+      }
+    }
+  },
+  "demoStablecoinMint": {
+    "transactionHash": "0xf172959eec3e17352a84477a3a2c0690a548ca217aa49bbffa87971503ef01ab",
+    "blockNumber": 11679929,
+    "status": 1,
+    "gasUsed": "68403",
+    "feeWei": "197111906166681",
+    "to": "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE",
+    "decoded": "mint",
+    "adminBalanceRaw": "100000000000000",
+    "totalSupplyRaw": "100000000000000",
+    "totalSupplyFormatted": "100000000",
+    "decimals": 6
+  },
+  "chainAtCheck": {
+    "latestBlock": 11679930,
+    "finalizedBlock": 11679849,
+    "adminBalanceETH": "0.529902553360903247"
+  },
+  "offchain": {
+    "tokenAddress": "0x111B510517087a76eF7D1914849898A0718A2734",
+    "startBlock": 11679925,
+    "policy": "unused-first-v1",
+    "policyStatus": "provisional",
+    "initialEmissionEventVerified": true,
+    "latestBlockEvents": {
+      "emissionCount": 1,
+      "transferCount": 1,
+      "units": 150
+    },
+    "service": {
+      "url": "http://localhost:3001",
+      "configEndpointMatchesDeployment": true,
+      "initialHealth": "CONTRACT_NOT_FOUND while creation block is not finalized",
+      "finalizedBlockAtInitialCheck": 11679881,
+      "personalFlowTestedOn": "local EVM",
+      "sepoliaPrimaryPurchases": 0
+    }
+  },
+  "totalPreparationFeeETH": "0.009308350455389027",
+  "contractVersion": 1
+}

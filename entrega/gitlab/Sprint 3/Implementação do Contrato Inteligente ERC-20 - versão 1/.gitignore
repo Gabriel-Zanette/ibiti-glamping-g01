@@ -1,0 +1,12 @@
+/node_modules/
+/build/
+/artifacts/
+/cache/
+/types/
+/dist/
+/coverage/
+.env
+.env.*
+
+/entrega/
+.DS_Store
