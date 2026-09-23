@@ -1,0 +1,49 @@
+{
+  "revision": "Parte 2 acadêmica / IBIToken técnico v3",
+  "validatedAt": "2026-09-22T03:12:06.390342+00:00",
+  "environment": {
+    "node": "24.19.0",
+    "solidity": "0.8.34",
+    "openzeppelin": "5.6.1",
+    "anvil": "1.7.1",
+    "evm": "osaka",
+    "optimizerRuns": 200
+  },
+  "results": {
+    "smartContractNodeEntries": 48,
+    "solidityContainerEntries": 1,
+    "offchainTests": 19,
+    "effectiveCases": 66,
+    "failures": 0,
+    "build": "passed",
+    "typechecks": [
+      "smart-contract: passed",
+      "offchain: passed"
+    ],
+    "cleanArchiveReproduction": "npm ci nos dois módulos; build; ambas as suítes completas; ambos typechecks: passaram",
+    "demo": "EVM local com compra estável, saldo 5, cotas usadas 2, disponíveis 3, royalty sacado; /health HTTP ok; encerrado após verificação",
+    "review": "Dois achados concretos reproduzidos, corrigidos e revalidados por revisão independente"
+  },
+  "runtimeBytecodeBytes": 15148,
+  "sourceSha256": {
+    "smart-contract/contracts/IBIToken.sol": "22d10428465c8cb763cbec69d951c662ae363ece49fad9e946de240b5eec5e38",
+    "offchain/src/chain.ts": "85053e4a703e1bd72e5e3252813c62e70059894d149f4aba1698aa283417932f",
+    "offchain/src/ledger.ts": "7ab9a14e48aaad47a3d9f49d5ddd3f8064cd0a31a939e1983d6139f11faecf18",
+    "offchain/src/api.ts": "52e39b7fef2a0edeefda0a24fdaa7666d924843dacd4acae1a3f1b0bdf65097c",
+    "smart-contract/tests/feedback.test.ts": "1d3d1407970e90b4ebeb1a48531148cfa77c1e9a3dbb758e9a66532fd9e6c73a",
+    "smart-contract/tests/offchain.test.ts": "2e6d27fa59adab474d88e63bf1290860fbbd13bcab35fc5be1366f144c6e2f87",
+    "smart-contract/scripts/01_publicar.js": "8bc5f3e3f283b837e372c506977e02894c6c89727abcd5c363395190ad6f8cfa",
+    "smart-contract/scripts/02_operar.js": "12f05bd84b0a48ca4dc8c70672cd664d1c7f28a176b3fa2f98be4ea80fad968f"
+  },
+  "publication": {
+    "sepoliaV3": false,
+    "gitlabPush": false,
+    "historicalSourcesUnchanged": true
+  },
+  "limits": [
+    "Sem execução do plugin Remix no navegador nesta revisão",
+    "Sem auditoria formal de produção",
+    "Sem KYC, hotel ou BRZ reais",
+    "Memorando jurídico consolidado não fornecido nesta tarefa"
+  ]
+}

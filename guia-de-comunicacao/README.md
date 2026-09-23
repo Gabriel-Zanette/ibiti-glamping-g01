@@ -1,5 +1,7 @@
 # Guia de Comunicação — IBIToken (IBITI Glamping)
 
+> **Landing revisada em 16/09/2026:** a apresentação vigente está em [`landing/`](landing/README.md), com experiência e pertencimento na abertura, benefícios, contribuição ao território, números essenciais e preço com dois CTAs. O fundo escolhido é **05 — Luz do bosque**, aplicado como padrão à landing e às páginas de apoio. O [comparador](landing/variacoes.html) preserva as cinco opções com a mesma copy. Detalhes, perguntas e transparência foram atualizados, e a [aquisição](landing/adquirir.html) demonstra quantidade → dados fictícios → revisão, sem envio ou pagamento. O valor de referência é **R$ 37.055,19 por IBT**. As prescrições de copy, preço, benefícios, custódia e telas no restante deste guia e no board são históricas; para essas superfícies, prevalecem a revisão da landing, a skill de contexto vigente e o whitepaper revisado.
+
 > **Revisão de 10/09/2026:** hospedagens são controladas por pessoa no cadastro off-chain. Fontes HTML e o vocabulário deste guia foram ajustados. As exportações `mockups/svg/` e `mockups/png/` são históricas da v1 e precisam ser regeneradas antes de uma nova entrega visual. A interface executável atual está em [`offchain/public/`](../offchain/README.md).
 
 > **Artefato:** Guia de Comunicação da operação tokenizada · **Módulo:** ADMD7 — Blockchain, criptomoedas e

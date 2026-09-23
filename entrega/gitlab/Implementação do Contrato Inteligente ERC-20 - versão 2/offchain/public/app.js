@@ -1,0 +1,37 @@
+const $=s=>document.querySelector(s);
+let session='',admin='',person='',mode='member',config;
+const labels={requested:'Pedido recebido',confirmed:'Confirmada (demonstração)',completed:'Hospedagem utilizada',cancelled:'Cancelada'};
+const errors={INSUFFICIENT_QUOTA:'Não há hospedagens disponíveis para essa quantidade.',AWAITING_FINALITY:'Há uma movimentação aguardando confirmação na rede. Tente novamente depois.',NOT_ELIGIBLE:'O cadastro não está elegível neste momento. Confira saldo, validade e pausa.',PERSON_CAP_EXCEEDED:'O total das carteiras excede o limite de 20 por pessoa. Procure o atendimento.',PERSON_NOT_VERIFIED:'A aprovação do cadastro ainda está pendente.',WALLET_NOT_LINKED:'Esta carteira ainda não está vinculada a um cadastro.',UNAUTHORIZED:'Acesso não autorizado ou expirado. Entre novamente.',INVALID_DATES:'Confira as datas: elas devem estar no futuro e dentro da validade do token.',SERVICE_UNAVAILABLE:'O serviço está indisponível. Seu pedido não foi concluído.',LEGACY_REDEMPTIONS_REQUIRE_MIGRATION:'Este contrato possui consumo do modelo antigo. É necessário conciliar o histórico antes de continuar.'};
+function message(text){$('#message').textContent=text;}
+async function api(path,body,token=mode==='admin'?admin:session){
+ const res=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:body===undefined?undefined:JSON.stringify(body)});
+ const data=await res.json();if(!res.ok)throw Error(errors[data.error]||data.error);return data;
+}
+const base=()=>mode==='admin'?'/admin/people/'+person:'/me';
+async function action(fn){try{message('');await fn();}catch(e){message(e.message);}}
+async function wallet(){if(!window.ethereum)throw Error('Abra este endereço em um navegador com uma carteira Ethereum, como MetaMask.');const [account]=await ethereum.request({method:'eth_requestAccounts'});const chain=await ethereum.request({method:'eth_chainId'});if(Number(chain)!==config.chainId)throw Error('Selecione a rede '+config.chainId+' na carteira antes de continuar.');return account;}
+async function sign(c,account){const bytes=new TextEncoder().encode(c.message);const hex='0x'+[...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');const signature=await ethereum.request({method:'personal_sign',params:[hex,account]});return api('/auth/verify',{id:c.id,signature},'');}
+async function refresh(){
+ const data=await api(base());person=data.person.id;$('#passport').hidden=false;$('#logout').hidden=false;
+ const counts=$('#counts');counts.replaceChildren();for(const [key,label] of [['available','Disponíveis'],['reserved','Em pedidos'],['used','Utilizadas'],['pendingRelease','Em devolução']]){const box=document.createElement('div');const strong=document.createElement('strong');strong.textContent=data.quota[key];box.append(strong,document.createTextNode(label));counts.append(box);}
+ $('#eligibility').textContent=`${data.quota.balance} unidade(s) vinculada(s) ao cadastro. ${data.quota.eligible?'Cadastro elegível.':'Pedidos indisponíveis: confira validade, saldo e aprovação.'}`;
+ const list=$('#stays');list.replaceChildren();if(!data.stays.length)list.textContent='Você ainda não fez pedidos.';
+ for(const s of data.stays){const row=document.createElement('div');row.className='stay';const text=document.createElement('p');text.textContent=`${s.arrival} → ${s.departure} · ${s.units} cota(s) · ${labels[s.status]}`;row.append(text);
+  const add=(label,status)=>{const b=document.createElement('button');b.className='secondary';b.textContent=label;b.onclick=()=>action(async()=>{await api(base()+'/stays/'+s.id+'/'+status,{});await refresh();});row.append(b);};
+  if(['requested','confirmed'].includes(s.status)){add('Cancelar pedido','cancelled');const dates=document.createElement('div');dates.className='fields';const arrival=document.createElement('input'),departure=document.createElement('input');arrival.type=departure.type='date';arrival.value=s.arrival;departure.value=s.departure;arrival.setAttribute('aria-label','Nova chegada');departure.setAttribute('aria-label','Nova saída');const save=document.createElement('button');save.textContent='Remarcar';save.className='secondary';save.onclick=()=>action(async()=>{await api(base()+'/stays/'+s.id+'/reschedule',{arrival:arrival.value,departure:departure.value});await refresh();});dates.append(arrival,departure,save);row.append(dates);}
+  if(mode==='admin'&&s.status==='requested')add('Confirmar (demo)','confirmed');if(mode==='admin'&&s.status==='confirmed')add('Registrar uso (demo)','completed');list.append(row);
+ }
+}
+$('#login').onclick=()=>action(async()=>{const account=await wallet();const c=await api('/auth/challenge',{wallet:account},'');session=(await sign(c,account)).token;mode='member';await refresh();});
+$('#logout').onclick=()=>action(async()=>{if(session)await api('/auth/logout',{},session);session=admin=person='';mode='member';$('#passport').hidden=true;$('#logout').hidden=true;$('#admin-access').reset();message('Você saiu.');});
+$('#refresh').onclick=()=>action(refresh);
+let requestKey;
+$('#request').onsubmit=e=>{e.preventDefault();const form=e.currentTarget;action(async()=>{requestKey??=crypto.randomUUID();const f=new FormData(form);await api(base()+'/stays',{units:Number(f.get('units')),arrival:f.get('arrival'),departure:f.get('departure'),idempotencyKey:requestKey});requestKey=undefined;await refresh();message('Pedido registrado. A confirmação do hotel depende do atendimento.');});};
+$('#request').oninput=()=>{requestKey=undefined;};
+$('#admin-access').onsubmit=e=>{e.preventDefault();action(async()=>{const f=new FormData(e.target);admin=f.get('key');person=f.get('person');mode='admin';if(person)await refresh();else message('Acesso informado. Cadastre uma pessoa de demonstração abaixo.');});};
+$('#register').onsubmit=e=>{e.preventDefault();action(async()=>{mode='admin';const f=new FormData(e.target);const p=await api('/admin/people',{cpf:f.get('cpf')},admin);person=p.id;$('#person-id').textContent='Identificador: '+person;$('#admin-access [name=person]').value=person;message('Cadastro criado. Registre a aprovação de demonstração e vincule uma carteira.');});};
+$('#verify-person').onclick=()=>action(async()=>{await api('/admin/people/'+person+'/verification',{verified:true},admin);message('Aprovação de demonstração registrada. A verificação real da IBITI permanece pendente.');});
+$('#link-wallet').onsubmit=e=>{e.preventDefault();action(async()=>{const account=await wallet();const c=await api('/admin/people/'+person+'/wallet-challenge',{wallet:account},admin);await sign(c,account);mode='admin';await refresh();message('Carteira vinculada mediante assinatura.');});};
+$('#royalties').onclick=()=>action(async()=>{const result=await api(base()+'/royalties');$('#royalty-result').textContent=result.periods.length?result.periods.map(p=>`Apuração ${p.period}\nA receber: ${p.due} ${p.symbol}\nJá recebido: ${p.paid} ${p.symbol}`).join('\n\n'):'Ainda não há apurações publicadas.';$('#royalty-result').hidden=false;});
+if(window.ethereum){ethereum.on('accountsChanged',()=>{session='';if(mode==='member')$('#passport').hidden=true;});ethereum.on('chainChanged',()=>{session='';$('#passport').hidden=true;});}
+action(async()=>{config=await api('/config',undefined,'');$('#network').textContent=`Rede ${config.chainId===11155111?'Sepolia':'local'} · Consulta de teste · Sem reservas reais no hotel`;});

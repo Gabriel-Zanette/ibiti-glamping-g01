@@ -1,8 +1,10 @@
 # Documentação do projeto — IBIToken (tokenização do IBITI Glamping)
 
+> **Decisões em revisão, 22/09/2026:** [entrevista de governança e operação](../docs/decisoes/2026-09-22-governanca-e-operacao.md), [glossário de domínio](../CONTEXT.md) e [ADRs](../docs/adr/). Início na abertura e entrada secundária foram confirmados; o código ainda requer adaptação.
+
 > Grupo G01 · Módulo ADMD7 — Blockchain, criptomoedas e tokenização de ativos · Inteli
 > Projeto parceiro: IBITI (Ibiti Projeto) · Empreendimento em foco: IBITI Glamping
-> Última revisão: 11/09/2026 · Formato vigente: **token único, sem queima, com a experiência vinculada à
+> Última revisão: 22/09/2026 · Formato vigente: **token único, sem queima, com a experiência vinculada à
 > pessoa física verificada** (ver [03](03-uso-vinculado-a-pessoa.md)).
 
 Esta pasta explica o projeto inteiro, do problema da IBITI ao contrato implantado, num só lugar. Cada
@@ -26,7 +28,7 @@ documento é independente, mas a ordem abaixo é a leitura recomendada para quem
 ibiti-glamping-g01/
 ├── README.md               # porta de entrada do repositório
 ├── documentacao/           # esta pasta — o projeto inteiro explicado
-├── smart-contract/         # workspace Remix v2; v1 publicada preservada em deployments/
+├── smart-contract/         # workspace Remix v3 (Parte 2); v1 publicada preservada em deployments/
 ├── guia-de-comunicacao/    # Guia de Comunicação: documento, landing, board visual, telas SVG/PNG, tasks
 ├── offchain/              # cadastro, cotas por pessoa, API e interface executável
 ├── entrega/               # pasta e ZIP importáveis no Remix
@@ -52,3 +54,7 @@ ibiti-glamping-g01/
 A documentação 01–09 foi importada do trabalho do Claude. Notas de 10/09 nesta revisão e o documento 10 distinguem o que foi implementado das decisões originais. BPMN e IBX históricos existem no diretório de origem, não neste checkout.
 
 A revisão de 11/09 reorganiza a entrega para Remix e remove Hardhat. A v2 publicada na Sepolia não possui resgates on-chain; a v1 permanece histórica. O endereço vigente e as evidências estão no registro de publicação. Use os manuais atuais de execução, sem comandos dos relatórios históricos.
+
+## Segunda entrega após feedback
+
+Estado vigente: [05 · Contrato](05-contrato-inteligente.md), [evolução e critérios](../smart-contract/docs/evolucao-v1-v2.md), [testes](../smart-contract/docs/relatorio-de-testes.md). As publicações v1/v2 de 11/09 são históricas; a v3 técnica revisada permanece local.

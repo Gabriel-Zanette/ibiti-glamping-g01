@@ -1,5 +1,10 @@
 # 08 · Decisões e pendências
 
+> **Decisões posteriores em 22/09/2026:** vigência de quatro anos desde a abertura, períodos de seis meses e entrada secundária para participantes previamente aprovados. O código ainda exige janeiro e saldo prévio no destinatário; precisa de adaptação. Veja os [ADRs](../docs/adr/) e a [entrevista atual](../docs/decisoes/2026-09-22-governanca-e-operacao.md). Separação de funções e atendimento externo são direções aceitas; quóruns e procedimentos permanecem em discussão.
+
+> **Revisão final em 22/09/2026:** a Parte 2 agora usa IBIToken técnico v3, local. Teto pessoal on-chain, tesouraria separada, calendário civil, compra atômica e recuperação com 48h estão implementados. As descrições de 10–11/09 abaixo são histórico da Parte 1; consulte [05](05-contrato-inteligente.md) e a [matriz de evolução](../smart-contract/docs/evolucao-v1-v2.md) para o estado vigente.
+
+
 > **Implementação em 10/09/2026:** consulte [10 · Implementação off-chain](10-implementacao-offchain.md). O software de cadastro e cotas já está neste repositório; aprovação, hotel e operação real da IBITI seguem pendentes. A política de cotas foi confirmada pelo responsável do projeto em 11/09/2026: uma experiência por IBT em toda a emissão, sem renovação; só direitos livres acompanham transferências. O contrato v1 mantém contadores legados, sem uso no fluxo atual.
 
 Registro datado. Uma decisão posterior substitui a anterior no mesmo tema. Itens **em aberto** são
@@ -77,3 +82,9 @@ A revisão local do whitepaper já corrige os pontos abaixo. A tabela preserva a
 | I7 | Whitepaper §9.1 × §10.6 | pausa "recomendada e não decidida" | adotada na v1, a ratificar |
 | I8 | Whitepaper §4.4 × §9.2 | silêncio sobre transferências após o prazo | bloqueadas (v1) |
 | **I9** | Whitepaper §4.4, §5, §9, §10.3–10.5; Guia (A6–A7, vocabulário, catálogo); BPMN fase 4; premissas P13 | resgate híbrido com voucher e contadores como verdade | uso vinculado à pessoa (10/09) |
+
+## 22/09/2026 — correção da implementação final
+
+Origem: pedido explícito do usuário com feedback do professor. Implementado: registro opaco permanente, teto pessoal, tesouraria imutável, compra stablecoin atômica, oito encerramentos civis e recuperação com 48h/cancelamento/recebíveis sem saldo. Escolhas técnicas: 48h e tesouraria imutável; não presumem ratificação da IBITI. Sucessão entre pessoas permanece fora do mecanismo. O whitepaper foi alinhado sem alterar a planilha ou projeções. Valuation de 11/09 já consolidado em R$ 37.055,19; a pendência financeira antiga acima está superada.
+
+Código técnico v3 ainda não publicado; Parte 1 e recibos preservados. Confrontar o memorando jurídico consolidado quando fornecido; não inventar suas condições. A matriz vinculando cada correção aos oito critérios está em smart-contract/docs/evolucao-v1-v2.md.

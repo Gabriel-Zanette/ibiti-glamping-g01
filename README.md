@@ -1,8 +1,14 @@
 # IBITI Glamping · Grupo G01
 
+## Testar o projeto passo a passo
+
+Comece pelo **[guia de testes para iniciantes](GUIA-DE-TESTES.md)**: Passaporte, landing, compra e transferências locais, royalties, recuperação, Remix e Sepolia, com resultados esperados e um caderno para registrar melhorias. O guia distingue a v3 local da v2 publicada e as decisões ainda pendentes de implementação.
+
 ## Entrega funcional do token
 
-- **[smart-contract/](smart-contract/README.md):** workspace Remix v2 com `contracts/`, `scripts/` e `tests/`; documentação e evidências de publicação.
+**Revisão final de 22/09/2026:** correções do feedback implementadas localmente. Consulte a [matriz de evolução e critérios](smart-contract/docs/evolucao-v1-v2.md) e o [guia de execução](smart-contract/docs/guia-de-execucao.md). O código técnico v3 ainda não foi publicado; a v2 antiga na Sepolia não contém as novas salvaguardas.
+
+- **[smart-contract/](smart-contract/README.md):** workspace Remix v3 (Parte 2 acadêmica) com `contracts/`, `scripts/` e `tests/`; documentação e evidências de publicação.
 - **[offchain/](offchain/README.md):** cadastro, assinatura de carteira, cotas por pessoa, API e Passaporte. É necessário ao fluxo de hospedagens.
 - **[documentacao/](documentacao/README.md):** contexto, decisões, hipóteses e histórico do projeto.
 - **[guia-de-comunicacao/](guia-de-comunicacao/README.md):** artefato de comunicação separado da implementação do token.
@@ -25,7 +31,7 @@ Abra http://localhost:3000. A demonstração usa **Anvil**, compila pelo **solc*
 
 ## Estado da rede
 
-**v2 publicada na Sepolia:** IBIToken em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, 150 IBT, sem resgates ou contadores de hospedagem on-chain. Publicada pelo Remix/MetaMask e verificada no Sourcify (correspondência exata). A tBRL existente foi reutilizada. A versão 1 permanece apenas como histórico, sem migração automática. [Evidências e distinção entre versões](smart-contract/docs/deploy-modelo-pessoa.md).
+**Histórico — v2 publicada em 11/09 na Sepolia:** IBIToken em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, 150 IBT, sem resgates ou contadores de hospedagem on-chain. Publicada pelo Remix/MetaMask e verificada no Sourcify (correspondência exata). A tBRL existente foi reutilizada. A versão 1 permanece apenas como histórico, sem migração automática. [Evidências e distinção entre versões](smart-contract/docs/deploy-modelo-pessoa.md).
 
 A política `unused-first-v1` foi confirmada: uma experiência por IBT por toda a emissão, sem renovação e com circulação apenas das cotas livres. O projeto definiu 3 noites para até 5 pessoas. Prazo de cancelamento e custódia seguem em fechamento; essas condições e os limites do software estão no whitepaper revisado.
 
@@ -36,6 +42,8 @@ O [whitepaper atualizado](output/pdf/whitepaper_ibiti_revisado.pdf) descreve o m
 A referência é de **R$ 37.055,19 por IBT**, com taxa de desconto de **17,8609% a.a.**, ocupação de 35% / 20% / 25% / 30% entre 2027 e 2030, royalties nominais projetados de R$ 8.923.259,16 e valor presente de R$ 5.558.278,01. A referência para 100 unidades é de R$ 3.705.518,67, calculada com o valor unitário integral da planilha. O desconto é anual; a planilha não detalha recebimentos semestrais. São projeções, não garantia de receita ou retorno.
 
 ## Entrega acadêmica no GitLab
+
+A segunda entrega foi preparada em `entrega/gitlab/Implementação do Contrato Inteligente ERC-20 - versão 2/`, com código, integração, documentação e whitepaper revisado. ZIP completo: `entrega/IBITI-Implementacao-v2.zip`. Não houve novo envio remoto nesta revisão. A pasta da primeira entrega foi preservada.
 
 O artefato técnico foi publicado na `main` do GitLab no [commit c9093569](https://git.inteli.edu.br/graduacao/2026-2a/t19/g01/-/commit/c9093569df8b5737bd6ca69b7680031de17434c1), em `Sprint 3/Implementação do Contrato Inteligente ERC-20 - versão 1`. O nome acadêmico “versão 1” contém a implementação técnica IBIToken v2.
 

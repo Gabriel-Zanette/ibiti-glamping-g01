@@ -1,3 +1,15 @@
+# Segunda entrega de implementação — preparação local
+
+A Parte 2 utiliza a versão técnica 3 corrigida após o feedback de 8,4/10. Está em [Implementação do Contrato Inteligente ERC-20 - versão 2](<Implementação do Contrato Inteligente ERC-20 - versão 2/README.md>), pronta para inclusão na sprint de destino definida pela turma. Ainda não houve envio remoto nem deploy público desta revisão.
+
+Principais correções: teto por pessoa, tesouraria separada, calendário semestral, recuperação com anúncio de 48h e recebíveis sem saldo, compra stablecoin atômica e integração de cadastro/cotas. Código, testes, roteiro, whitepaper e matriz dos oito critérios estão no pacote.
+
+---
+
+## Conteúdo histórico da entrega anterior
+
+O conteúdo abaixo documenta exclusivamente a Parte 1 e o deploy técnico v2 de 11/09. Não descreve as novas salvaguardas.
+
 # IBIToken — IBITI Glamping
 
 Projeto acadêmico de tokenização desenvolvido no Inteli pelo Grupo G01, no módulo ADMD7, com foco no IBITI Glamping. O programa combina pertencimento ao ecossistema, experiências de hospedagem e participação em royalties.

@@ -1,0 +1,82 @@
+{
+  "status": "confirmed",
+  "contractVersion": 2,
+  "network": "Sepolia",
+  "chainId": 11155111,
+  "deployedVia": "Remix IDE / MetaMask",
+  "contractName": "IBIToken",
+  "token": "0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030",
+  "stablecoin": "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE",
+  "admin": "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+  "supply": "150",
+  "decimals": 0,
+  "reservedUnits": "50",
+  "maxPerWallet": "20",
+  "adminBalanceAtVerification": "150",
+  "validFrom": 1789152828,
+  "validUntil": 1915296828,
+  "constructorArguments": [
+    "0x549852CA58C2e843e29428a81Ab97D2d613BB749",
+    150,
+    1789152828,
+    1915296828,
+    "0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE"
+  ],
+  "transactionHash": "0x415a6618a50981407552e4297c48ab0e66c724d03d846cc3f9c165b5a114fb5c",
+  "startBlock": 11684811,
+  "blockHash": "0x2036f37a645f00b1d22eebdcdb16207dfb67937de93877dace1dc39b8fb214a9",
+  "deployedAt": "2026-09-11T22:23:24.000Z",
+  "checkedAt": "2026-09-11T22:23:58.910Z",
+  "gasUsed": "2414333",
+  "gasPriceWei": "2465486419",
+  "costETH": "0.005952505222443527",
+  "compiler": "0.8.34",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "evmVersion": "osaka",
+  "sourceSha256": "d0564f3e0dbe4636a6bdf79e1ad4af38b23f6947e7ca6f3983d2132dd4509e83",
+  "creationBytecodeMatchIgnoringMetadata": true,
+  "stateVerified": true,
+  "runtimeCodeKeccak256": "0x59cbb4817e913345f7d2ba3de102e803eff7d8fae704064fea87139eda0480b8",
+  "runtimeCodeBytes": 9532,
+  "previousVersionAddress": "0x111B510517087a76eF7D1914849898A0718A2734",
+  "note": "Nova implantação de teste com emissão própria de 150 IBT. A versão 1 permanece histórica; não houve migração automática.",
+  "verification": {
+    "sourcify": "exact_match",
+    "creationMatch": "exact_match",
+    "runtimeMatch": "exact_match",
+    "verifiedAt": "2026-09-11T22:23:37Z",
+    "url": "https://repo.sourcify.dev/11155111/0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030/",
+    "api": "https://sourcify.dev/server/v2/contract/11155111/0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030",
+    "blockscout": "success reported by Remix",
+    "etherscan": "not submitted: API key not configured"
+  },
+  "sourceDirectory": "source/Sepolia-v2-2026-09-11",
+  "compilerInput": "source/Sepolia-v2-2026-09-11/compiler-input.json",
+  "verifiedSourceFiles": 17,
+  "backendVerification": {
+    "recordedAt": "2026-09-11T22:43:28.601Z",
+    "healthStatus": "ok",
+    "finality": "finalized",
+    "chain": {
+      "number": 11684822,
+      "hash": "0xa23b5a735cdc825f4aeac8671855917c53c20c0d2e363bf1913a73d4124a4289",
+      "timestamp": 1789165536,
+      "validFrom": 1789152828,
+      "validUntil": 1915296828,
+      "paused": false,
+      "maxPerWallet": 20,
+      "owner": "0x549852ca58c2e843e29428a81ab97d2d613bb749"
+    },
+    "ledger": {
+      "tokens": 150,
+      "potentialCredits": 150,
+      "wallets": 1,
+      "people": 0,
+      "stays": 0
+    },
+    "note": "GET /health respondeu ok após a finalização da emissão. Conferência SQLite somente de leitura; 150 direitos potenciais na carteira administrativa, sem pessoas ou hospedagens cadastradas. Não representa 150 hospedagens liberadas a clientes."
+  }
+}

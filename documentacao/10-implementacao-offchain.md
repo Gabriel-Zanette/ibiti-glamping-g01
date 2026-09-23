@@ -1,5 +1,8 @@
 # 10 · Implementação do modelo por pessoa — atualização 11/09/2026
 
+> **Revisão final em 22/09/2026:** a Parte 2 agora usa IBIToken técnico v3, local. Teto pessoal on-chain, tesouraria separada, calendário civil, compra atômica e recuperação com 48h estão implementados. As descrições de 10–11/09 abaixo são histórico da Parte 1; consulte [05](05-contrato-inteligente.md) e a [matriz de evolução](../smart-contract/docs/evolucao-v1-v2.md) para o estado vigente.
+
+
 Esta revisão incorpora a documentação produzida pelo Claude no diretório `ibiti-token/documentacao` e aplica o pedido do usuário neste repositório (`ibiti-glamping-g01`). A skill correspondente foi instalada em `~/.codex/skills/ibiti-context/`. O diretório antigo e a skill do Claude foram preservados.
 
 ## Resultado e divisão de responsabilidades

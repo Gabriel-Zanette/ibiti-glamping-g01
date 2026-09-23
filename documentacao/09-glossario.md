@@ -1,5 +1,7 @@
 # 09 · Glossário
 
+> **Revisão em 22/09/2026:** o [glossário de domínio](../CONTEXT.md) prevalece sobre termos históricos abaixo em conflito, incluindo datas fixas, sucessão como recuperação e entrada apenas por compra primária. A [entrevista atual](../docs/decisoes/2026-09-22-governanca-e-operacao.md) registra propostas e questões abertas.
+
 > **Implementação em 10/09/2026:** consulte [10 · Implementação off-chain](10-implementacao-offchain.md). O software de cadastro e cotas já está neste repositório; aprovação, hotel e operação real da IBITI seguem pendentes. A política de cotas foi confirmada pelo responsável do projeto em 11/09/2026: uma experiência por IBT em toda a emissão, sem renovação; só direitos livres acompanham transferências. O contrato v1 mantém contadores legados, sem uso no fluxo atual.
 
 Dois registros, definidos no Guia de Comunicação: o da **interface** (o que a pessoa lê na tela e ouve do

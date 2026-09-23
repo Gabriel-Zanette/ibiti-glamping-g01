@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="luz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Escolha a quantidade de tokens, confira o valor total de referência e conheça a etapa de verificação do programa.">
+<meta name="theme-color" content="#374338">
+<title>Escolha seu IBIToken · IBIToken</title>
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<script src="purchase.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" data-journey href="index.html" aria-label="IBIToken — início"><span class="brand-word">IBITI</span><span class="brand-sub">IBIToken</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacao">Menu</button>
+    <nav class="header-nav" id="navegacao" aria-label="Navegação principal"><a data-journey href="index.html#experiencia">A experiência</a><a data-journey href="index.html#territorio">O território</a><a data-journey href="como-funciona.html">Como funciona</a><a class="nav-cta" data-journey href="adquirir.html">Adquirir meu token</a></nav>
+  </div>
+</header>
+<main id="conteudo">
+
+<section class="inner-hero"><div class="wrap"><span class="eyebrow">Sua participação começa aqui</span><h1>Escolha seu <em>IBIToken.</em></h1><p>Confira o valor total e prepare os dados para a etapa de verificação.</p></div></section>
+<div class="wrap">
+  <div class="demo-notice">Demonstração acadêmica. Use dados fictícios: nada é enviado, salvo ou cobrado.</div>
+  <noscript><div class="callout">Ative o JavaScript para usar a seleção de quantidade e a demonstração do cadastro. <a data-journey href="como-funciona.html">Você pode ler todas as condições aqui.</a></div></noscript>
+  <div class="purchase-shell">
+    <div>
+      <ol class="steps" aria-label="Etapas da aquisição"><li data-step-label="1" aria-current="step">1. Quantidade</li><li data-step-label="2">2. Seus dados</li><li data-step-label="3">3. Revisão</li></ol>
+      <section class="purchase-panel" id="step-1" aria-labelledby="quantity-title">
+        <h2 id="quantity-title" tabindex="-1">Quantos tokens deseja?</h2><p>Cada token da colocação inicial reúne uma experiência de hospedagem, o Passaporte e uma participação no royalty.</p>
+        <form id="quantity-form">
+          <label for="quantity">Quantidade de tokens</label>
+          <div class="quantity-control"><button id="decrease" type="button" aria-label="Diminuir quantidade">−</button><input id="quantity" name="quantity" type="number" inputmode="numeric" min="1" max="20" step="1" value="1" required aria-describedby="quantity-help quantity-error"><button id="increase" type="button" aria-label="Aumentar quantidade">+</button></div>
+          <p class="small muted" id="quantity-help">De 1 a 20 nesta simulação. O saldo já existente será considerado na verificação.</p><p class="error small" id="quantity-error" role="alert" hidden></p>
+          <div class="actions"><button class="btn btn-primary" type="submit">Continuar para verificação <span aria-hidden="true">→</span></button></div>
+        </form>
+      </section>
+      <section class="purchase-panel" id="step-2" aria-labelledby="registration-title" hidden>
+        <h2 id="registration-title" tabindex="-1">Vamos nos conhecer.</h2><p>Estes são os dados iniciais da jornada. A conferência de identidade e os documentos ficam para o atendimento da IBITI.</p>
+        <form id="registration-form">
+          <div class="field"><label for="full-name">Nome completo fictício</label><input id="full-name" name="fullName" type="text" minlength="3" maxlength="100" autocomplete="off" placeholder="Ex.: Maria de Exemplo" required></div>
+          <div class="field"><label for="email">E-mail fictício</label><input id="email" name="email" type="email" maxlength="200" autocomplete="off" placeholder="maria@example.com" required></div>
+          <fieldset><legend>Como prefere seguir?</legend><label class="radio-option"><input type="radio" name="journey" value="assistida" checked><span><strong>Com orientação da equipe</strong><small>Ajuda para entender a carteira e as etapas da aquisição.</small></span></label><label class="radio-option"><input type="radio" name="journey" value="propria"><span><strong>Com minha própria carteira</strong><small>O vínculo da carteira é conferido após a verificação de identidade.</small></span></label></fieldset>
+          <p class="small muted">A preferência por orientação não define quem guarda suas chaves. O modelo de custódia será informado nas condições comerciais.</p>
+          <div class="actions"><button class="btn btn-primary" type="submit">Revisar minha escolha <span aria-hidden="true">→</span></button><button class="btn btn-secondary" type="button" data-go-step="1">Voltar</button></div>
+        </form>
+      </section>
+      <section class="purchase-panel" id="step-3" aria-labelledby="review-title" hidden>
+        <span class="eyebrow">Resumo da demonstração</span><h2 id="review-title" tabindex="-1">Sua escolha, em um só lugar.</h2><p>O próximo passo real seria a verificação pela IBITI. Este resumo não reserva tokens, não conclui uma compra e não foi enviado à equipe.</p>
+        <dl class="facts review-data"><div><dt>Nome informado</dt><dd id="review-name"></dd></div><div><dt>E-mail informado</dt><dd id="review-email"></dd></div><div><dt>Jornada preferida</dt><dd id="review-journey"></dd></div></dl>
+        <div class="callout"><strong>O que vem depois da verificação?</strong><p class="small">Confirmação da disponibilidade, das condições comerciais e do pagamento. O acesso ao Passaporte acompanha o registro da aquisição.</p></div>
+        <div class="actions"><button class="btn btn-secondary" type="button" data-go-step="2">Editar dados</button><button class="btn btn-secondary" type="button" data-go-step="1">Alterar quantidade</button><button class="btn btn-primary" type="button" id="restart">Encerrar demonstração</button></div>
+      </section>
+    </div>
+    <aside class="summary-card" aria-label="Resumo da sua escolha">
+      <span class="eyebrow">Sua escolha</span><h2><span id="summary-quantity">1</span> <span id="summary-unit">IBIToken</span></h2>
+      <ul><li><span id="summary-stays">1 experiência</span> de 3 noites, para até 5 pessoas por hospedagem</li><li>Vínculo ao programa e acesso ao Passaporte</li><li>Participação proporcional no royalty</li></ul>
+      <div class="summary-rule"><p class="small muted">R$ 37.055,19 por token</p><p class="small" id="total-label">Valor total de referência</p><output class="price" id="total" aria-labelledby="total-label" aria-live="polite" aria-atomic="true">R$ 37.055,19</output><p class="small muted">Preço comercial sujeito à confirmação. Nenhuma cobrança nesta demonstração.</p></div>
+      <p class="small muted summary-rule">Vigência: 2027–2030. Uma hospedagem por token em todo o ciclo, conforme disponibilidade. Royalties dependem do faturamento.</p><a class="text-link" data-journey href="como-funciona.html">Rever as condições</a>
+    </aside>
+  </div>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top"><a class="brand" data-journey href="index.html"><span class="brand-word">IBITI</span></a><nav class="footer-links" aria-label="Saiba mais"><a data-journey href="perguntas.html">Perguntas frequentes</a><a data-journey href="transparencia.html">Transparência</a><a data-journey href="como-funciona.html">Como funciona</a></nav></div>
+    <div class="footer-bottom"><span>Ibitipoca, Minas Gerais · Emissão 2027–2030</span><span>Protótipo acadêmico · Inteli / G01 · Sem oferta comercial ativa</span></div>
+  </div>
+</footer>
+</body>
+</html>

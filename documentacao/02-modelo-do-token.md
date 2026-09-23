@@ -1,5 +1,8 @@
 # 02 · Modelo do token (IBIToken)
 
+> **Revisão final em 22/09/2026:** a Parte 2 agora usa IBIToken técnico v3, local. Teto pessoal on-chain, tesouraria separada, calendário civil, compra atômica e recuperação com 48h estão implementados. As descrições de 10–11/09 abaixo são histórico da Parte 1; consulte [05](05-contrato-inteligente.md) e a [matriz de evolução](../smart-contract/docs/evolucao-v1-v2.md) para o estado vigente.
+
+
 > **Implementação em 10/09/2026:** consulte [10 · Implementação off-chain](10-implementacao-offchain.md). O software de cadastro e cotas já está neste repositório; aprovação, hotel e operação real da IBITI seguem pendentes. A política de cotas foi confirmada pelo responsável do projeto em 11/09/2026: uma experiência por IBT em toda a emissão, sem renovação; só direitos livres acompanham transferências. O contrato v1 mantém contadores legados, sem uso no fluxo atual.
 
 Este documento consolida as regras do ativo como valem hoje. As decisões originais do grupo (D1–D13, de
@@ -18,7 +21,7 @@ uso da experiência segue o formato de 10/09/2026, descrito em [03](03-uso-vincu
 | Reserva da IBITI | **50 unidades = 1/3 do supply = 5 dos 15 pontos do royalty**, fora de venda salvo decisão expressa; só pode diminuir | decidido |
 | Unidades à venda | 100 (2/3 do supply = 10 dos 15 pontos) | decidido |
 | Preço | fixo, igual para todos; referência **R$ 53.008,93** por unidade; captação máxima ≈ R$ 5,3 mi | hipótese do valuation |
-| Teto por carteira | **20 unidades = 2/15 do supply = 2 dos 15 pontos**; carteira administrativa isenta | decidido |
+| Teto por pessoa | **20 unidades = 2/15 do supply = 2 dos 15 pontos**; somente a tesouraria isenta | decidido |
 | Validade | **4 anos: 01/01/2027 a 31/12/2030**; ao fim, as três faces se extinguem, inclusive o membership | decidido; piloto sem nova emissão |
 | Royalty | **15% do faturamento bruto** do Glamping (diárias + alimentação + demais serviços), 100% tokenizado, fração igual por unidade | decidido; rubricas do bruto a confirmar |
 | Apuração | **semestral**, 8 apurações em 4 anos; valor devido pro-rata ao saldo no momento do reporte | decidido |
@@ -46,7 +49,7 @@ carteira. **Colaboradores e produtores locais não recebem token**; são alcanç
 atividade econômica do território. Emissão administrativa para esses atores não é uma opção considerada.
 
 Transferências entre membros são permitidas, só para carteiras que já detêm token (logo, já verificadas),
-até o teto de 20 por carteira. Uma unidade cuja hospedagem já foi usada transfere normalmente e leva
+até o teto de 20 por pessoa. Uma unidade cuja hospedagem já foi usada transfere normalmente e leva
 consigo o membership e o royalty; o que acontece com hospedagens ainda não usadas está em aberto (ver 03).
 
 ## 4. Passaporte IBITI (membership)

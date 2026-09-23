@@ -25,9 +25,13 @@ de 01/01/2027 a 31/12/2030. Todo o supply nasce na carteira administrativa. Não
 
 ## Fase 1 · Descoberta, conversa inicial e verificação
 
-1. A pessoa conhece o projeto pela landing ou por indicação. A landing diz o essencial em tópicos e **não
-   mostra o preço**.
-2. Conversa inicial com a IBITI: o que a cota dá, o preço (apresentado só aqui), como funciona a guarda.
+1. A pessoa conhece o projeto pela landing ou por indicação. Conforme decisão do usuário em 16/09/2026,
+   a landing parte da experiência e do pertencimento, apresenta benefícios, apoio ao território e números
+   essenciais, e **mostra o valor integral de referência de R$ 37.055,19 por IBT**, com dois CTAs: aquisição
+   e detalhes. A escassez corresponde à emissão de 150 e à colocação inicial de 100; não é estoque em tempo real.
+2. A entrada da aquisição permite escolher a quantidade e conferir o total. A demonstração da interface
+   usa dados fictícios, sem enviá-los ou salvá-los e sem cobrança. A operação real precisa confirmar
+   disponibilidade, condições comerciais e guarda antes de concluir a compra.
 3. **Verificação de identidade** pela IBITI, obrigatória para todos. É o filtro ético do projeto. Aqui
    nasce o vínculo pessoa–carteira, guardado fora da blockchain.
 
@@ -89,9 +93,9 @@ As três faces se extinguem. Não há mais transferências nem hospedagens. O co
 
 | Tela | Momento | Situação após 10/09/2026 |
 |---|---|---|
-| A1 | descoberta (landing) | válida |
+| A1 | descoberta (landing) | revisada em 16/09/2026; preço e dois CTAs |
 | A2 | verificação | válida |
-| A3 | aquisição (única tela com o preço) | válida |
+| A3 | aquisição (quantidade e valor total) | entrada demonstrativa revisada em 16/09/2026; preço também na landing |
 | A4 | recebimento | válida |
 | A5 | Passaporte | válida |
 | A6, A7 | resgate e voucher | **substituir por "pedir hospedagem"** |
