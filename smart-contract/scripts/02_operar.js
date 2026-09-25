@@ -2,7 +2,8 @@
 // Hospedagens são operadas em offchain/, nunca por uma chamada de resgate no contrato.
 (async () => {
   const config = {
-    acao: 'status', // status, registrar, compra, transferencia, reporte, saque, anunciar-recuperacao, recuperacao, cancelar-recuperacao, pausar, retomar
+    acao: 'status', // status, registrar, abertura, compra, reporte, saque, anunciar-recuperacao, recuperacao, cancelar-recuperacao, pausar, retomar
+    aberturaUtc: '', // ISO 8601 do marco confirmado, com Z ou offset; somente para acao abertura
     destino: '', origem: '', quantidade: '1', faturamento: '1000.00', periodo: 1,
     identificadorPessoa: '', // bytes32 preparado pelo serviço; não inserir CPF
     referencia: 'demonstracao-academica'
@@ -20,7 +21,7 @@
     } catch { /* Compatibilidade com a organização de artefatos do Remix. */ }
   }
   if (!metadata) throw Error('Compile IBIToken.sol no Remix antes de operar.');
-  if (record.contractVersion !== 3) throw Error('Registro histórico: esta operação exige deploy da versão técnica 3.');
+  if (record.contractVersion !== 4) throw Error('Registro histórico: esta operação exige deploy da versão técnica 4.');
   const token = new ethers.Contract(record.token,metadata.abi,signer);
   const hash = ethers.id ? ethers.id(config.referencia) : ethers.utils.id(config.referencia);
   const parseUnits = ethers.parseUnits ?? ethers.utils.parseUnits;
@@ -45,7 +46,11 @@
       }
       break;
     }
-    case 'transferencia': tx=await token.transfer(config.destino,config.quantidade);break;
+    case 'abertura': {
+      const opened=Date.parse(config.aberturaUtc)/1000;
+      if(!Number.isSafeInteger(opened) || opened<=0 || !/(Z|[+-]\d{2}:\d{2})$/.test(config.aberturaUtc)) throw Error('Informe abertura UTC com referência documental.');
+      tx=await token.recordOpening(opened,hash);break;
+    }
     case 'saque': tx=await token.claimRoyalty(config.periodo);break;
     case 'anunciar-recuperacao': tx=await token.requestRecovery(config.origem,config.destino,hash);break;
     case 'cancelar-recuperacao': tx=await token.cancelRecovery(config.origem);break;

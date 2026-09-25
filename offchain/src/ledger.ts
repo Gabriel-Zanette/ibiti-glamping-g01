@@ -13,7 +13,7 @@ const ZERO = '0x0000000000000000000000000000000000000000';
 export function address(value: string) { try { const a = getAddress(value).toLowerCase(); if (a === ZERO) throw Error(); return a; } catch { throw new Error('INVALID_WALLET'); } }
 export function ensure(condition: unknown, code: string): asserts condition { if (!condition) throw new Error(code); }
 export function positive(value: number) { ensure(Number.isSafeInteger(value) && value > 0 && value <= 150, 'INVALID_UNITS'); }
-function cpfKey(cpf: string, secret: string) {
+export function cpfKey(cpf: string, secret: string) {
   ensure(typeof cpf === 'string' && /^[\d.\-\s]+$/.test(cpf), 'INVALID_CPF');
   const digits = cpf.replace(/\D/g, '');
   ensure(digits.length === 11 && !/^(\d)\1{10}$/.test(digits), 'INVALID_CPF');
@@ -38,6 +38,7 @@ export class Ledger {
       CREATE TABLE IF NOT EXISTS wallets (address TEXT PRIMARY KEY, person_id TEXT REFERENCES people(id), balance INTEGER NOT NULL DEFAULT 0 CHECK(balance>=0), credits INTEGER NOT NULL DEFAULT 0 CHECK(credits>=0), revoked INTEGER NOT NULL DEFAULT 0);
       CREATE TABLE IF NOT EXISTS movements (id TEXT PRIMARY KEY, data TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS stays (id TEXT PRIMARY KEY, person_id TEXT NOT NULL REFERENCES people(id), units INTEGER NOT NULL CHECK(units>0), arrival TEXT NOT NULL, departure TEXT NOT NULL, status TEXT NOT NULL CHECK(status IN ('requested','confirmed','completed','cancelled')), request_key TEXT NOT NULL, fingerprint TEXT NOT NULL, UNIQUE(person_id,request_key));
+      CREATE TABLE IF NOT EXISTS stay_policies (stay_id TEXT PRIMARY KEY REFERENCES stays(id), version TEXT NOT NULL, accepted_at TEXT NOT NULL, actor TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS allocations (stay_id TEXT NOT NULL REFERENCES stays(id), wallet TEXT NOT NULL REFERENCES wallets(address), units INTEGER NOT NULL CHECK(units>0));
       CREATE TABLE IF NOT EXISTS cancellation_refunds (stay_id TEXT PRIMARY KEY REFERENCES stays(id), ready_after INTEGER NOT NULL, released INTEGER NOT NULL DEFAULT 0);
       CREATE TABLE IF NOT EXISTS audit (seq INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, action TEXT NOT NULL, data TEXT NOT NULL);
@@ -184,7 +185,7 @@ export class Ledger {
     const start = parse(input.arrival), end = parse(input.departure);
     ensure(start >= Math.max(s.validFrom, Math.floor(s.timestamp / 86400) * 86400) && start < end && end <= s.validUntil, 'INVALID_DATES');
   }
-  requestStay(personId: string, input: StayInput, key: string): Stay {
+  requestStay(personId: string, input: StayInput, key: string, policy?: { version: string; actor: string }): Stay {
     positive(input.units); ensure(typeof key === 'string' && /^[\w-]{1,100}$/.test(key), 'INVALID_IDEMPOTENCY_KEY');
     const fingerprint = JSON.stringify([input.units, input.arrival, input.departure]);
     return this.transaction(() => {
@@ -201,6 +202,7 @@ export class Ledger {
         this.db.prepare('INSERT INTO allocations VALUES (?,?,?)').run(id, w.address, n); left -= n;
       }
       ensure(left === 0, 'INSUFFICIENT_QUOTA');
+      if (policy) this.db.prepare('INSERT INTO stay_policies VALUES (?,?,?,?)').run(id,policy.version,new Date().toISOString(),policy.actor);
       this.audit('stay.requested', { id, personId, ...input, block: q.block }); return this.stay(personId, id);
     });
   }

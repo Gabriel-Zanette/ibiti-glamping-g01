@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
 :root {
   --display: 'Fraunces', Georgia, serif;
@@ -319,3 +318,10 @@ fieldset { border: 0; padding: 0; margin: 1.5rem 0; }
   .motion-ready .hero-photo img { transform: none; }
   .motion-ready .landing-page .section::before { display: none; }
 }
+
+.simulation {border:1px solid var(--line); background:var(--surface); padding:1.4rem; border-radius:12px; margin:1.2rem 0;}
+.simulation label {display:block;}
+.simulation input {display:block; width:100%; max-width:200px; margin:.5rem 0 1rem; padding:.7rem; border:1px solid var(--control-line); background:var(--canvas); color:var(--ink); border-radius:6px;}
+.simulation output {display:block; font-size:1.2rem; font-weight:700;}
+.simulation small {display:block; margin-top:1rem; color:var(--muted); font-size:.85rem;}
+.header-nav {gap:1rem;}

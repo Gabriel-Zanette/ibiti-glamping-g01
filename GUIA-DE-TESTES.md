@@ -1,3 +1,5 @@
+> **Guia histórico anterior à revisão interna v4, hoje em preparação para a v2 oficial.** Para testar a jornada atual e usar as contas de demonstração, siga o [guia atual](smart-contract/docs/guia-v4.md). Transferências ordinárias foram retiradas, royalties agora consideram tempo de posse, abertura é relativa e cancelamento é manual. Não usar os cenários antigos de revenda como comportamento esperado atual.
+
 # Guia de testes do IBITI — passo a passo, do primeiro clique à blockchain
 
 Preparado em **23/09/2026**, para o código deste repositório. Você não precisa saber programar para começar. Faça uma seção por vez, copie os comandos e compare o que aconteceu com o resultado esperado.

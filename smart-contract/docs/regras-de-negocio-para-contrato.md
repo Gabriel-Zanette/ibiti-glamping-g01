@@ -1,3 +1,5 @@
+> **Registro da revisão técnica v3 (22/09), preservado como trajetória.** A fonte atual é v4: [guia vigente](guia-v4.md), [inventário de regras e pendências](../../docs/decisoes/2026-09-25-inventario-completo-token.md). Calendário fixo, transferências, corte por fotografia e espera de 48h abaixo foram superados. Memorando v2 já recebido e revisado em feedback separado.
+
 # Regras executáveis — versão técnica 3 / Parte 2
 
 | Regra | Implementação |

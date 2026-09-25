@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="site.css">
 <script src="site.js"></script>
 <script src="landing-motion.js" defer></script>
+<script src="/simulation.js" type="module"></script>
 
 </head>
 <body class="landing-page">
@@ -17,7 +18,7 @@
   <div class="wrap header-inner">
     <a class="brand" data-journey href="index.html" aria-label="IBIToken — início"><span class="brand-word">IBITI</span><span class="brand-sub">IBIToken</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacao">Menu</button>
-    <nav class="header-nav" id="navegacao" aria-label="Navegação principal"><a data-journey href="index.html#experiencia">A experiência</a><a data-journey href="index.html#territorio">O território</a><a data-journey href="como-funciona.html">Como funciona</a><a class="nav-cta" data-journey href="adquirir.html">Adquirir meu token</a></nav>
+    <nav class="header-nav" id="navegacao" aria-label="Navegação principal"><a data-journey href="index.html#experiencia">A experiência</a><a data-journey href="index.html#territorio">O território</a><a data-journey href="como-funciona.html">Como funciona</a><a href="/conta#entrar">Minha conta</a><a class="nav-cta" data-journey href="/conta">Entrar na lista de interesse</a></nav>
   </div>
 </header>
 <main id="conteudo">
@@ -39,7 +40,7 @@
     <div class="benefit-grid">
       <article class="benefit"><span class="index" aria-hidden="true">01 / Estar</span><h3>Três noites para desacelerar.</h3><p>Uma experiência no Glamping para até 5 pessoas, com os serviços comuns da hospedagem. Você escolhe com quem compartilhar.</p></article>
       <article class="benefit"><span class="index" aria-hidden="true">02 / Pertencer</span><h3>Seu Passaporte IBITI.</h3><p>Seu vínculo como membro do programa, com as hospedagens disponíveis e a participação no royalty reunidas no Passaporte.</p></article>
-      <article class="benefit"><span class="index" aria-hidden="true">03 / Participar</span><h3>Uma parte do que o Glamping gera.</h3><p>Participação no royalty, proporcional aos seus tokens. Os valores dependem do faturamento real, sem retorno garantido.</p></article>
+      <article class="benefit"><span class="index" aria-hidden="true">03 / Participar</span><h3>Uma parte do que o Glamping gera.</h3><p>Participação no royalty, proporcional à quantidade e ao tempo de posse dos tokens em cada semestre. Os valores dependem do faturamento real, sem retorno garantido.</p></article>
     </div>
   </div>
 </section>
@@ -55,7 +56,7 @@
     <div class="stat-grid">
       <div class="stat"><strong><span class="count" data-count="150" aria-hidden="true">150</span><span class="sr-only">150</span></strong><span>tokens nesta emissão</span></div>
       <div class="stat"><strong><span class="count" data-count="100" aria-hidden="true">100</span><span class="sr-only">100</span></strong><span>destinados à colocação inicial</span></div>
-      <div class="stat"><strong>2027–2030</strong><span>vigência do programa</span></div>
+      <div class="stat"><strong>4 anos</strong><span>a partir da abertura do Glamping</span></div>
     </div>
     <p class="numbers-note">15% do faturamento bruto do Glamping compõem o royalty dividido entre os 150 tokens, com apurações semestrais.</p>
   </div>
@@ -63,7 +64,7 @@
 <section class="section offer" id="comprar" aria-labelledby="oferta-titulo">
   <div class="wrap offer-grid">
     <div class="offer-copy"><span class="eyebrow">Seu IBIToken</span><h2 id="oferta-titulo">Viva essa experiência. <em>Faça parte dessa história.</em></h2><p>Um token reúne a hospedagem, o Passaporte e a participação no royalty durante a vigência.</p></div>
-    <div><span class="eyebrow">1 IBIToken</span><strong class="price">R$ 37.055,19</strong><p class="small">Valor integral de referência por token.</p><div class="actions"><a class="btn btn-primary" data-journey href="adquirir.html">Adquirir meu token <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" data-journey href="como-funciona.html">Entender todos os detalhes</a></div><p class="small">Uma hospedagem por token durante o ciclo, sujeita à disponibilidade.</p></div>
+    <div><span class="eyebrow">Conheça as possibilidades</span><h3>Simule seu interesse.</h3><div data-public-simulation></div><p class="small">Referência do memorando: R$ 34.874,14 por IBT. A simulação não reserva tokens nem gera cobrança. Este ambiente usa apenas recursos de teste.</p><div class="actions"><a class="btn btn-primary" href="/conta">Entrar na lista de interesse <span aria-hidden="true">↗</span></a><a class="btn btn-secondary" href="/conta#entrar">Já tenho uma conta</a></div><p class="small">Primeiro, cadastro e análise em até cinco dias úteis. Depois da aprovação, escolha a quantidade definitiva e prepare sua compra.</p></div>
   </div>
 </section>
 
@@ -71,7 +72,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-top"><a class="brand" data-journey href="index.html"><span class="brand-word">IBITI</span></a><nav class="footer-links" aria-label="Saiba mais"><a data-journey href="perguntas.html">Perguntas frequentes</a><a data-journey href="transparencia.html">Transparência</a><a data-journey href="como-funciona.html">Como funciona</a></nav></div>
-    <div class="footer-bottom"><span>Ibitipoca, Minas Gerais · Emissão 2027–2030</span><span>Protótipo acadêmico · Inteli / G01 · Sem oferta comercial ativa</span></div>
+    <div class="footer-bottom"><span>Ibitipoca, Minas Gerais · Vigência: quatro anos desde a abertura do Glamping</span><span>Protótipo acadêmico · Inteli / G01 · Sem oferta comercial ativa</span></div>
   </div>
 </footer>
 </body>

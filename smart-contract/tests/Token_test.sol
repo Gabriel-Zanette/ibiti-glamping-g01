@@ -26,8 +26,9 @@ contract TokenTest {
     }
     function testTransferenciaMesmaPessoaNoTeto() public returns(bool) {
         token.primaryPurchase(address(alice),15,bytes32(0));token.primaryPurchase(address(bob),5,bytes32(0));
-        alice.execute(address(token),abi.encodeCall(token.transfer,(address(bob),5)));
-        require(token.balanceOf(address(bob))==10 && token.personBalance(keccak256("pessoa A"))==20);return true;
+        (bool ok,) = address(alice).call(abi.encodeCall(alice.execute,(address(token),abi.encodeCall(token.transfer,(address(bob),5)))));
+        require(!ok);
+        require(token.balanceOf(address(bob))==5 && token.personBalance(keccak256("pessoa A"))==20);return true;
     }
     function testTesourariaNaoContornaCompra() public returns(bool) {
         (bool ok,) = address(token).call(abi.encodeCall(token.transfer,(address(alice),1)));

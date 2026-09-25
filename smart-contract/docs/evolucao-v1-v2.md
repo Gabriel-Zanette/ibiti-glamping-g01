@@ -1,3 +1,5 @@
+> **Registro da revisão técnica v3 (22/09), preservado como trajetória.** A fonte atual é v4: [guia vigente](guia-v4.md), [inventário de regras e pendências](../../docs/decisoes/2026-09-25-inventario-completo-token.md). Calendário fixo, transferências, corte por fotografia e espera de 48h abaixo foram superados. Memorando v2 já recebido e revisado em feedback separado.
+
 # Segunda entrega de implementação — evolução e justificativas
 
 Revisão de 22/09/2026. **Parte 1 acadêmica = código técnico v2 publicado em 11/09. Parte 2 acadêmica = código técnico v3 desta revisão.** A alteração de numeração técnica evita atribuir ao endereço histórico funcionalidades que ele não possui. O contrato não é atualizável por proxy; os recibos antigos continuam preservados.

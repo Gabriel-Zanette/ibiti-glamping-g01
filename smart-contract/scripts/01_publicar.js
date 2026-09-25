@@ -6,7 +6,7 @@
     permitirSepolia: false,
     stablecoinSepolia: '0xFEc48658BdaBAfbdB572204B632d4dfCCF1F89fE',
     // Datas de demonstração. Os termos econômicos de produção precisam de ratificação.
-    anoInicio: 2027,
+    // Abertura é registrada depois de ocorrer; não assumir janeiro nem data da projeção.
     precoUnitario: '37055.19' // referência de demonstração; tBRL de 6 decimais
   };
   const provider = ethers.BrowserProvider ? new ethers.BrowserProvider(web3Provider) : new ethers.providers.Web3Provider(web3Provider);
@@ -38,14 +38,14 @@
     stablecoin = await addressOf(stable);
     await (await stable.mint(admin,'1000000000')).wait(); // 1.000 tBRL fictícios; não altera os 150 IBT.
   } else if (!ethers.isAddress?.(stablecoin) && !ethers.utils?.isAddress(stablecoin)) throw Error('Endereço de stablecoin inválido.');
-  const validFrom = Date.UTC(config.anoInicio,0,1)/1000;
-  const validUntil = Date.UTC(config.anoInicio+4,0,1)/1000-1;
+  const validFrom = 0;
+  const validUntil = 0;
   const token = await deploy('IBIToken','contracts/artifacts/IBIToken.json',[admin,150,validFrom,validUntil,stablecoin]);
   const parseUnits = ethers.parseUnits ?? ethers.utils.parseUnits;
   await (await token.setPrimaryPrice(parseUnits(config.precoUnitario,6))).wait();
   const tx = ethers.BrowserProvider ? token.deploymentTransaction() : token.deployTransaction;
   const receipt = await tx.wait();
-  const record = {contractVersion:3,chainId,token:await addressOf(token),stablecoin,admin,treasury:admin,primaryUnitPrice:String(await token.primaryUnitPrice()),supply:'150',decimals:0,validFrom,validUntil,transactionHash:tx.hash,startBlock:receipt.blockNumber};
+  const record = {contractVersion:4,chainId,token:await addressOf(token),stablecoin,admin,treasury:admin,primaryUnitPrice:String(await token.primaryUnitPrice()),supply:'150',decimals:0,validFrom,validUntil,transactionHash:tx.hash,startBlock:receipt.blockNumber};
   await remix.call('fileManager','setFile','deployments/remix-latest.json',JSON.stringify(record,null,2));
   console.log('Publicação confirmada. Salve o registro deployments/remix-latest.json:',record);
   return record;

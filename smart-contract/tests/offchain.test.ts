@@ -9,7 +9,7 @@ before(async()=>{chain=await localChain();});
 after(async()=>{await chain?.stop();});
 
 describe('Hospedagens off-chain com IBIToken real', function () {
-  it('compra, solicita, cancela, transfere, reemite e recebe royalty sem markRedeemed', async function () {
+  it('compra, solicita, cancela, bloqueia revenda, reemite e recebe royalty temporal', async function () {
     const [admin, alice, bob, recovery] = chain.signers;
     const now = (await chain.provider.getBlock('latest'))!.timestamp;
     const stable = await chain.deploy('MockStablecoin', ['Teste', 'tBRL', 6]);
@@ -31,9 +31,10 @@ describe('Hospedagens off-chain com IBIToken real', function () {
     assert.equal(db.quota(p.id).used,2);
     assert.equal(token.interface.hasFunction('markRedeemed'),false);
     assert.equal(await token.balanceOf(alice.address),5n);
-    await (await token.connect(alice).transfer(bob.address, 4)).wait(); await sync.sync();
-    assert.equal(db.quota(p.id).available,0); assert.equal(db.quota(q.id).available,4);
-    await sync.sync(); assert.equal(db.quota(q.id).available,4);
+    await assert.rejects(token.connect(alice).transfer(bob.address, 4));
+    await (await token.primaryPurchase(bob.address,4,ethers.id("additional-primary"))).wait(); await sync.sync();
+    assert.equal(db.quota(p.id).available,3); assert.equal(db.quota(q.id).available,5);
+    await sync.sync(); assert.equal(db.quota(q.id).available,5);
     const booking = db.requestStay(q.id, { units: 1, arrival: tomorrow, departure }, 'stay-b');
     db.linkWallet(q.id, recovery.address);
     await (await token.requestRecovery(bob.address,recovery.address,ethers.id('processo'))).wait();
@@ -43,16 +44,19 @@ describe('Hospedagens off-chain com IBIToken real', function () {
     await (await token.reissue(bob.address, recovery.address)).wait(); await sync.sync();
     db.transition(q.id, booking.id, 'cancelled');
     await sync.sync();
-    assert.equal(db.quota(q.id).balance,5); assert.equal(db.quota(q.id).available,4);
+    assert.equal(db.quota(q.id).balance,5); assert.equal(db.quota(q.id).available,5);
     assert.throws(() => db.requireWallet(bob.address),new RegExp('WALLET_REVOKED'));
     await (await token.setStablecoin(await stable.getAddress())).wait();
     await (await stable.mint(admin.address, 1_000_000)).wait(); await (await stable.approve(await token.getAddress(), 1_000_000)).wait();
-    await (await token.reportRevenue(1_000_000, ethers.id('report'))).wait();
-    await (await token.connect(recovery).claimRoyalty(1)).wait();
-    assert.equal(await stable.balanceOf(recovery.address),5000n);
+    const closes=Number(await token.periodEnd(4));
+    await chain.provider.send('evm_setNextBlockTimestamp',[closes]);await chain.provider.send('evm_mine',[]);
+    for(let period=1;period<=4;period++)await (await token.reportRevenue(1_000_000, ethers.id('report'+period))).wait();
+    const due=await token.royaltyDue(4,recovery.address);assert.ok(due>0n && due<5000n);
+    await (await token.connect(recovery).claimRoyalty(4)).wait();
+    assert.equal(await stable.balanceOf(recovery.address),due);
     const statement = await sync.royalties(q.id);
     assert.equal(statement.symbol,'tBRL');
-    assert.equal(statement.periods[0].paid,'0.005');
+    assert.equal(statement.periods[3].paid,ethers.formatUnits(due,6));
     assert.equal(statement.periods[0].due,'0.0');
     await (await token.pause()).wait(); await sync.sync();
     assert.throws(() => db.requestStay(q.id, { units: 1, arrival: tomorrow, departure }, 'paused'),new RegExp('NOT_ELIGIBLE'));
@@ -113,8 +117,8 @@ describe('Hospedagens off-chain com IBIToken real', function () {
     const db=new Ledger(':memory:','integration'.repeat(8),'local');const p=db.registerPerson('52998224725');db.setVerified(p.id,true);db.linkWallet(p.id,a.address);
     const sync=new ChainSync(db,chain.provider,await token.getAddress(),receipt!.blockNumber,31337);
     const statement=await sync.royalties(p.id);
-    assert.equal(statement.periods[0].symbol,'BRL');assert.equal(statement.periods[0].due,'10.0');
-    assert.equal(statement.periods[1].symbol,'tBRL');assert.equal(statement.periods[1].due,'0.001');db.close();
+    assert.equal(statement.periods[0].symbol,'BRL');assert.equal(statement.periods[0].due,'0.0');
+    assert.equal(statement.periods[1].symbol,'tBRL');assert.equal(statement.periods[1].due,'0.0');db.close();
   });
 
 });
@@ -137,7 +141,7 @@ it('cadastro on-chain e tesouraria permanecem coerentes no serviço após troca 
     assert.equal(db.quota(p.id).available,0);assert.equal(db.quota(p.id).eligible,false);
   } finally {db.close();}
 });
-it('recuperação sem saldo revoga sessão e preserva cotas e royalties no cadastro original', async () => {
+it('recuperação revoga carteira antiga e preserva cotas no cadastro original', async () => {
   const [admin,a,b,replacement]=chain.signers;
   const token=await chain.deploy('IBIToken',[admin.address,150,1735689600,1861919999,ethers.ZeroAddress]);
   const receipt=await token.deploymentTransaction()!.wait();
@@ -149,14 +153,14 @@ it('recuperação sem saldo revoga sessão e preserva cotas e royalties no cadas
       await(await token.registerWallet(w.address,db.personChainId(person.id))).wait();await(await token.primaryPurchase(w.address,n,ethers.id('sale'))).wait();
     }
     await(await token.reportRevenue(1_000_000,ethers.id('r'))).wait();
-    await(await token.connect(a).transfer(b.address,5)).wait();
+    await assert.rejects(token.connect(a).transfer(b.address,5));
     const sync=new ChainSync(db,chain.provider,await token.getAddress(),receipt!.blockNumber,31337);await sync.sync();
     await(await token.requestRecovery(a.address,replacement.address,ethers.id('case'))).wait();
     const r=await token.recoveries(a.address);await chain.provider.send('evm_setNextBlockTimestamp',[Number(r.executeAfter)]);
     await(await token.reissue(a.address,replacement.address)).wait();await sync.sync();
     assert.equal(db.requireWallet(replacement.address),p.id);assert.throws(()=>db.requireWallet(a.address),/WALLET_REVOKED/);
-    assert.equal(db.quota(p.id).available,0);assert.equal(db.quota(q.id).available,6);
-    assert.equal((await sync.royalties(p.id)).periods[0].due,'50.0');
-    await sync.sync();assert.equal(db.quota(q.id).available,6);
+    assert.equal(db.quota(p.id).available,5);assert.equal(db.quota(q.id).available,1);
+    assert.equal((await sync.royalties(p.id)).periods[0].due,'0.0');
+    await sync.sync();assert.equal(db.quota(q.id).available,1);
   } finally {db.close();}
 });

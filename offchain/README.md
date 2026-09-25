@@ -1,3 +1,7 @@
+> **Fonte v4 e demo atual:** usar `npm run demo:portal` e o [guia atual com acessos](../smart-contract/docs/guia-v4.md). Os comandos de demonstração/controle compartilhado abaixo descrevem a interface histórica.
+
+> **Atualização 25/09/2026:** a jornada com waitlist, contas individuais e três modalidades de custódia está documentada em [PORTAL.md](PORTAL.md). As instruções de API administrativa compartilhada abaixo são históricas; o servidor atual as desabilita.
+
 # Passaporte IBITI — hospedagens por pessoa
 
 Serviço executável do modelo de 10/09/2026: um ERC-20 para posse e royalty; hospedagens controladas por pessoa física fora da blockchain. Integra a v3 técnica local e mantém leitura das versões históricas publicadas na Sepolia, sem resgate on-chain; mantém compatibilidade de leitura da v1 histórica sem chamar `markRedeemed`. Não há IDs por unidade do token.

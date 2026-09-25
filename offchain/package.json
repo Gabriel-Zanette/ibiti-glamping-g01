@@ -12,7 +12,9 @@
     "test": "node --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
     "demo": "node scripts/demo.ts",
-    "check:sepolia": "node --env-file-if-exists=.env scripts/check-sepolia.ts"
+    "check:sepolia": "node --env-file-if-exists=.env scripts/check-sepolia.ts",
+    "operator:create": "node --env-file-if-exists=.env scripts/create-operator.ts",
+    "demo:portal": "node scripts/demo-portal.ts"
   },
   "dependencies": {
     "ethers": "6.17.0"

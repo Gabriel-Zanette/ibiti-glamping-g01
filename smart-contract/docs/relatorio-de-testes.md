@@ -1,3 +1,5 @@
+> **Registro da revisão técnica v3 (22/09), preservado como trajetória.** A fonte atual é v4: [guia vigente](guia-v4.md), [inventário de regras e pendências](../../docs/decisoes/2026-09-25-inventario-completo-token.md). Calendário fixo, transferências, corte por fotografia e espera de 48h abaixo foram superados. Memorando v2 já recebido e revisado em feedback separado.
+
 # Validação da Parte 2 — IBIToken técnico v3
 
 Rodada de 22/09/2026, Node 24.19.0, Solidity 0.8.34, OpenZeppelin 5.6.1, EVM Osaka, otimizador 200, Anvil 1.7.1. Todos os testes abaixo executaram em ambiente local. Não houve deploy público da v3 nem reexecução do plugin do Remix no navegador.

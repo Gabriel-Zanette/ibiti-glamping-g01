@@ -9,9 +9,9 @@ contract SettlementTest {
         alice=new Actor();token.registerWallet(address(alice),keccak256("A"));token.primaryPurchase(address(alice),20,bytes32(0));
     }
     function testLiquidacaoExternaSemDuplicacao() public returns(bool) {
-        token.reportRevenue(1_000_000,bytes32(0));token.settleOffChain(1,address(alice),keccak256("comprovante"));
-        require(token.royaltyDue(1,address(alice))==0 && token.royaltyPaid(1,address(alice))==20_000);
-        (bool ok,) = address(token).call(abi.encodeCall(token.settleOffChain,(1,address(alice),bytes32(0))));
+        token.reportRevenue(1_000_000,bytes32(0));token.settleOffChain(1,address(this),keccak256("comprovante"));
+        require(token.royaltyDue(1,address(this))==0 && token.royaltyPaid(1,address(this))==150_000);
+        (bool ok,) = address(token).call(abi.encodeCall(token.settleOffChain,(1,address(this),bytes32(0))));
         require(!ok);return true;
     }
     function testRenunciaBloqueada() public returns(bool) {

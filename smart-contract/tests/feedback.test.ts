@@ -6,10 +6,11 @@ const FROM = 1798761600; // 01/01/2027 UTC
 const UNTIL = 1924991999; // 31/12/2030 23:59:59 UTC
 const ENDS = ['2027-07-01','2028-01-01','2028-07-01','2029-01-01','2029-07-01','2030-01-01','2030-07-01','2031-01-01'].map(d=>Date.parse(d+'T00:00:00Z')/1000);
 const PERSON_A=id('identificador-aleatorio-A'), PERSON_B=id('identificador-aleatorio-B');
-async function setup(t: any) {
+async function setup(t: any, legacy = false) {
   const c = await localChain(); t.after(() => c.stop());
+  await c.provider.send('anvil_setBlockTimestampInterval',[0]);
   const [admin, a, b, next, alt, outsider] = c.signers;
-  const token = await c.deploy('IBIToken', [admin.address, 150, FROM, UNTIL, ZeroAddress]);
+  const token = await c.deploy(legacy ? 'LegacyPositionFixture' : 'IBIToken', [admin.address, 150, FROM, UNTIL, ZeroAddress]);
   await (await token.registerWallet(a.address,PERSON_A)).wait();
   await (await token.registerWallet(b.address,PERSON_B)).wait();
   await (await token.registerWallet(alt.address,PERSON_A)).wait();
@@ -26,6 +27,7 @@ async function setup(t: any) {
     const r=await token.recoveries(old.address);await warp(Number(r.executeAfter));
     await(await token.reissue(old.address,dest.address)).wait();
   };
+  await warp(FROM);
   return { ...c, token, admin, a, b, next, alt, outsider, buy, warp, stableMode, recover };
 }
 async function rejects(token:any,call:Promise<unknown>,name:string) {
@@ -73,18 +75,18 @@ test('feedback: compras em duas carteiras da mesma pessoa não excedem 20', asyn
   await rejects(token,token.primaryPurchase(alt.address,1,id('compra')),'PersonCapExceeded');
   assert.equal(await token.personBalance(PERSON_A),20n);
 });
-test('feedback: transfer e transferFrom aplicam teto pessoal agregado', async t => {
+test('feedback: transfer e transferFrom ficam bloqueados mesmo com allowance', async t => {
   const {token,a,b,alt,outsider,buy}=await setup(t);await buy(a,10);await buy(alt,10);await buy(b,2);
-  await rejects(token,token.connect(b).transfer(a.address,1),'PersonCapExceeded');
+  await rejects(token,token.connect(b).transfer(a.address,1),'SecondaryTransfersDisabled');
   await(await token.connect(b).approve(outsider.address,1)).wait();
-  await rejects(token,token.connect(outsider).transferFrom(b.address,alt.address,1),'PersonCapExceeded');
+  await rejects(token,token.connect(outsider).transferFrom(b.address,alt.address,1),'SecondaryTransfersDisabled');
   assert.equal(await token.allowance(b.address,outsider.address),1n);
 });
 test('transferência interna à mesma pessoa no teto não duplica agregado', async t => {
   const {token,a,alt,buy}=await setup(t);await buy(a,15);await buy(alt,5);
-  await(await token.connect(a).transfer(alt.address,5)).wait();
-  assert.equal(await token.personBalance(PERSON_A),20n);assert.equal(await token.balanceOf(alt.address),10n);
-  await(await token.connect(a).transfer(a.address,10)).wait();assert.equal(await token.personBalance(PERSON_A),20n);
+  await rejects(token,token.connect(a).transfer(alt.address,5),'SecondaryTransfersDisabled');
+  assert.equal(await token.personBalance(PERSON_A),20n);assert.equal(await token.balanceOf(alt.address),5n);
+  await rejects(token,token.connect(a).transfer(a.address,10),'SecondaryTransfersDisabled');assert.equal(await token.personBalance(PERSON_A),20n);
 });
 test('cadastro obrigatório, exclusivo e restrito à administração', async t => {
   const {token,a,next,admin}=await setup(t);
@@ -96,16 +98,16 @@ test('cadastro obrigatório, exclusivo e restrito à administração', async t =
 });
 test('porta de entrada e transferFrom da tesouraria não contornam compra', async t => {
   const {token,a,alt,admin,outsider,buy}=await setup(t);await buy(a,1);
-  await rejects(token,token.connect(a).transfer(alt.address,1),'RecipientNotHolder');
+  await rejects(token,token.connect(a).transfer(alt.address,1),'SecondaryTransfersDisabled');
   await rejects(token,token.transfer(alt.address,1),'PrimaryPurchaseRequired');
   await(await token.approve(outsider.address,1)).wait();
   await rejects(token,token.connect(outsider).transferFrom(admin.address,alt.address,1),'PrimaryPurchaseRequired');
 });
-test('devolução reduz agregado pessoal e conserva supply e registro de titulares', async t => {
+test('devolução informal à tesouraria é bloqueada sem alterar posição', async t => {
   const {token,a,admin,buy}=await setup(t);await buy(a,5);
-  await(await token.connect(a).transfer(admin.address,5)).wait();
-  assert.equal(await token.personBalance(PERSON_A),0n);assert.equal(await token.totalSupply(),150n);
-  assert.deepEqual([...(await token.holders())],[admin.address]);
+  await rejects(token,token.connect(a).transfer(admin.address,5),'SecondaryTransfersDisabled');
+  assert.equal(await token.personBalance(PERSON_A),5n);assert.equal(await token.totalSupply(),150n);
+  assert.deepEqual([...(await token.holders())],[admin.address,a.address]);
 });
 test('recuperação exige anúncio e prazo, migra saldo sem inflação e revoga origem', async t => {
   const {token,a,next,buy,warp}=await setup(t);await buy(a,20);
@@ -135,7 +137,7 @@ test('recuperação congela transferências e recebimento, cancelamento devolve 
   await rejects(token,token.connect(b).transfer(a.address,1),'RecoveryPending');
   await rejects(token,token.primaryPurchase(next.address,1,id('compra')),'RecoveryPending');
   await(await token.pause()).wait();await(await token.connect(a).cancelRecovery(a.address)).wait();
-  await(await token.unpause()).wait();await(await token.connect(a).transfer(b.address,1)).wait();
+  await(await token.unpause()).wait();await buy(b,1);
   assert.equal(await token.balanceOf(b.address),2n);assert.equal(await token.recoverySource(next.address),ZeroAddress);
 });
 test('troca de administrador invalida anúncio anterior e exige novo prazo', async t => {
@@ -149,12 +151,12 @@ test('troca de administrador invalida anúncio anterior e exige novo prazo', asy
   assert.ok((await token.recoveries(a.address)).executeAfter>r.executeAfter);
 });
 test('feedback: recupera royalties sem saldo e após expiração, preservando valores pagos', async t => {
-  const {token,a,b,next,buy,warp,recover,stableMode,admin}=await setup(t);await buy(a,5);await buy(b,1);
+  const {token,a,b,next,buy,warp,recover,stableMode,admin}=await setup(t,true);await buy(a,5);await buy(b,1);
   const stable=await stableMode();await(await stable.mint(admin.address,1_000_000)).wait();await(await stable.approve(await token.getAddress(),1_000_000)).wait();
   await warp(ENDS[0]);await(await token.reportRevenue(1_000_000,id('r1'))).wait();
   await(await token.connect(a).claimRoyalty(1)).wait();
   await warp(ENDS[1]);await(await token.reportRevenue(1_000_000,id('r2'))).wait();
-  await(await token.connect(a).transfer(b.address,5)).wait();await warp(UNTIL+1);
+  await(await token.simulateLegacyZeroPosition(a.address)).wait();await warp(UNTIL+1);
   await recover(a,next);
   assert.equal(await token.balanceOf(next.address),0n);assert.equal(await token.pendingRoyaltyOf(next.address),5000n);
   assert.equal(await token.royaltyPaid(1,a.address),5000n);assert.equal(await token.royaltyPaid(1,next.address),0n);
@@ -201,16 +203,16 @@ test('compra inválida não cobra stablecoin e preço ausente impede compra', as
   await rejects(token,token.connect(next).buyPrimary(1,id('sem-cadastro')),'WalletNotRegistered');
   assert.equal(await stable.balanceOf(a.address),10n);
 });
-test('royalty mantém fotografia, funding atômico, reserva e saque individual', async t => {
+test('royalty temporal mantém funding atômico, estoque e saque individual', async t => {
   const {token,a,b,admin,buy,warp,stableMode}=await setup(t);await buy(a,20);await buy(b,10);
   const stable=await stableMode();await warp(ENDS[0]);
   await assert.rejects(token.reportRevenue(1_000_000,id('sem-funding')));assert.equal(await token.lastReportedPeriod(),0n);
   await(await stable.mint(admin.address,1_000_000)).wait();await(await stable.approve(await token.getAddress(),1_000_000)).wait();
   await(await token.reportRevenue(1_000_000,id('r1'))).wait();assert.equal(await stable.balanceOf(await token.getAddress()),150000n);
   assert.equal(await token.royaltyDue(1,admin.address),120000n);
-  await(await token.connect(a).transfer(b.address,5)).wait();assert.equal(await token.royaltyDue(1,a.address),20000n);
+  const payment=5n*await token.primaryUnitPrice();await(await stable.mint(b.address,payment)).wait();await(await stable.connect(b).approve(await token.getAddress(),payment)).wait();await(await token.connect(b).buyPrimary(5,id('nova-compra'))).wait();assert.equal(await token.royaltyDue(1,a.address),20000n);
   await warp(ENDS[1]);await(await token.reportRevenue(1_000_000,id('r2'))).wait();
-  assert.equal(await token.royaltyDue(2,a.address),15000n);assert.equal(await token.royaltyDue(2,b.address),15000n);
+  assert.equal(await token.royaltyDue(2,a.address),20000n);assert.equal(await token.royaltyDue(2,b.address),15000n);
   await(await token.connect(a).claimRoyalty(1)).wait();assert.equal(await stable.balanceOf(a.address),20000n);
 });
 test('recuperação pendente bloqueia saque e liquidação para carteira perdida', async t => {
@@ -225,7 +227,7 @@ test('pausa, expiração e autorizações permanecem eficazes', async t => {
   await rejects(token,token.connect(a).pause(),'OwnableUnauthorizedAccount');
   await rejects(token,token.renounceOwnership(),'RenounceDisabled');
   await rejects(token,token.primaryPurchase(a.address,0,id('zero')),'ZeroUnits');
-  await rejects(token,token.connect(a).transfer(b.address,6),'ERC20InsufficientBalance');
+  await rejects(token,token.connect(a).transfer(b.address,6),'SecondaryTransfersDisabled');
   await(await token.pause()).wait();await rejects(token,token.connect(a).transfer(b.address,1),'EnforcedPause');
   await(await token.unpause()).wait();await warp(UNTIL+1);
   await rejects(token,token.connect(a).transfer(b.address,1),'TokenExpired');

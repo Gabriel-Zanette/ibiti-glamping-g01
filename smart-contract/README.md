@@ -1,6 +1,13 @@
 # IBIToken — segunda entrega de implementação
 
-Revisão de 22/09/2026, **versão técnica 3**. A Parte 1 acadêmica continha o contrato técnico v2 publicado em 11/09. Esta Parte 2 corrige o feedback: teto de 20 por pessoa, tesouraria independente, calendário semestral, recuperação anunciada por 48 horas e compra atômica em stablecoin.
+Revisão de 25/09/2026, **versão técnica 4** para a Parte 2 acadêmica. Royalties por saldo × tempo, oito semestres desde a abertura, compra somente após abertura, transferências ordinárias bloqueadas, teto pessoal, tesouraria independente, recuperação com sete dias e compra atômica. Governança conjunta e pausa seletiva continuam pendentes.
+
+- [Guia atual, demo e credenciais locais](docs/guia-v4.md).
+- [Validação da v4](docs/validacao-v4.md).
+- [Inventário integral on-chain/off-chain e pendências](../docs/decisoes/2026-09-25-inventario-completo-token.md).
+- [Feedback pontual do memorando v2, sem alterar o PDF](../docs/decisoes/2026-09-25-feedback-memorando-v2.md).
+
+Registros históricos da evolução:
 
 - [Evolução, justificativas e matriz dos critérios](docs/evolucao-v1-v2.md).
 - [Guia do Remix e execução local](docs/guia-de-execucao.md).
@@ -20,9 +27,9 @@ npm test --prefix smart-contract
 npm test --prefix offchain
 npm run typecheck --prefix smart-contract
 npm run typecheck --prefix offchain
-npm run demo --prefix offchain
+npm run demo:portal --prefix offchain
 ```
 
-Remix é o ambiente de entrega. A alternativa local usa solc 0.8.34, Osaka, otimizador 200, Anvil 1.7.1 e ethers, sem Hardhat. Extraia `../entrega/IBITI-Remix.zip` para importar no Remix. O pacote completo da Parte 2 inclui também o serviço e os testes de integração.
+Remix é o ambiente de entrega. A alternativa local usa solc 0.8.34, Osaka, viaIR, otimizador 200, Anvil 1.7.1 e ethers, sem Hardhat. Os pacotes ZIP anteriores são históricos e não foram regenerados nesta rodada. Para esta fonte use os diretórios atuais; não atribua suas funcionalidades aos pacotes antigos.
 
-**Estado público:** v3 ainda não publicada. A v2 histórica na Sepolia (`0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811) não contém as novas salvaguardas. Editar este repositório não altera contratos publicados. [Evidências históricas](docs/deploy-modelo-pessoa.md).
+**Estado público:** v4 ainda não publicada em rede pública. A v2 histórica na Sepolia (`0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811) não contém as novas salvaguardas. Editar este repositório não altera contratos publicados. [Evidências históricas](docs/deploy-modelo-pessoa.md).

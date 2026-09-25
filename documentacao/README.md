@@ -1,4 +1,8 @@
+> **Estado consolidado em 25/09/2026:** [inventário integral](../docs/decisoes/2026-09-25-inventario-completo-token.md) e [feedback do memorando v2 recebido](../docs/decisoes/2026-09-25-feedback-memorando-v2.md). Implementados na fonte v4: royalties por tempo, abertura relativa, bloqueio de transferências ordinárias e recuperação com sete dias. Jornada/waitlist e cancelamento manual funcionam localmente. Governança conjunta, pausa seletiva e integrações externas ainda pendentes. Os registros datados abaixo preservam propostas/estados anteriores e não substituem esta consolidação.
+
 # Documentação do projeto — IBIToken (tokenização do IBITI Glamping)
+
+> **Rodada atual, 25/09/2026:** [planejamento da jornada unificada e waitlist](../docs/decisoes/2026-09-25-jornada-unificada-waitlist.md), com diagnóstico do código, painel administrativo, prazo recomendado, alternativas de cancelamento e comparação de custódia. Q1 e os aceites anteriores foram reafirmados. O memorando v2 será recebido ao final das modificações. [Consolidação das 12 anotações de 23/09](../docs/decisoes/2026-09-23-consolidacao-das-anotacoes.md).
 
 > **Decisões em revisão, 22/09/2026:** [entrevista de governança e operação](../docs/decisoes/2026-09-22-governanca-e-operacao.md), [glossário de domínio](../CONTEXT.md) e [ADRs](../docs/adr/). Início na abertura e entrada secundária foram confirmados; o código ainda requer adaptação.
 

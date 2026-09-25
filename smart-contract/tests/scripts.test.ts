@@ -20,7 +20,10 @@ for (const layout of ['root', 'legacy']) test('Scripts Remix publicam e operam c
     for(const [from,to]of Object.entries(changes))source=source.replace(from,to);
     return new vm.Script(source,{filename:name}).runInNewContext(context,{timeout:5000});
   };
+  await chain.provider.send('anvil_setBlockTimestampInterval',[0]);
   const record=await run('01_publicar.js');assert.equal(record.supply,'150');
+  await chain.provider.send('evm_setNextBlockTimestamp',[1798761600]);await chain.provider.send('evm_mine',[]);
+  await run('02_operar.js', {"acao: 'status'":"acao: 'abertura'","aberturaUtc: ''":"aberturaUtc: '2027-01-01T00:00:00Z'"});
   const result=await run('02_operar.js');assert.equal(result.supply,'150');
   await run('02_operar.js',{"acao: 'status'":"acao: 'registrar'","destino: ''":`destino: '${chain.signers[1].address}'`,"identificadorPessoa: ''":`identificadorPessoa: '${ethers.id('pessoa')}'`});
   const stable=new ethers.Contract(record.stablecoin,artifact('MockStablecoin').abi,chain.signers[0]);

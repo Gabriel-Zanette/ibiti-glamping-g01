@@ -2,3 +2,7 @@
 node_modules/
 /tmp/
 .build/
+
+# Estado local de execução e verificação
+/.superpowers/
+/data/

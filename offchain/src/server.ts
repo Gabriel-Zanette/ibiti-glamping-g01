@@ -1,22 +1,37 @@
-import { mkdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { FetchRequest, JsonRpcProvider } from 'ethers';
-import { Ledger, ensure } from './ledger.ts';
-import { Auth } from './auth.ts';
-import { ChainSync } from './chain.ts';
-import { createApp } from './api.ts';
-const env=(key:string)=>{const v=process.env[key];ensure(v,`MISSING_${key}`);return v;};
-const port=Number(process.env.PORT ?? 3000);
-const origin=process.env.APP_ORIGIN ?? `http://localhost:${port}`;
-const chainId=Number(process.env.CHAIN_ID ?? 11155111);
-const tokenAddress=env('TOKEN_ADDRESS');
-const rpc=new FetchRequest(env('RPC_URL'));rpc.timeout=10_000;
-const provider=new JsonRpcProvider(rpc,undefined,{cacheTimeout:-1});
-const file=resolve(process.env.DATABASE_PATH ?? 'data/ibiti.sqlite');mkdirSync(dirname(file),{recursive:true,mode:0o700});
-const ledger=new Ledger(file,env('IDENTITY_SECRET'),`${chainId}:${tokenAddress.toLowerCase()}`);
-const chain=new ChainSync(ledger,provider,tokenAddress,Number(env('START_BLOCK')),chainId);
-const auth=new Auth(ledger,origin,chainId);
-const server=createApp({ledger,chain,auth,origin,chainId,tokenAddress,adminToken:env('ADMIN_API_TOKEN')});
-server.listen(port,'127.0.0.1',()=>console.log(`Passaporte IBITI: ${origin} (demonstração acadêmica; rede ${chainId})`));
-const stop=()=>server.close(()=>{ledger.close();provider.destroy();process.exit(0);});
-process.once('SIGINT',stop);process.once('SIGTERM',stop);
+import { randomBytes } from "node:crypto";
+import { Auth } from "./auth.ts";
+import { Purchases } from "./purchase.ts";
+import { createApp } from "./api.ts";
+import { runtime } from "./runtime.ts";
+const r = runtime();
+const unavailable = async () => {
+  throw Error("CHAIN_NOT_CONFIGURED");
+};
+const server = createApp({
+  ledger: r.ledger,
+  portal: r.portal,
+  chain: r.chain ?? {
+    sync: unavailable,
+    assertCurrent: unavailable,
+    royalties: unavailable,
+  },
+  purchases: r.chain ? new Purchases(r.chain) : undefined,
+  auth: new Auth(r.ledger, r.origin, r.chainId),
+  origin: r.origin,
+  chainId: r.chainId,
+  tokenAddress: r.tokenAddress,
+  adminToken: randomBytes(32).toString("hex"),
+  legacyApi: false,
+});
+server.listen(r.port, "127.0.0.1", () =>
+  console.log(
+    `Passaporte IBITI: ${r.origin} (ambiente acadêmico; ${r.chain ? "rede " + r.chainId : "waitlist independente de blockchain"})`,
+  ),
+);
+const stop = () =>
+  server.close(() => {
+    r.close();
+    process.exit(0);
+  });
+process.once("SIGINT", stop);
+process.once("SIGTERM", stop);

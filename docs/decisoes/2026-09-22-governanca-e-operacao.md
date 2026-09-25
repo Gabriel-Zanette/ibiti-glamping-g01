@@ -1,5 +1,11 @@
 # Governança e operação — entrevista de decisões
 
+> **Prevalece a consolidação após as 12 anotações:** [decisões atuais de 23/09](2026-09-23-consolidacao-das-anotacoes.md). Royalties por quantidade e tempo de posse; mercado secundário integralmente retirado; identificação híbrida e fluxo de recuperação aceitos. Os avisos e propostas abaixo preservam etapas anteriores da entrevista.
+
+> **Estado mais recente, 23/09/2026:** [respostas Q3–Q13](2026-09-23-respostas-q3-q13.md). Pré-venda removida; revisão conjunta, pausa por atividade, recuperação com sete dias e escopo externo aceitos. Reserva pode ser liberada para venda; hospedagem compromete cotas off-chain. Núcleo da tesouraria 2 de 3 aceito, com anotações complementares pendentes. Q10 e Q13 abertos; Q11 indicado como retirado, alcance a conciliar com as anotações. As recomendações originais abaixo são histórico e não prevalecem sobre essas respostas.
+
+> **Continuação em 23/09/2026:** [respostas disponíveis e Q1/Q2](2026-09-23-anotacoes-e-q1-q2.md). O memorando v1 foi localizado e consultado diretamente na Sprint 3 do GitLab. A rodada atual foi limitada pelo usuário a Q1/Q2. Uma imagem posterior confirma 12 anotações no aplicativo, distintas das respostas numeradas já lidas; seu conteúdo ainda não foi recuperado. A imagem pede reformular Q1 e condiciona o aceite da recomendação de Q2 à verificação durante o período.
+
 22/09/2026. Sessão solicitada com `grill-with-docs`, `grilling` e `domain-modeling`. Documento de trabalho: propostas não são aprovação institucional, contratação ou implementação. Código e pacotes não foram alterados nesta rodada.
 
 ## Confirmado e observado
@@ -7,7 +13,7 @@
 - **Confirmado:** quatro anos desde a abertura, períodos de seis meses. [ADR 0001](../adr/0001-vigencia-a-partir-da-abertura.md).
 - **Confirmado:** compra secundária por participante previamente aprovado, inclusive primeira aquisição. [ADR 0002](../adr/0002-entrada-pelo-mercado-secundario.md).
 - **Direção aceita:** distribuir poderes por função; atendimento/contestação externos. Matriz de poderes, aprovação conjunta e integração da contestação ainda abertas.
-- **Fonte pendente:** memorando v1 prometido pelo usuário. Recebidos os enunciados dos artefatos, não seu conteúdo.
+- **Fonte consultada em 23/09:** [memorando v1 da Sprint 3](../referencias/memorando-v1-sprint3/README.md). Páginas 11–12 fixam corte no reporte na v1; mudar para encerramento é uma proposta de evolução, ainda não aprovada. O memorando v2 consolidado permanece pendente.
 - **Código observado:** calendário civil, owner único, pausa ampla, reserva reduzível, recuperação em 48h, tesouraria imutável, preço fixado uma vez e stablecoin não substituível. Testes anteriores validam esse estado, não as propostas abaixo.
 
 ## Entregas e limites do escopo

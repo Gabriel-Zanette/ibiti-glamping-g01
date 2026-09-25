@@ -5,7 +5,7 @@ import { resolve, relative } from 'node:path';
 const require = createRequire(import.meta.url);
 const solc = require('solc');
 export const root = fileURLToPath(new URL('../', import.meta.url));
-export const settings = { optimizer: { enabled: true, runs: 200 }, evmVersion: 'osaka', outputSelection: { '*': { '*': ['abi','evm.bytecode.object','evm.deployedBytecode.object'] } } };
+export const settings = { viaIR: true, optimizer: { enabled: true, runs: 200 }, evmVersion: 'osaka', outputSelection: { '*': { '*': ['abi','evm.bytecode.object','evm.deployedBytecode.object'] } } };
 let cached: any;
 export function compile() {
   if (cached) return cached;
@@ -35,5 +35,5 @@ export function compile() {
 }
 export function artifact(name:string) { compile(); return JSON.parse(readFileSync(resolve(root,'build',name+'.json'),'utf8')); }
 if (process.argv[1] && relative(root,resolve(process.argv[1]))==='tools/compile.ts') {
-  compile();console.log(`Solidity ${solc.version()}: compilação concluída (Osaka, otimizador 200).`);
+  compile();console.log(`Solidity ${solc.version()}: compilação concluída (Osaka, viaIR, otimizador 200).`);
 }

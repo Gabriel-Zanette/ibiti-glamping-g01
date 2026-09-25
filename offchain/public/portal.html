@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#374338" />
+    <title>Passaporte · IBITI</title>
+    <link rel="stylesheet" href="/portal.css" />
+    <script src="/portal.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header>
+      <a class="brand" href="/">IBITI <small>PASSAPORTE</small></a
+      ><span id="identity">Um lugar para pertencer.</span
+      ><button id="logout" class="subtle" hidden>Sair</button>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <p class="eyebrow">IBITI GLAMPING · IBITOKEN</p>
+        <h1>Seu próximo capítulo,<br /><em>mais perto da natureza.</em></h1>
+        <p>
+          Da primeira conversa à sua experiência: uma conta para acompanhar cada
+          etapa.
+        </p>
+      </div>
+      <div class="notice">
+        Ambiente acadêmico local. Use dados de teste. Não há oferta comercial
+        ativa nem verificação de identidade por fornecedor externo.
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="access">
+        <div class="tabs" role="group" aria-label="Acesso">
+          <button id="show-signup" class="selected">
+            Entrar na lista de interesse</button
+          ><button id="show-login" class="subtle">Já tenho uma conta</button>
+        </div>
+        <section id="signup-panel">
+          <span class="eyebrow">PRIMEIRO, VAMOS NOS CONHECER</span>
+          <h2>Seu interesse começa aqui.</h2>
+          <p>
+            Resposta em até cinco dias úteis após o cadastro completo. A
+            inscrição não reserva tokens nem gera cobrança.
+          </p>
+          <form id="signup">
+            <div class="grid">
+              <label
+                >Nome completo<input
+                  name="name"
+                  required
+                  maxlength="150"
+                  autocomplete="name" /></label
+              ><label
+                >E-mail<input
+                  name="email"
+                  required
+                  type="email"
+                  maxlength="254"
+                  autocomplete="email" /></label
+              ><label
+                >CPF<input
+                  name="cpf"
+                  required
+                  maxlength="14"
+                  inputmode="numeric"
+                  autocomplete="off" /></label
+              ><label
+                >Telefone de contato<input
+                  name="phone"
+                  required
+                  maxlength="40"
+                  type="tel"
+                  autocomplete="tel" /></label
+              ><label
+                >Senha da sua conta<input
+                  name="password"
+                  required
+                  type="password"
+                  minlength="15"
+                  maxlength="256"
+                  autocomplete="new-password"
+                /><small
+                  >Use pelo menos 15 caracteres, como uma frase. Nunca informe a
+                  chave ou frase da carteira.</small
+                ></label
+              >
+            </div>
+            <h3>Simule seu interesse.</h3>
+            <p>
+              Você poderá mudar a quantidade após a aprovação, antes de preparar
+              o pedido. Esta simulação não reserva tokens nem gera cobrança.
+            </p>
+            <div data-public-simulation></div>
+            <p class="muted">
+              Referência do memorando: R$ 34.874,14 por IBT. Esta demonstração
+              não cobra dinheiro real.
+            </p>
+            <fieldset>
+              <legend>Quem vai cuidar dos seus tokens?</legend>
+              <p>
+                Os tokens ficam em uma carteira digital. Escolha quem vai
+                guardar o acesso e autorizar as operações. Em todos os formatos
+                você usa esta conta para acompanhar a compra e pedir hospedagem,
+                sem conectar a carteira a cada acesso.
+              </p>
+              <div id="custody-options" class="custody"></div>
+            </fieldset>
+            <label class="check"
+              ><input name="consent" type="checkbox" required /><span
+                >Li que o programa não oferece revenda, cada IBT concede uma
+                experiência durante a vigência e royalties dependem do
+                faturamento. Entendo que este é um ambiente acadêmico.</span
+              ></label
+            ><button type="submit">
+              Enviar candidatura <span aria-hidden="true">→</span>
+            </button>
+          </form>
+        </section>
+        <section id="login-panel" hidden>
+          <span class="eyebrow">BEM-VINDO DE VOLTA</span>
+          <h2>Entre no seu Passaporte.</h2>
+          <p>
+            O mesmo acesso antes e depois da compra. Sem conectar carteira para
+            entrar ou pedir hospedagem.
+          </p>
+          <form id="login">
+            <label
+              >E-mail<input
+                type="email"
+                name="email"
+                required
+                autocomplete="username" /></label
+            ><label
+              >Senha<input
+                type="password"
+                name="password"
+                required
+                autocomplete="current-password" /></label
+            ><button type="submit">Entrar</button>
+          </form>
+          <small
+            >Perdeu o acesso? A recuperação da conta é tratada pelo atendimento
+            com nova verificação de identidade. Ela não movimenta sua
+            carteira.</small
+          >
+        </section>
+      </div>
+      <div id="member" hidden></div>
+      <div id="admin" hidden></div>
+      <dialog id="case-dialog" aria-labelledby="case-title">
+        <div class="dialog-head">
+          <h2 id="case-title">Ficha</h2>
+          <button type="button" id="close-dialog" class="subtle" autofocus>
+            Fechar
+          </button>
+        </div>
+        <div id="dialog-message" role="status" aria-live="polite"></div>
+        <div id="detail"></div>
+      </dialog>
+    </main>
+    <footer>
+      IBITI · Ibitipoca, Minas Gerais<br />Projeto acadêmico · Inteli / G01 ·
+      Dados pessoais permanecem fora da blockchain.
+    </footer>
+  </body>
+</html>
