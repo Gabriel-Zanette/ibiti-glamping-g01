@@ -1,0 +1,1 @@
+evidence_id,objective,network,chain_id,token_address,actor_role,function_name,arguments_and_units,execution_kind,transaction_hash,explorer_url,block_number,block_hash,timestamp_utc,receipt_status,gas_used,effective_gas_price_wei,cost_test_eth,before_state_file,after_state_file,receipt_file,figure_file,expected_result,observed_result,interpretation,limitations

@@ -1,0 +1,53 @@
+import { localChain } from '../../smart-contract/tools/local-chain.ts';
+import { createServer } from 'node:net';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { randomBytes } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { once } from 'node:events';
+import { id } from 'ethers';
+import { Ledger } from '../src/ledger.ts';
+import { Auth } from '../src/auth.ts';
+import { ChainSync } from '../src/chain.ts';
+import { createApp } from '../src/api.ts';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const rpcPort=Number(process.env.DEMO_RPC_PORT??8545), port=Number(process.env.PORT??3000);
+async function portAvailable(port:number){const s=createServer();s.listen(port,'127.0.0.1');await once(s,'listening');s.close();await once(s,'close');}
+await portAvailable(rpcPort);await portAvailable(port);
+const evm=await localChain(rpcPort);
+const provider=evm.provider;
+const shutdown=()=>{void evm.stop();};
+process.once('SIGINT',()=>{void evm.stop().then(()=>process.exit(0));});
+process.once('SIGTERM',()=>{void evm.stop().then(()=>process.exit(0));});
+try {
+  const admin=await provider.getSigner(0),alice=await provider.getSigner(1),bob=await provider.getSigner(2);
+  const stable:any=await evm.deploy('MockStablecoin',['Teste','tBRL',6]);
+  const now=(await provider.getBlock('latest'))!.timestamp;
+  const token:any=await evm.deploy('IBIToken',[await admin.getAddress(),150,1735689600,1861919999,await stable.getAddress()]);
+  const receipt=await token.deploymentTransaction().wait();
+  const identitySecret=randomBytes(32).toString('hex'), adminToken=randomBytes(32).toString('hex');
+  const dir=root+'data/demo-'+Date.now();mkdirSync(dir,{recursive:true,mode:0o700});
+  const database=dir+'/ibiti.sqlite';const tokenAddress=await token.getAddress();
+  const ledger=new Ledger(database,identitySecret,`31337:${tokenAddress.toLowerCase()}`);
+  const p=ledger.registerPerson('52998224725');ledger.setVerified(p.id,true);ledger.linkWallet(p.id,await alice.getAddress());
+  const q=ledger.registerPerson('11144477735');ledger.setVerified(q.id,true);ledger.linkWallet(q.id,await bob.getAddress());
+  await(await token.setPrimaryPrice(37_055_190000n)).wait();
+  for(const [wallet,person,units] of [[alice,p,5],[bob,q,1]] as const) {
+    await(await token.registerWallet(await wallet.getAddress(),ledger.personChainId(person.id))).wait();
+    await(await stable.mint(await wallet.getAddress(),BigInt(units)*37_055_190000n)).wait();
+    await(await stable.connect(wallet).approve(tokenAddress,BigInt(units)*37_055_190000n)).wait();
+    await(await token.connect(wallet).buyPrimary(units,id('compra-demo'))).wait();
+  }
+  const chain=new ChainSync(ledger,provider,tokenAddress,receipt.blockNumber,31337);await chain.sync();
+  const arrival=new Date((now+86400*10)*1000).toISOString().slice(0,10),departure=new Date((now+86400*12)*1000).toISOString().slice(0,10);
+  const used=ledger.requestStay(p.id,{units:2,arrival,departure},'demo-used');ledger.transition(p.id,used.id,'confirmed');ledger.transition(p.id,used.id,'completed');
+  const cancelled=ledger.requestStay(p.id,{units:1,arrival,departure},'demo-cancelled');ledger.transition(p.id,cancelled.id,'cancelled');
+  await (await stable.mint(await admin.getAddress(),1_000_000)).wait();await (await stable.approve(tokenAddress,1_000_000)).wait();
+  await (await token.reportRevenue(1_000_000,id('relatorio-demo'))).wait();await(await token.connect(alice).claimRoyalty(1)).wait();
+  await chain.sync();
+  const origin=`http://localhost:${port}`;
+  writeFileSync(root+'.env.demo',`RPC_URL=http://127.0.0.1:${rpcPort}\nCHAIN_ID=31337\nTOKEN_ADDRESS=${tokenAddress}\nSTART_BLOCK=${receipt.blockNumber}\nDATABASE_PATH=${database}\nPORT=${port}\nAPP_ORIGIN=${origin}\nADMIN_API_TOKEN=${adminToken}\nIDENTITY_SECRET=${identitySecret}\nDEMO_PERSON_ID=${p.id}\n`,{mode:0o600});
+  const server=createApp({ledger,chain,auth:new Auth(ledger,origin,31337),adminToken,origin,chainId:31337,tokenAddress});
+  server.listen(port,'127.0.0.1');await once(server,'listening');
+  console.log(JSON.stringify({url:origin,network:'EVM local — não é Sepolia; janela demonstrativa 2025–2028',token:tokenAddress,personId:p.id,quota:ledger.quota(p.id),royaltyPaid:String(await stable.balanceOf(await alice.getAddress())),configuration:root+'.env.demo'},null,2));
+  console.log('Demonstração ativa. Ctrl+C encerra o servidor e a EVM local; o banco fica preservado em data/.');
+} catch(error) {shutdown();throw error;}

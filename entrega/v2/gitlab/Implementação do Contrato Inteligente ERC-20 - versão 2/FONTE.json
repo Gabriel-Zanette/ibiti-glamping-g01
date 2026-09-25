@@ -1,0 +1,8 @@
+{
+  "officialRelease": "v2",
+  "status": "em-preparacao",
+  "internalRevision": 4,
+  "sourceBaseCommit": "1cf4f8c22746120352cd0435e210d546058d929b",
+  "includesWorkingTree": true,
+  "note": "O commit-base não inclui necessariamente as mudanças locais. MANIFEST.sha256 identifica os bytes empacotados; não há afirmação de novo deploy público."
+}

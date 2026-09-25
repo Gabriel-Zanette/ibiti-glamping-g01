@@ -19,3 +19,11 @@ A lista distingue decisões aceitas ainda não implementadas, definições abert
 ## Último refinamento do portal
 
 Referência econômica adotada: R$ 34.874,14/IBT do memorando v2. Não repetir que a demo atual usa 100 tBRL. Financeiro acessa somente Compras; titular entra em Experiências, sem simulador. Custódia IBITI sem extensão é exclusiva do adaptador Anvil local. Ver `docs/decisoes/2026-09-25-portal-por-etapa-e-responsavel.md`. A versão oficial futura permanece v2, independentemente das revisões internas de teste.
+
+Revisão visual subsequente: `docs/decisoes/2026-09-25-interface-progressiva.md`. Cadastro agora tem três etapas; detalhes e formulários aparecem sob demanda. O guia para o responsável pelo artefato on-chain e o roteiro mínimo em inglês estão em `docs/entrega/`; não confundir esses materiais com evidências já coletadas de um novo deploy.
+
+## Próxima retomada solicitada por Gabriel — 25/09/2026
+
+Além das pendências antigas, Gabriel quer **remodelar os pilares da administração** e **aprimorar a parte de custódia**. Retomar esses dois assuntos em breve, antes de considerar o desenho administrativo atual definitivo. O pedido desta rodada é registrar a intenção, não implementar uma reorganização sem detalhá-la. Preservar as três modalidades aceitas; o alcance das melhorias e a nova divisão dos pilares serão definidos na retomada.
+
+Preparação de entrega atual: `entrega/v2/README.md`, com espelho local do GitLab e pacotes atualizados. Não usar os ZIPs históricos fora dessa pasta como fonte da nova v2. Regenerar a preparação após mudanças nos módulos canônicos.

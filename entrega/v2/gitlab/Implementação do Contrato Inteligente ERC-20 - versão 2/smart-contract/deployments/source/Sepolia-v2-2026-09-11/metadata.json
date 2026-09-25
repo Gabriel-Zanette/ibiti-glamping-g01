@@ -1,0 +1,1941 @@
+{
+  "compiler": {
+    "version": "0.8.34+commit.80d5c536"
+  },
+  "language": "Solidity",
+  "output": {
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "admin",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "emissionCap_",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "validFrom_",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "validUntil_",
+            "type": "uint64"
+          },
+          {
+            "internalType": "address",
+            "name": "stablecoin_",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "totalPeriods",
+            "type": "uint8"
+          }
+        ],
+        "name": "AllPeriodsReported",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "allowance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "needed",
+            "type": "uint256"
+          }
+        ],
+        "name": "ERC20InsufficientAllowance",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "balance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "needed",
+            "type": "uint256"
+          }
+        ],
+        "name": "ERC20InsufficientBalance",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "approver",
+            "type": "address"
+          }
+        ],
+        "name": "ERC20InvalidApprover",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          }
+        ],
+        "name": "ERC20InvalidReceiver",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          }
+        ],
+        "name": "ERC20InvalidSender",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          }
+        ],
+        "name": "ERC20InvalidSpender",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "EnforcedPause",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ExpectedPause",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidAddress",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "cap",
+            "type": "uint256"
+          }
+        ],
+        "name": "InvalidEmissionCap",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "requested",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current",
+            "type": "uint256"
+          }
+        ],
+        "name": "InvalidReserve",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint64",
+            "name": "validFrom",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "validUntil",
+            "type": "uint64"
+          }
+        ],
+        "name": "InvalidValidity",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          }
+        ],
+        "name": "NothingToClaim",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+          }
+        ],
+        "name": "NothingToReissue",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableInvalidOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableUnauthorizedAccount",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          }
+        ],
+        "name": "PeriodNotOnChain",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          }
+        ],
+        "name": "PeriodNotReported",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          }
+        ],
+        "name": "PeriodOnChain",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          }
+        ],
+        "name": "RecipientNotHolder",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "RenounceDisabled",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "adminBalanceAfter",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reservedUnits",
+            "type": "uint256"
+          }
+        ],
+        "name": "ReserveProtected",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "SafeERC20FailedOperation",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "current",
+            "type": "address"
+          }
+        ],
+        "name": "StablecoinAlreadySet",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint64",
+            "name": "validUntil",
+            "type": "uint64"
+          }
+        ],
+        "name": "TokenExpired",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "resultingBalance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxPerWallet",
+            "type": "uint256"
+          }
+        ],
+        "name": "WalletCapExceeded",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "wallet",
+            "type": "address"
+          }
+        ],
+        "name": "WalletRevoked",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroUnits",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "Approval",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "admin",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "emissionCap",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "reservedUnits",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "maxPerWallet",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint64",
+            "name": "validFrom",
+            "type": "uint64"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint64",
+            "name": "validUntil",
+            "type": "uint64"
+          }
+        ],
+        "name": "Emission",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferStarted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "Paused",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "units",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "saleRef",
+            "type": "bytes32"
+          }
+        ],
+        "name": "PrimaryPurchase",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "oldWallet",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newWallet",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "units",
+            "type": "uint256"
+          }
+        ],
+        "name": "Reissued",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "previousReserve",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newReserve",
+            "type": "uint256"
+          }
+        ],
+        "name": "ReserveReduced",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "grossRevenue",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "royaltyAmount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "reportHash",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "snapshotSupply",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "holderCount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "onChain",
+            "type": "bool"
+          }
+        ],
+        "name": "RevenueReported",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "RoyaltyClaimed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "RoyaltyRegistered",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "paymentRef",
+            "type": "bytes32"
+          }
+        ],
+        "name": "RoyaltySettledOffChain",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "stablecoin",
+            "type": "address"
+          }
+        ],
+        "name": "StablecoinSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "from",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "Transfer",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "Unpaused",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "BPS_DENOMINATOR",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "ROYALTY_BPS",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "TOTAL_PERIODS",
+        "outputs": [
+          {
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "acceptOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "accessInfo",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "balance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "member",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "expired",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          }
+        ],
+        "name": "allowance",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "approve",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          }
+        ],
+        "name": "claimRoyalty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+          {
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "emissionCap",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "holderCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "holders",
+        "outputs": [
+          {
+            "internalType": "address[]",
+            "name": "",
+            "type": "address[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "isExpired",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "isMember",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "lastReportedPeriod",
+        "outputs": [
+          {
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "maxPerWallet",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "pause",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "paused",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "pendingOwner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "pendingRoyaltyOf",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          }
+        ],
+        "name": "periodInfo",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "grossRevenue",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "royaltyAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalDue",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "snapshotSupply",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "holderCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "reportHash",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "uint64",
+                "name": "reportedAt",
+                "type": "uint64"
+              },
+              {
+                "internalType": "bool",
+                "name": "onChain",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct IBIToken.Period",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "units",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "saleRef",
+            "type": "bytes32"
+          }
+        ],
+        "name": "primaryPurchase",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "newReserve",
+            "type": "uint256"
+          }
+        ],
+        "name": "reduceReserve",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "oldWallet",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "newWallet",
+            "type": "address"
+          }
+        ],
+        "name": "reissue",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "grossRevenue",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "reportHash",
+            "type": "bytes32"
+          }
+        ],
+        "name": "reportRevenue",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "reservedUnits",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "revoked",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "royaltyDue",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "royaltyPaid",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "saleableUnits",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "stablecoin_",
+            "type": "address"
+          }
+        ],
+        "name": "setStablecoin",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint8",
+            "name": "period",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "paymentRef",
+            "type": "bytes32"
+          }
+        ],
+        "name": "settleOffChain",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "stablecoin",
+        "outputs": [
+          {
+            "internalType": "contract IERC20",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "from",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferFrom",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "unpause",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "validFrom",
+        "outputs": [
+          {
+            "internalType": "uint64",
+            "name": "",
+            "type": "uint64"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "validUntil",
+        "outputs": [
+          {
+            "internalType": "uint64",
+            "name": "",
+            "type": "uint64"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ],
+    "devdoc": {
+      "author": "Grupo G01 · Inteli",
+      "details": "Versão 2: hospedagens, identidade e cotas são controladas em offchain/ por pessoa. Não há marcação de resgate, IDs por unidade nem queima por hospedagem neste contrato. O token usa componentes OpenZeppelin 5.6.1. Administração em dois passos, pausa, reserva, teto por carteira e recuperação de acesso são mecanismos efetivamente usados. Verificação civil, teto agregado por pessoa e calendário de apuração exigem operação externa. Esta fonte não é o bytecode v1 publicado em 11/09/2026; requer nova publicação pelo Remix.",
+      "errors": {
+        "ERC20InsufficientAllowance(address,uint256,uint256)": [
+          {
+            "details": "Indicates a failure with the `spender`’s `allowance`. Used in transfers.",
+            "params": {
+              "allowance": "Amount of tokens a `spender` is allowed to operate with.",
+              "needed": "Minimum amount required to perform a transfer.",
+              "spender": "Address that may be allowed to operate on tokens without being their owner."
+            }
+          }
+        ],
+        "ERC20InsufficientBalance(address,uint256,uint256)": [
+          {
+            "details": "Indicates an error related to the current `balance` of a `sender`. Used in transfers.",
+            "params": {
+              "balance": "Current balance for the interacting account.",
+              "needed": "Minimum amount required to perform a transfer.",
+              "sender": "Address whose tokens are being transferred."
+            }
+          }
+        ],
+        "ERC20InvalidApprover(address)": [
+          {
+            "details": "Indicates a failure with the `approver` of a token to be approved. Used in approvals.",
+            "params": {
+              "approver": "Address initiating an approval operation."
+            }
+          }
+        ],
+        "ERC20InvalidReceiver(address)": [
+          {
+            "details": "Indicates a failure with the token `receiver`. Used in transfers.",
+            "params": {
+              "receiver": "Address to which tokens are being transferred."
+            }
+          }
+        ],
+        "ERC20InvalidSender(address)": [
+          {
+            "details": "Indicates a failure with the token `sender`. Used in transfers.",
+            "params": {
+              "sender": "Address whose tokens are being transferred."
+            }
+          }
+        ],
+        "ERC20InvalidSpender(address)": [
+          {
+            "details": "Indicates a failure with the `spender` to be approved. Used in approvals.",
+            "params": {
+              "spender": "Address that may be allowed to operate on tokens without being their owner."
+            }
+          }
+        ],
+        "EnforcedPause()": [
+          {
+            "details": "The operation failed because the contract is paused."
+          }
+        ],
+        "ExpectedPause()": [
+          {
+            "details": "The operation failed because the contract is not paused."
+          }
+        ],
+        "OwnableInvalidOwner(address)": [
+          {
+            "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+          }
+        ],
+        "OwnableUnauthorizedAccount(address)": [
+          {
+            "details": "The caller account is not authorized to perform an operation."
+          }
+        ],
+        "ReentrancyGuardReentrantCall()": [
+          {
+            "details": "Unauthorized reentrant call."
+          }
+        ],
+        "SafeERC20FailedOperation(address)": [
+          {
+            "details": "An operation with an ERC-20 token failed."
+          }
+        ]
+      },
+      "events": {
+        "Approval(address,address,uint256)": {
+          "details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+        },
+        "Paused(address)": {
+          "details": "Emitted when the pause is triggered by `account`."
+        },
+        "Transfer(address,address,uint256)": {
+          "details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+        },
+        "Unpaused(address)": {
+          "details": "Emitted when the pause is lifted by `account`."
+        }
+      },
+      "kind": "dev",
+      "methods": {
+        "acceptOwnership()": {
+          "details": "The new owner accepts the ownership transfer."
+        },
+        "allowance(address,address)": {
+          "details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+        },
+        "approve(address,uint256)": {
+          "details": "See {IERC20-approve}. NOTE: If `value` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+        },
+        "balanceOf(address)": {
+          "details": "Returns the value of tokens owned by `account`."
+        },
+        "claimRoyalty(uint8)": {
+          "details": "Padrão pull: cada carteira saca o que lhe cabe; um endereço problemático não bloqueia os demais."
+        },
+        "constructor": {
+          "params": {
+            "admin": "Carteira administrativa da IBITI: recebe toda a emissão (reserva + unidades à venda)                     e é a única com permissão para as funções administrativas.",
+            "emissionCap_": "Quantidade total de unidades da emissão (projeção: 150). Mínimo 15, para que as                     frações do modelo (1/3 de reserva, 2/15 de teto) resultem em unidades inteiras.",
+            "stablecoin_": "Endereço da stablecoin para pagamento on-chain do royalty, ou zero (liquidação fora da chain).",
+            "validFrom_": "Timestamp (UTC) de início do período de utilização off-chain.",
+            "validUntil_": "Timestamp (UTC) de expiração: fim dos 4 anos da emissão."
+          }
+        },
+        "name()": {
+          "details": "Returns the name of the token."
+        },
+        "owner()": {
+          "details": "Returns the address of the current owner."
+        },
+        "paused()": {
+          "details": "Returns true if the contract is paused, and false otherwise."
+        },
+        "pendingOwner()": {
+          "details": "Returns the address of the pending owner."
+        },
+        "primaryPurchase(address,uint256,bytes32)": {
+          "details": "As travas (teto por carteira, reserva, validade, revogação, pausa) são aplicadas em `_update`.",
+          "params": {
+            "saleRef": "Hash do registro da venda/verificação no sistema da IBITI (rastreabilidade sem dado pessoal).",
+            "to": "Carteira do apoiador verificado.",
+            "units": "Quantidade de unidades inteiras."
+          }
+        },
+        "reissue(address,address)": {
+          "details": "Implementada como queima + cunhagem de igual quantidade (supply inalterado): é literalmente uma      reemissão, e não passa pelas regras de transferência entre portadores."
+        },
+        "reportRevenue(uint256,bytes32)": {
+          "details": "Custo limitado: o laço percorre no máximo `emissionCap` carteiras (cada uma tem >= 1 unidade).",
+          "params": {
+            "grossRevenue": "Faturamento bruto do período (diárias + receitas adicionais), na unidade de conta                     adotada: menor unidade da stablecoin quando configurada; centavos de real caso contrário.",
+            "reportHash": "Hash do relatório financeiro que sustenta o valor (o relatório em si fica fora da chain)."
+          }
+        },
+        "settleOffChain(uint8,address,bytes32)": {
+          "params": {
+            "paymentRef": "Hash do comprovante bancário / referência do pagamento."
+          }
+        },
+        "symbol()": {
+          "details": "Returns the symbol of the token, usually a shorter version of the name."
+        },
+        "totalSupply()": {
+          "details": "Returns the value of tokens in existence."
+        },
+        "transfer(address,uint256)": {
+          "details": "See {IERC20-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `value`."
+        },
+        "transferFrom(address,address,uint256)": {
+          "details": "See {IERC20-transferFrom}. Skips emitting an {Approval} event indicating an allowance update. This is not required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve]. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`."
+        },
+        "transferOwnership(address)": {
+          "details": "Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is one. Can only be called by the current owner. Setting `newOwner` to the zero address is allowed; this can be used to cancel an initiated ownership transfer."
+        }
+      },
+      "stateVariables": {
+        "_holders": {
+          "details": "Registro enumerável de carteiras com saldo > 0 (limitado pelo supply: no máximo `emissionCap` endereços)."
+        }
+      },
+      "title": "IBIToken — cota de apoiador do IBITI Glamping",
+      "version": 1
+    },
+    "userdoc": {
+      "kind": "user",
+      "methods": {
+        "ROYALTY_BPS()": {
+          "notice": "Alíquota do contrato de royalties do território para investimento de terceiro: 15%."
+        },
+        "TOTAL_PERIODS()": {
+          "notice": "Apurações semestrais ao longo dos 4 anos de validade: 8 períodos (2027-1 … 2030-2)."
+        },
+        "accessInfo(address)": {
+          "notice": "Consulta única para liberação de benefícios: saldo total, condição de membro e situação de validade. Hospedagens ficam no cadastro externo. Não expõe nenhum dado pessoal."
+        },
+        "claimRoyalty(uint8)": {
+          "notice": "Saca, em stablecoin, o royalty registrado para o chamador em um período reportado on-chain."
+        },
+        "decimals()": {
+          "notice": "Token indivisível: zero casas decimais. Quantidade de hospedagens é regra do cadastro externo."
+        },
+        "emissionCap()": {
+          "notice": "Teto da emissão única (projeção do whitepaper: 150 unidades). Não existe mint depois do deploy."
+        },
+        "holders()": {
+          "notice": "Carteiras com saldo > 0 (a fotografia usada nas distribuições)."
+        },
+        "isExpired()": {
+          "notice": "True depois do fim dos 4 anos: as três faces do token se extinguem (o registro fica como histórico)."
+        },
+        "isMember(address)": {
+          "notice": "Passaporte IBITI: quem tem saldo, não foi revogado e está dentro da validade é membro."
+        },
+        "lastReportedPeriod()": {
+          "notice": "Último período (semestre) já reportado pela IBITI (0 = nenhum)."
+        },
+        "maxPerWallet()": {
+          "notice": "Máximo de unidades por carteira = 2 dos 15 pontos do royalty = 2/15 do supply (projeção: 20).         A carteira administrativa (reserva da IBITI) é isenta."
+        },
+        "pause()": {
+          "notice": "Pausa de emergência: congela transferências, reportes e saques (incidente, ordem judicial)."
+        },
+        "pendingRoyaltyOf(address)": {
+          "notice": "Soma do royalty ainda não liquidado de uma carteira em todos os períodos reportados."
+        },
+        "periodInfo(uint8)": {
+          "notice": "Dados de um período reportado."
+        },
+        "primaryPurchase(address,uint256,bytes32)": {
+          "notice": "Compra primária: entrega `units` unidades a um apoiador que concluiu a verificação de identidade fora da blockchain. É a única forma de uma carteira sem saldo entrar no ecossistema."
+        },
+        "reduceReserve(uint256)": {
+          "notice": "Reduz a reserva da IBITI (decisão expressa da administração — D8: \"fora de venda salvo decisão dela\"). A reserva nunca pode ser aumentada: isso retiraria unidades já prometidas à venda."
+        },
+        "reissue(address,address)": {
+          "notice": "Reemissão por perda de chave ou sucessão: move todo o saldo e os royalties ainda não liquidados de `oldWallet` para `newWallet` e invalida a carteira antiga, mediante processo administrativo fora da blockchain. Nunca existem dois saldos válidos representando o mesmo direito."
+        },
+        "renounceOwnership()": {
+          "notice": "A renúncia está desabilitada: sem administrador não há reporte nem reemissão."
+        },
+        "reportRevenue(uint256,bytes32)": {
+          "notice": "Reporta o faturamento bruto do semestre. O contrato calcula o royalty (15%), tira a fotografia de saldos e registra o valor devido a cada carteira, pro-rata ao saldo (inclui a reserva da IBITI; o uso de hospedagens não altera o saldo). Se a stablecoin estiver configurada, o total devido é depositado neste contrato na mesma transação (a IBITI precisa ter aprovado o valor antes) e fica disponível para saque por `claimRoyalty`."
+        },
+        "reservedUnits()": {
+          "notice": "Unidades que a carteira administrativa deve manter (reserva da IBITI = 5 dos 15 pontos         do royalty = 1/3 do supply; projeção: 50). Só pode ser reduzida, por decisão expressa."
+        },
+        "revoked(address)": {
+          "notice": "Carteiras invalidadas por reemissão (perda de chave / sucessão). Não recebem, não transferem, não sacam."
+        },
+        "royaltyDue(uint8,address)": {
+          "notice": "Valor de royalty ainda NÃO liquidado por período e carteira (registrado na fotografia do reporte)."
+        },
+        "royaltyPaid(uint8,address)": {
+          "notice": "Valor de royalty já liquidado (sacado em stablecoin ou pago fora da blockchain) por período e carteira."
+        },
+        "saleableUnits()": {
+          "notice": "Unidades que a carteira administrativa ainda pode vender sem tocar na reserva."
+        },
+        "setStablecoin(address)": {
+          "notice": "Define a stablecoin de pagamento (uma única vez). Períodos reportados antes seguem liquidados fora da chain."
+        },
+        "settleOffChain(uint8,address,bytes32)": {
+          "notice": "Registra a liquidação FORA da blockchain (pagamento em reais) do royalty de um portador, em períodos reportados sem stablecoin. Mantém a trilha de auditoria completa on-chain."
+        },
+        "stablecoin()": {
+          "notice": "Stablecoin usada para pagar os royalties on-chain. Endereço zero = liquidação fora da blockchain."
+        },
+        "unpause()": {
+          "notice": "Retoma a operação."
+        },
+        "validFrom()": {
+          "notice": "Início do período de utilização, consultado pelo serviço off-chain."
+        },
+        "validUntil()": {
+          "notice": "Fim da validade: depois desta data o contrato rejeita transferências."
+        }
+      },
+      "notice": "ERC-20 indivisível para posse, transferências e royalties de 15% do faturamento bruto.",
+      "version": 1
+    }
+  },
+  "settings": {
+    "compilationTarget": {
+      "contracts/IBIToken.sol": "IBIToken"
+    },
+    "evmVersion": "osaka",
+    "libraries": {},
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    },
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "remappings": []
+  },
+  "sources": {
+    "contracts/IBIToken.sol": {
+      "keccak256": "0xfe14f2030b284eedb3dc48eb607ceedd0be5b3d337d8e838faefded3385d1985",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://a1930782fa7855b583c0ac986b74ccb75b4d313b0b166dba93289eb7f981dcfc",
+        "dweb:/ipfs/QmRDQsK9ucnhq4fFNLmwh1Crw8JmE5pg65nHqg2zo3rzuQ"
+      ]
+    },
+    "contracts/vendor/openzeppelin/access/Ownable.sol": {
+      "keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+        "dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+      ]
+    },
+    "contracts/vendor/openzeppelin/access/Ownable2Step.sol": {
+      "keccak256": "0xdcad8898fda432696597752e8ec361b87d85c82cb258115427af006dacf7128c",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://e2c9d517f0c136d54bd00cd57959d25681d4d6273f5bbbc263afe228303772f0",
+        "dweb:/ipfs/QmReNFjXBiufByiAAzfSQ2SM5r3qeUErn46BmN3yVRvrek"
+      ]
+    },
+    "contracts/vendor/openzeppelin/interfaces/IERC1363.sol": {
+      "keccak256": "0xd5ea07362ab630a6a3dee4285a74cf2377044ca2e4be472755ad64d7c5d4b69d",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://da5e832b40fc5c3145d3781e2e5fa60ac2052c9d08af7e300dc8ab80c4343100",
+        "dweb:/ipfs/QmTzf7N5ZUdh5raqtzbM11yexiUoLC9z3Ws632MCuycq1d"
+      ]
+    },
+    "contracts/vendor/openzeppelin/interfaces/IERC165.sol": {
+      "keccak256": "0x0afcb7e740d1537b252cb2676f600465ce6938398569f09ba1b9ca240dde2dfc",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://1c299900ac4ec268d4570ecef0d697a3013cd11a6eb74e295ee3fbc945056037",
+        "dweb:/ipfs/Qmab9owJoxcA7vJT5XNayCMaUR1qxqj1NDzzisduwaJMcZ"
+      ]
+    },
+    "contracts/vendor/openzeppelin/interfaces/IERC20.sol": {
+      "keccak256": "0x1a6221315ce0307746c2c4827c125d821ee796c74a676787762f4778671d4f44",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://1bb2332a7ee26dd0b0de9b7fe266749f54820c99ab6a3bcb6f7e6b751d47ee2d",
+        "dweb:/ipfs/QmcRWpaBeCYkhy68PR3B4AgD7asuQk7PwkWxrvJbZcikLF"
+      ]
+    },
+    "contracts/vendor/openzeppelin/interfaces/draft-IERC6093.sol": {
+      "keccak256": "0x1b88b3fb3d85ba5496d7d5f396f83ee1fddcdd6762059ff65992655b67920998",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://89393bb3212da1c0889601b9706a07b39419ddc4d2faab9eaf6e7f9152cf6a1c",
+        "dweb:/ipfs/QmcCfzzxv1Bkdz1c1yF4gQCeYb6Us5BJANnzTFqawfd1HL"
+      ]
+    },
+    "contracts/vendor/openzeppelin/token/ERC20/ERC20.sol": {
+      "keccak256": "0x669464167428061ee0f8618b73b3ee90aff8405683e7ddde8cd77dadaa1afe29",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://0dda78587a7358b4fdf6b9fca0fde5a5e34930f36d5268a16028627fc0170195",
+        "dweb:/ipfs/QmQ1b6cCceDRWNxti9HifsTCzmVP25Haxs1bWugm52vTqH"
+      ]
+    },
+    "contracts/vendor/openzeppelin/token/ERC20/IERC20.sol": {
+      "keccak256": "0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://5282825a626cfe924e504274b864a652b0023591fa66f06a067b25b51ba9b303",
+        "dweb:/ipfs/QmeCfPykghhMc81VJTrHTC7sF6CRvaA1FXVq2pJhwYp1dV"
+      ]
+    },
+    "contracts/vendor/openzeppelin/token/ERC20/extensions/ERC20Pausable.sol": {
+      "keccak256": "0x756aee61d83960d324973de3a64920a02b480efe662b611fb05ea506d844aa55",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://4dfb71ab2f5fcc530226a25bba4d808f4d22a7f383cae4a3be3629ec057b276c",
+        "dweb:/ipfs/QmRzyetUjbr9Gx1pcXYSsE5rz4XypfEbZgmBvZKUNUJQLR"
+      ]
+    },
+    "contracts/vendor/openzeppelin/token/ERC20/extensions/IERC20Metadata.sol": {
+      "keccak256": "0xd6fa4088198f04eef10c5bce8a2f4d60554b7ec4b987f684393c01bf79b94d9f",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://f95ee0bbd4dd3ac730d066ba3e785ded4565e890dbec2fa7d3b9fe3bad9d0d6e",
+        "dweb:/ipfs/QmSLr6bHkPFWT7ntj34jmwfyskpwo97T9jZUrk5sz3sdtR"
+      ]
+    },
+    "contracts/vendor/openzeppelin/token/ERC20/utils/SafeERC20.sol": {
+      "keccak256": "0x304d732678032a9781ae85c8f204c8fba3d3a5e31c02616964e75cfdc5049098",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://299ced486011781dc98f638059678323c03079fefae1482abaa2135b22fa92d0",
+        "dweb:/ipfs/QmbZNbcPTBxNvwChavN2kkZZs7xHhYL7mv51KrxMhsMs3j"
+      ]
+    },
+    "contracts/vendor/openzeppelin/utils/Context.sol": {
+      "keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+        "dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+      ]
+    },
+    "contracts/vendor/openzeppelin/utils/Pausable.sol": {
+      "keccak256": "0xdb484371dfbb848cb6f5d70464e9ac9b2900e4164ead76bbce4fef0b44bcc68f",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://f9d6f6f6600a2bec622f699081b58350873b5e63ce05464d17d674a290bb8a7c",
+        "dweb:/ipfs/QmQKVzSQY1PM3Bid4QhgVVZyx6B4Jx7XgaQzLKHj38vJz8"
+      ]
+    },
+    "contracts/vendor/openzeppelin/utils/ReentrancyGuard.sol": {
+      "keccak256": "0xa516cbf1c7d15d3517c2d668601ce016c54395bf5171918a14e2686977465f53",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://1e1d079e8edfb58efd23a311e315a4807b01b5d1cf153f8fa2d0608b9dec3e99",
+        "dweb:/ipfs/QmTBExeX2SDTkn5xbk5ssbYSx7VqRp9H4Ux1CY4uQM4b9N"
+      ]
+    },
+    "contracts/vendor/openzeppelin/utils/StorageSlot.sol": {
+      "keccak256": "0xcf74f855663ce2ae00ed8352666b7935f6cddea2932fdf2c3ecd30a9b1cd0e97",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://9f660b1f351b757dfe01438e59888f31f33ded3afcf5cb5b0d9bf9aa6f320a8b",
+        "dweb:/ipfs/QmarDJ5hZEgBtCmmrVzEZWjub9769eD686jmzb2XpSU1cM"
+      ]
+    },
+    "contracts/vendor/openzeppelin/utils/introspection/IERC165.sol": {
+      "keccak256": "0x8891738ffe910f0cf2da09566928589bf5d63f4524dd734fd9cedbac3274dd5c",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://971f954442df5c2ef5b5ebf1eb245d7105d9fbacc7386ee5c796df1d45b21617",
+        "dweb:/ipfs/QmadRjHbkicwqwwh61raUEapaVEtaLMcYbQZWs9gUkgj3u"
+      ]
+    }
+  },
+  "version": 1
+}

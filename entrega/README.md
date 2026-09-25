@@ -1,8 +1,13 @@
-# Pacotes da segunda entrega
+# Áreas de entrega — IBITI
 
-- `IBITI-Remix.zip` e pasta extraída `IBITI-Remix/`: contratos, bibliotecas, scripts e testes Solidity para importar no Remix.
-- `IBITI-Implementacao-v2.zip` e `gitlab/Implementação do Contrato Inteligente ERC-20 - versão 2/`: repositório completo com smart-contract, offchain, documentação e whitepaper. Preparado localmente, sem publicação remota.
+A preparação atual está em **[v2/](v2/README.md)**, separada das cópias anteriores. Contém o espelho dos três artefatos do GitLab, fonte executável, apoio para os responsáveis, pacote Remix e ZIPs com manifestos.
 
-Fontes canônicos ficam nos módulos da raiz. Regenerar: `npm run package:remix --prefix smart-contract` e `npm run package:delivery --prefix smart-contract`. As listas de inclusão excluem bancos, segredos e node_modules.
+A v2 oficial ainda está em preparação; “v4” é somente revisão técnica interna. O GitHub guarda o trabalho e o espelho local; isso não representa envio da entrega ao GitLab nem novo deploy público.
 
-Parte 2 acadêmica usa código técnico v3, ainda não publicado na Sepolia. v1/v2 históricos e a pasta da Parte 1 foram preservados. O nome da sprint de destino da Parte 2 não foi informado; o pacote fica pronto para ser colocado na pasta correta do GitLab.
+Regenerar a área atual na raiz do repositório:
+
+```bash
+npm run package:delivery --prefix smart-contract
+```
+
+`npm run package:remix --prefix smart-contract` também regenera o conjunto para manter as fontes sincronizadas. Os arquivos `IBITI-Remix.zip`, `IBITI-Implementacao-v2.zip` e `gitlab/` fora de `v2/` são históricos de preparações anteriores; não usá-los como fonte atual. A primeira entrega permanece preservada.

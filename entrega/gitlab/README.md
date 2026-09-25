@@ -1,3 +1,5 @@
+> **Área histórica.** A preparação oficial v2 atual foi separada em [../v2/](../v2/README.md). O conteúdo abaixo preserva estados anteriores, inclusive prazos, preços e circulação que já mudaram. Não usar esta cópia para a nova entrega.
+
 # Segunda entrega de implementação — preparação local
 
 A Parte 2 utiliza a versão técnica 3 corrigida após o feedback de 8,4/10. Está em [Implementação do Contrato Inteligente ERC-20 - versão 2](<Implementação do Contrato Inteligente ERC-20 - versão 2/README.md>), pronta para inclusão na sprint de destino definida pela turma. Ainda não houve envio remoto nem deploy público desta revisão.

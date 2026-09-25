@@ -13,7 +13,7 @@ Comece pelo **[guia da v2 em preparação e acessos locais](smart-contract/docs/
 - **[documentacao/](documentacao/README.md):** contexto, decisões, hipóteses e histórico do projeto.
 - **[guia-de-comunicacao/](guia-de-comunicacao/README.md):** artefato de comunicação separado da implementação do token.
 
-Para o Remix, usar as fontes atuais e o [guia atual](smart-contract/docs/guia-v4.md), com viaIR habilitado. ZIPs de `entrega/` são anteriores a esta rodada e não representam automaticamente a fonte atual.
+Para o Remix, usar as fontes atuais e o [guia atual](smart-contract/docs/guia-v4.md), com viaIR habilitado. A preparação atual e os ZIPs regenerados ficam em [entrega/v2/](entrega/v2/README.md); os pacotes fora dessa pasta permanecem históricos.
 
 ## Executar o sistema completo localmente
 
@@ -31,7 +31,7 @@ Abra http://localhost:3000. A demonstração usa **Anvil**, compila pelo **solc*
 
 ## Estado da rede
 
-**Histórico — v2 publicada em 11/09 na Sepolia:** IBIToken em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, 150 IBT, sem resgates ou contadores de hospedagem on-chain. Publicada pelo Remix/MetaMask e verificada no Sourcify (correspondência exata). A tBRL existente foi reutilizada. A versão 1 permanece apenas como histórico, sem migração automática. [Evidências e distinção entre versões](smart-contract/docs/deploy-modelo-pessoa.md).
+**Histórico — piloto da entrega oficial v1 (revisão técnica então chamada v2), publicado em 11/09 na Sepolia:** IBIToken em `0xaA6C2902A7f50Dd8C4E8a68de67EA97817Aac030`, bloco 11684811, 150 IBT, sem resgates ou contadores de hospedagem on-chain. Publicada pelo Remix/MetaMask e verificada no Sourcify (correspondência exata). A tBRL existente foi reutilizada. As revisões técnicas anteriores permanecem como histórico, sem migração automática; a próxima entrega oficial v2 ainda está em preparação. [Evidências e distinção entre versões](smart-contract/docs/deploy-modelo-pessoa.md).
 
 Uma experiência por IBT por toda a emissão, sem renovação. A fonte atual não permite circulação ordinária entre participantes. Experiência de 3 noites para até 5 pessoas; cancelamento manual provisório e três modalidades de custódia na jornada. O whitepaper anterior ainda precisa acompanhar as decisões posteriores registradas no inventário.
 
@@ -45,8 +45,14 @@ O memorando v2 recebido nesta rodada usa R$ 34.874,14 e taxa de 20,46%; a difere
 
 ## Entrega acadêmica no GitLab (histórico)
 
-A segunda entrega foi preparada em `entrega/gitlab/Implementação do Contrato Inteligente ERC-20 - versão 2/`, com código, integração, documentação e whitepaper revisado. ZIP completo: `entrega/IBITI-Implementacao-v2.zip`. Não houve novo envio remoto nesta revisão. A pasta da primeira entrega foi preservada.
+A próxima entrega oficial está estruturada em [entrega/v2/](entrega/v2/README.md), com três pastas de artefatos do GitLab, código executável, guias de apoio e ZIPs atuais. Memorando e PDF de evidências finais continuam pendentes. As preparações anteriores e a primeira entrega foram preservadas; não houve envio desta estrutura ao GitLab.
 
 O artefato técnico foi publicado na `main` do GitLab no [commit c9093569](https://git.inteli.edu.br/graduacao/2026-2a/t19/g01/-/commit/c9093569df8b5737bd6ca69b7680031de17434c1), em `Sprint 3/Implementação do Contrato Inteligente ERC-20 - versão 1`. O nome acadêmico “versão 1” contém a implementação técnica IBIToken v2.
 
 A entrega documental da Sprint 3 utiliza `Whitepaper Técnico do Ativo Digital`, preservando o nome da pasta histórica da Sprint 2. A cópia de preparação do README do repositório acadêmico está em `entrega/gitlab/README.md`; seus caminhos seguem a organização por sprints do GitLab, enquanto este repositório local mantém `smart-contract/`, `offchain/` e `whitepaper/`.
+
+## Preparação de Deploy e Evidências Operacionais
+
+[Guia completo para o responsável](docs/entrega/guia-deploy-e-evidencias-v2.md), [roteiro mínimo em inglês](docs/entrega/roteiro-minimo-relatorio-onchain-en.md) e [índice CSV de evidências](docs/entrega/registro-evidencias-modelo.csv). São materiais de preparação; não representam novo deploy ou relatório de operações públicas concluídas.
+
+[Revisão de usabilidade de todas as telas](docs/decisoes/2026-09-25-interface-progressiva.md) e [pendências consolidadas](docs/decisoes/2026-09-25-pendencias-para-retomada.md).
