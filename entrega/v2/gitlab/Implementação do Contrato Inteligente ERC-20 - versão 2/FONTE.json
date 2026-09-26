@@ -2,7 +2,7 @@
   "officialRelease": "v2",
   "status": "em-preparacao",
   "internalRevision": 4,
-  "sourceBaseCommit": "1cf4f8c22746120352cd0435e210d546058d929b",
+  "sourceBaseCommit": "0905f1206cc08924179301e9f494ab8b7be2a8ba",
   "includesWorkingTree": true,
-  "note": "O commit-base não inclui necessariamente as mudanças locais. MANIFEST.sha256 identifica os bytes empacotados; não há afirmação de novo deploy público."
+  "note": "MANIFEST.sha256 identifica o conteúdo, inclusive mudanças locais. Documentação selecionada para entrega; histórico e ferramentas editoriais ficam no repositório. Landing relocada para offchain/public/landing com caminho normalizado em api.ts. Scripts de empacotamento removidos do package.json desta cópia. Evidências públicas ficam no artefato próprio."
 }

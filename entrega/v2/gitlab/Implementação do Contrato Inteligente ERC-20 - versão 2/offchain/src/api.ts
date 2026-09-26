@@ -94,7 +94,7 @@ export function createApp(options: Options) {
       if (method === "GET" && options.portal && landing.includes(path)) {
         const file = path === "/" ? "index.html" : path.slice(1);
         const body = await readFile(
-          new URL("../../guia-de-comunicacao/landing/" + file, import.meta.url),
+          new URL("../public/landing/" + file, import.meta.url),
         );
         const type = file.endsWith(".html")
           ? "text/html"

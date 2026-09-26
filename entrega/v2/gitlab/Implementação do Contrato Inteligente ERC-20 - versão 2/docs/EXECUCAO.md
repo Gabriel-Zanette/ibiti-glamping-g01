@@ -1,6 +1,6 @@
 # Executar e conferir a próxima entrega oficial v2
 
-25/09/2026. Estas instruções substituem o calendário fixo e o rateio por fotografia das instruções de 22/09. A única versão oficial publicada é a v1. A revisão interna de testes chamada v4 será consolidada na v2 oficial após validação. Não há Hardhat.
+Instruções da segunda entrega acadêmica. A identificação técnica interna v4 corresponde ao código em consolidação para a versão oficial v2. A demonstração abaixo usa Anvil local; o relatório de Deploy documenta separadamente a publicação na Sepolia. Não há Hardhat.
 
 ## Verificação local
 
@@ -55,4 +55,4 @@ A compilação local verifica o limite EIP-170 dos contratos e das suítes. `via
 
 Royalties por tempo, teto pessoal, tesouraria separada, ausência de transferências ordinárias, abertura relativa e recuperação de sete dias estão na fonte. Governança por pilares, segunda aprovação crítica, pausa seletiva e tesouraria 2 de 3 continuam pendentes. O portal não integra fornecedor KYC, serviço de custódia, conversão/PIX, e-mail ou MFA.
 
-[Inventário completo](../../docs/decisoes/2026-09-25-inventario-completo-token.md) · [Feedback do memorando](../../docs/decisoes/2026-09-25-feedback-memorando-v2.md).
+[Modelo, evolução e limites](MODELO-E-LIMITES.md) · [Configuração do portal](../offchain/README.md).

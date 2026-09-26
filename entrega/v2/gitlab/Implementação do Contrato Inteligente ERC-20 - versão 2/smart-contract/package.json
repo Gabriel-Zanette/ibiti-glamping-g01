@@ -13,9 +13,7 @@
     "test:contracts": "node --test tests/contracts.test.ts",
     "test:integration": "node --test tests/offchain.test.ts",
     "typecheck": "tsc --noEmit",
-    "demo": "node ../offchain/scripts/demo.ts",
-    "package:remix": "node tools/package-remix.ts",
-    "package:delivery": "node tools/package-delivery.ts"
+    "demo": "node ../offchain/scripts/demo.ts"
   },
   "devDependencies": {
     "@foundry-rs/anvil": "1.7.1",
