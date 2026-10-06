@@ -2,7 +2,7 @@
   "officialRelease": "v2",
   "status": "em-preparacao",
   "internalRevision": 4,
-  "sourceBaseCommit": "0905f1206cc08924179301e9f494ab8b7be2a8ba",
+  "sourceBaseCommit": "848b90fe293bd718033e855e81b74ddc272c19a2",
   "includesWorkingTree": true,
   "note": "MANIFEST.sha256 identifica o conteúdo, inclusive mudanças locais. Documentação selecionada para entrega; histórico e ferramentas editoriais ficam no repositório. Landing relocada para offchain/public/landing com caminho normalizado em api.ts. Scripts de empacotamento removidos do package.json desta cópia. Evidências públicas ficam no artefato próprio."
 }

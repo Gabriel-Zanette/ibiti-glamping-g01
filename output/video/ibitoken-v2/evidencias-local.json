@@ -1,0 +1,678 @@
+{
+  "generatedAt": "2026-09-26T02:24:11.875Z",
+  "status": "verified",
+  "officialDelivery": "v2",
+  "internalRevision": 4,
+  "network": "Anvil local — não é Sepolia",
+  "chainId": 31337,
+  "simulatedOpening": true,
+  "sourceSha256": "445c041752cf7081cf2ab82f1e4953249bcd65babb1eb31c0a945169dca84960",
+  "accounts": {
+    "admin": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "user1": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "user2": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "recoveryDestination": "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+  },
+  "token": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "stablecoin": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "primaryUnitPrice": "34874140000",
+  "currencyDecimals": 6,
+  "calendar": {
+    "opening": 1805068800,
+    "middle": 1813017600,
+    "firstPeriodEnd": 1820966400,
+    "validUntil": "1931299199"
+  },
+  "revenue": {
+    "gross": "150000000000",
+    "royalty": "22500000000",
+    "weights": {
+      "user1": "31795200",
+      "user2": "15897600"
+    },
+    "dueBeforeClaims": {
+      "user1": "300000000",
+      "user2": "150000000",
+      "treasury": "22050000000"
+    }
+  },
+  "final": {
+    "supply": "150",
+    "reserve": "50",
+    "cap": "20",
+    "adminIBT": "146",
+    "user1IBT": "2",
+    "user2IBT": "2",
+    "user1tBRL": "300000000",
+    "user2tBRL": "150000000",
+    "user1Due": "0",
+    "user2Due": "0",
+    "lastReportedPeriod": "1",
+    "recoveryCancelled": true
+  },
+  "records": [
+    {
+      "label": "Emissão IBIToken local",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x5141a45d34d659a24036cc9adfb96c2cfaa61fecf829ef70ac2d0aff497cb542",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": null,
+      "blockNumber": 2,
+      "blockHash": "0x8c05565a5fdf84733da9b0a8132306f4dd214638922bc0ea38275dd398fe9930",
+      "timestamp": 1790389406,
+      "status": 1,
+      "gasUsed": "3906647",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "OwnershipTransferred",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "StablecoinSet",
+          "args": [
+            "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "150"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "Emission",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "150",
+            "50",
+            "20",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Preço primário",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xa97d51c1879293ef5d00a979811d27c2cee4b679005c1c7b753f1816ebe3d789",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 3,
+      "blockHash": "0xa893c2032be0dae7d4838b791e409538a5de6cbcbacfe08b553195d7d1cffe1c",
+      "timestamp": 1790389406,
+      "status": 1,
+      "gasUsed": "47144",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "PrimaryPriceSet",
+          "args": [
+            "34874140000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Registrar USER1",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x9c313c867f61a36562c88b62fd53c76a90d9c99b9b8367a6a1ba9c4bff7fe947",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 4,
+      "blockHash": "0xffaffe36d32636d8e8bb47345e71f82a71d091099c73b1db2f3c9e2cc49d26d8",
+      "timestamp": 1790389406,
+      "status": 1,
+      "gasUsed": "53173",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "WalletRegistered",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xd0dfdf5af5f6236a7a5b9791af40750855040da9ce45893fa80364cd843ed90f"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Registrar USER2",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xe196a59f584c143335700201bfc1f3f14423aa801b9343834372e310003bcce5",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 5,
+      "blockHash": "0x85de866d0c67c1d31eb8c11a8cc2826cf0fb1e02c89ec7b8e5d3762df4cf32e8",
+      "timestamp": 1790389406,
+      "status": 1,
+      "gasUsed": "53149",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "WalletRegistered",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xbbef17b9edd26ea4012e01c7065e1b4ed4e239e80a74cccb30982741cb764d00"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1805068800,
+      "iso": "2027-03-15T00:00:00.000Z",
+      "note": "Avanço exclusivo do Anvil. Não representa tempo decorrido na Sepolia."
+    },
+    {
+      "label": "Abertura simulada",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xf07949e3a7f7a17aa919b5b747939733bd27351af3f2db0653d811c6de538224",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 7,
+      "blockHash": "0xe1f02f34f27982f24ac747af5e0fe750e91b4ee7d949dcd1be67b6c22dd9c4a2",
+      "timestamp": 1805068800,
+      "status": 1,
+      "gasUsed": "491502",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "OpeningRecorded",
+          "args": [
+            "1805068800",
+            "1931299199",
+            "0x3875613fadb484447e1a31d4e3b4e2329653700b4299c12b295644a860f07d52"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "tBRL fictício para USER1",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x476c008e03ea1430cc789a44af8c83d449a3af016b3ebcd0f597b093806a935e",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 8,
+      "blockHash": "0x4936ccb661c1f00ec44af2f251632626ab7965fc4930aac498dcd259a153e88e",
+      "timestamp": 1805068800,
+      "status": 1,
+      "gasUsed": "68085",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "tBRL fictício para USER2",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x50039074dc3bf3807aa6d36997a5f51b7059ace098551eb98e7fd395eae64489",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 9,
+      "blockHash": "0xbcfba078830d56cbb6974d7944a33a1332accf7e54fa6cfac292c7c0d840c925",
+      "timestamp": 1805068800,
+      "status": 1,
+      "gasUsed": "50973",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 autoriza pagamento",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xe7930dae7e0a8f817d564b3d247d25d1bdbee85aa2c1b2da579bf5140475aad0",
+      "from": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 10,
+      "blockHash": "0x70bcfc376051569076525baa6310abf6912af8b1083f48c390e6fbfa83063143",
+      "timestamp": 1805068800,
+      "status": 1,
+      "gasUsed": "45945",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Approval",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 compra 2 IBT no início",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xad96ba068ab525f325f82cae1e06cd458ae101b63bd56c80ff4672a316e32163",
+      "from": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 11,
+      "blockHash": "0x118e1e8b68a428b7b43408b740c603f06a19638d6ff2404ae8519cf26bdbceee",
+      "timestamp": 1805068800,
+      "status": 1,
+      "gasUsed": "314737",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "2"
+          ]
+        },
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "69748280000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "PrimaryPayment",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "69748280000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "PrimaryPurchase",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "2",
+            "0x4ed41245888a66522a2805f68aa583dc9b808b1b0fd03c95625ea0290c13dd1a"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Compra sem cadastro",
+      "kind": "eth_call-rejected",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "error": "WalletNotRegistered",
+      "args": [
+        "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65"
+      ],
+      "transactionHash": null,
+      "note": "Simulação eth_call; nenhuma transação foi minerada e não houve gas pago."
+    },
+    {
+      "label": "Apuração antes do fechamento",
+      "kind": "eth_call-rejected",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "error": "PeriodNotClosed",
+      "args": [
+        "1",
+        "1820966400"
+      ],
+      "transactionHash": null,
+      "note": "Simulação eth_call; nenhuma transação foi minerada e não houve gas pago."
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1813017600,
+      "iso": "2027-06-15T00:00:00.000Z",
+      "note": "Avanço exclusivo do Anvil. Não representa tempo decorrido na Sepolia."
+    },
+    {
+      "label": "USER2 autoriza pagamento",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xb1a8836a687fdb3b59e35876c64ce45964a45bd626b95fffafab2bdfeecea1a4",
+      "from": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 13,
+      "blockHash": "0x8d272f39e6469ed3f119bbf061c3af1c54e9444b4eab582581c3a8c0cee622db",
+      "timestamp": 1813017600,
+      "status": 1,
+      "gasUsed": "45945",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Approval",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER2 compra 2 IBT na metade",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xa4ebe7347d0489b7e058076de1d03cabc65d3a05f15aa40c31e6485aa47cc325",
+      "from": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 14,
+      "blockHash": "0x88bdd10954aebe0c0b99bfcd31af37b4f8531838530547bfff0107aaea5e0389",
+      "timestamp": 1813017600,
+      "status": 1,
+      "gasUsed": "320939",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "2"
+          ]
+        },
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "69748280000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "PrimaryPayment",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "69748280000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "PrimaryPurchase",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "2",
+            "0x118a7ed69bc630b4083b8219b28cb3d92f8ee2aea19547902742c0e2499dcb87"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Transferência USER1 para USER2",
+      "kind": "eth_call-rejected",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "error": "SecondaryTransfersDisabled",
+      "args": [],
+      "transactionHash": null,
+      "note": "Simulação eth_call; nenhuma transação foi minerada e não houve gas pago."
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1820966400,
+      "iso": "2027-09-15T00:00:00.000Z",
+      "note": "Avanço exclusivo do Anvil. Não representa tempo decorrido na Sepolia."
+    },
+    {
+      "label": "Autorizar financiamento do royalty",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x5d39297b50ab26e92648d919e6eecf1df0d4c1b49a52356c6156110b8ec1f3a2",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 16,
+      "blockHash": "0x9d7a4ebfdb2fe5aeedb44ae24fc47bcc6e5a078ecef9e007b616286ba2a18fa4",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "45933",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Approval",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "22500000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Apuração e depósito do semestre 1",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x1475f8d7114e0f02ac8b1292e4d813f9a88871c8ee9dce5dc075d47b7482817d",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 17,
+      "blockHash": "0xdc380797d26f18b216f56d1e4fddee3291d67b6dedb269ee3be57c5d652712c4",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "344717",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "22050000000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        },
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "22500000000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RevenueReported",
+          "args": [
+            "1",
+            "150000000000",
+            "22500000000",
+            "0xc41123be5ca432da75206c68aecb1e8fae1862fa605d02bb5c4fec9e99455925",
+            "150",
+            "3",
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Saque de USER1",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0xbce186b1b9e77f4c287aef67a444bb93f873406ad7e14be23872debb5265e46a",
+      "from": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 18,
+      "blockHash": "0xdf649fa9db74a6a42581a749916d5d1f360c1eafe20b930077cc42fd8ad800c3",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "92949",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RoyaltyClaimed",
+          "args": [
+            "1",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Saque de USER2",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x5ba6d23669af16fd55069f2439bcf2a60753242fb9bc431f9771d595bb6cb343",
+      "from": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 19,
+      "blockHash": "0xc6213fe0bc45eb9f86bb9a16689bc52d3cf298a9afa88e30c22d8a06991419e0",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "92949",
+      "events": [
+        {
+          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "name": "Transfer",
+          "args": [
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        },
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RoyaltyClaimed",
+          "args": [
+            "1",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Anúncio de recuperação",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x973f8044f036dc8512b72b45ba96e6acb1988a76dfd712b562f5533eb7134a4a",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 20,
+      "blockHash": "0x8d9028fe0b590ed9ef09973d420ea2eb53c57dbea2e985b0d6a73d5e3f45a2d9",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "169736",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RecoveryRequested",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+            "1821571200",
+            "0xea386ca988f316e6f943d3d53dfeca5600eccbfa97c9189f29fc25ff63221d59"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Recuperação antes de sete dias",
+      "kind": "eth_call-rejected",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "error": "RecoveryNotReady",
+      "args": [
+        "1821571200"
+      ],
+      "transactionHash": null,
+      "note": "Simulação eth_call; nenhuma transação foi minerada e não houve gas pago."
+    },
+    {
+      "label": "Cancelar recuperação",
+      "kind": "mined-transaction",
+      "network": "Anvil local",
+      "chainId": 31337,
+      "hash": "0x7a272bcee3d8fd5ff221ccc06f1345f29e7e313fddda4066c8ca7bb0d1ff3a56",
+      "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "to": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 21,
+      "blockHash": "0x9ed3636e21cc3550bf6ddab7215b39fd2a8d7bb2075fd0f309976bd63a1a814b",
+      "timestamp": 1820966400,
+      "status": 1,
+      "gasUsed": "41586",
+      "events": [
+        {
+          "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          "name": "RecoveryCancelled",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -14,16 +14,13 @@ entrega/v2/
       MANIFEST.sha256
       smart-contract/
       offchain/
-      guia-de-comunicacao/landing/
+      offchain/public/landing/
       docs/
+        EXECUCAO.md
+        MODELO-E-LIMITES.md
     Deploy e Evidências Operacionais On-Chain/
-      README.md
-      evidencias/
-        recibos/
-        estados/
-        capturas/
-        calculos/
-      [PDF em inglês: ainda a produzir]
+      IBIToken_Deploy_e_Evidencias_OnChain_v2_PT_1.pdf
+      IBIToken_Deployment_and_OnChain_Evidence_v2.pdf
     Memorando de oferta - versão 2/
       README.md
       [PDF em português: aguardando revisão do responsável]
@@ -38,7 +35,7 @@ entrega/v2/
   MANIFEST.sha256
 ```
 
-Os colchetes indicam conteúdo pendente, não nomes de arquivos entregues. Os PDFs finais de evidências e memorando não foram fabricados nem substituídos por versões antigas. `apoio/` é material de trabalho da equipe; não deve ser apresentado como relatório final avaliado.
+Os colchetes indicam conteúdo pendente, não nomes de arquivos entregues. O relatório de evidências entregue está em português; a versão em inglês permanece como material complementar; o memorando aguarda a revisão do responsável. `apoio/` é material de trabalho da equipe; não deve ser apresentado como relatório final avaliado.
 
 ## O que já está materializado
 
@@ -46,7 +43,7 @@ A pasta de implementação contém uma cópia executável da fonte, incluindo a 
 
 ## O que ainda falta fechar
 
-Governança conjunta, pausas seletivas e recuperação/contestação integrada seguem registradas nas pendências da implementação. Gabriel também pediu, para a próxima retomada, remodelar os pilares administrativos e aprimorar a custódia; esses desenhos não devem ser considerados fechados. Também falta consolidar o texto final do memorando, conciliar o whitepaper, congelar a revisão técnica e produzir as evidências públicas e o respectivo PDF em inglês. Nenhuma pasta vazia ou README comprova conclusão desses trabalhos.
+Governança conjunta, pausas seletivas e recuperação/contestação integrada seguem registradas nas pendências da implementação. Gabriel também pediu, para a próxima retomada, remodelar os pilares administrativos e aprimorar a custódia; esses desenhos não devem ser considerados fechados. Também falta consolidar o texto final do memorando e conciliar o whitepaper. O relatório de evidências em português foi entregue no GitLab em 26/09/2026, conforme o registro de pendências. Ampliar as operações públicas foi dispensado para esta entrega. Os relatórios e o vídeo distinguem a implantação verificada na Sepolia do ciclo operacional em Anvil. Nenhuma pasta vazia ou README comprova conclusão desses trabalhos.
 
 ## Atualização
 
@@ -62,4 +59,4 @@ As pastas e ZIPs anteriores em `entrega/`, fora de `v2/`, ficam como histórico.
 
 ## Conferência da preparação
 
-A rodada de testes e a execução a partir do ZIP estão registradas em [validação do pacote](<gitlab/Implementação do Contrato Inteligente ERC-20 - versão 2/docs/entrega/validacao-pacote-v2.md>). Os manifestos identificam os arquivos gerados, sem transformar esta preparação em publicação pública ou entrega concluída.
+A rodada de testes e a execução a partir do ZIP estão registradas em [validação do pacote no repositório de trabalho](../../docs/entrega/validacao-pacote-v2.md). Os manifestos identificam os arquivos gerados, sem transformar esta preparação em publicação pública ou entrega concluída.

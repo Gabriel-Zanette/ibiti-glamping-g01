@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: feedback: rejeita apuração antes do encerramento do semestre sem consumir período
+ok 1 - feedback: rejeita apuração antes do encerramento do semestre sem consumir período
+  ---
+  duration_ms: 34540.848583
+  type: 'test'
+  ...
+# Subtest: feedback: recuperação não pode confiscar posição para administrador ou tesouraria
+ok 2 - feedback: recuperação não pode confiscar posição para administrador ou tesouraria
+  ---
+  duration_ms: 798.74375
+  type: 'test'
+  ...
+# Subtest: feedback: troca de administrador preserva estoque, compra e reserva
+ok 3 - feedback: troca de administrador preserva estoque, compra e reserva
+  ---
+  duration_ms: 1500.233916
+  type: 'test'
+  ...
+# Subtest: feedback: compras em duas carteiras da mesma pessoa não excedem 20
+ok 4 - feedback: compras em duas carteiras da mesma pessoa não excedem 20
+  ---
+  duration_ms: 569.554792
+  type: 'test'
+  ...
+# Subtest: feedback: transfer e transferFrom ficam bloqueados mesmo com allowance
+ok 5 - feedback: transfer e transferFrom ficam bloqueados mesmo com allowance
+  ---
+  duration_ms: 794.6945
+  type: 'test'
+  ...
+# Subtest: transferência interna à mesma pessoa no teto não duplica agregado
+ok 6 - transferência interna à mesma pessoa no teto não duplica agregado
+  ---
+  duration_ms: 690.658083
+  type: 'test'
+  ...
+# Subtest: cadastro obrigatório, exclusivo e restrito à administração
+ok 7 - cadastro obrigatório, exclusivo e restrito à administração
+  ---
+  duration_ms: 593.58025
+  type: 'test'
+  ...
+# Subtest: porta de entrada e transferFrom da tesouraria não contornam compra
+ok 8 - porta de entrada e transferFrom da tesouraria não contornam compra
+  ---
+  duration_ms: 702.328209
+  type: 'test'
+  ...
+# Subtest: devolução informal à tesouraria é bloqueada sem alterar posição
+ok 9 - devolução informal à tesouraria é bloqueada sem alterar posição
+  ---
+  duration_ms: 609.25175
+  type: 'test'
+  ...
+# Subtest: recuperação exige anúncio e prazo, migra saldo sem inflação e revoga origem
+ok 10 - recuperação exige anúncio e prazo, migra saldo sem inflação e revoga origem
+  ---
+  duration_ms: 877.952291
+  type: 'test'
+  ...
+# Subtest: recuperação impede destino de outra pessoa, com saldo, contrato ou já reservado
+ok 11 - recuperação impede destino de outra pessoa, com saldo, contrato ou já reservado
+  ---
+  duration_ms: 795.018083
+  type: 'test'
+  ...
+# Subtest: recuperação congela transferências e recebimento, cancelamento devolve operação
+ok 12 - recuperação congela transferências e recebimento, cancelamento devolve operação
+  ---
+  duration_ms: 1277.23675
+  type: 'test'
+  ...
+# Subtest: troca de administrador invalida anúncio anterior e exige novo prazo
+ok 13 - troca de administrador invalida anúncio anterior e exige novo prazo
+  ---
+  duration_ms: 908.252375
+  type: 'test'
+  ...
+# Subtest: feedback: recupera royalties sem saldo e após expiração, preservando valores pagos
+ok 14 - feedback: recupera royalties sem saldo e após expiração, preservando valores pagos
+  ---
+  duration_ms: 1551.030917
+  type: 'test'
+  ...
+# Subtest: calendário fixa oito encerramentos civis e bloqueia esgotamento precoce
+ok 15 - calendário fixa oito encerramentos civis e bloqueia esgotamento precoce
+  ---
+  duration_ms: 1642.60275
+  type: 'test'
+  ...
+# Subtest: construtor rejeita supply divergente e janela que não corresponda a quatro anos civis
+ok 16 - construtor rejeita supply divergente e janela que não corresponda a quatro anos civis
+  ---
+  duration_ms: 631.766625
+  type: 'test'
+  ...
+# Subtest: compra estável é atômica, usa preço fixo e credita a tesouraria
+ok 17 - compra estável é atômica, usa preço fixo e credita a tesouraria
+  ---
+  duration_ms: 1054.611875
+  type: 'test'
+  ...
+# Subtest: falha no pagamento reverte entrega e agregado pessoal
+ok 18 - falha no pagamento reverte entrega e agregado pessoal
+  ---
+  duration_ms: 863.379666
+  type: 'test'
+  ...
+# Subtest: compra inválida não cobra stablecoin e preço ausente impede compra
+ok 19 - compra inválida não cobra stablecoin e preço ausente impede compra
+  ---
+  duration_ms: 925.499
+  type: 'test'
+  ...
+# Subtest: royalty temporal mantém funding atômico, estoque e saque individual
+ok 20 - royalty temporal mantém funding atômico, estoque e saque individual
+  ---
+  duration_ms: 1502.046958
+  type: 'test'
+  ...
+# Subtest: recuperação pendente bloqueia saque e liquidação para carteira perdida
+ok 21 - recuperação pendente bloqueia saque e liquidação para carteira perdida
+  ---
+  duration_ms: 845.465
+  type: 'test'
+  ...
+# Subtest: pausa, expiração e autorizações permanecem eficazes
+ok 22 - pausa, expiração e autorizações permanecem eficazes
+  ---
+  duration_ms: 920.739666
+  type: 'test'
+  ...
+# Subtest: retorno de um ex-administrador não revalida anúncio anterior à troca
+ok 23 - retorno de um ex-administrador não revalida anúncio anterior à troca
+  ---
+  duration_ms: 927.079167
+  type: 'test'
+  ...
+# Subtest: recuperação rejeita contrato que não pode operar a posição recebida
+ok 24 - recuperação rejeita contrato que não pode operar a posição recebida
+  ---
+  duration_ms: 626.457041
+  type: 'test'
+  ...
+# Subtest: abertura única, sem pré-venda, sem semestre antecipado e datas ancoradas em meses civis
+ok 25 - abertura única, sem pré-venda, sem semestre antecipado e datas ancoradas em meses civis
+  ---
+  duration_ms: 34499.197875
+  type: 'test'
+  ...
+# Subtest: cinco tokens desde a compra e mais um no último dia: peso exato, reporte tardio não muda o corte
+ok 26 - cinco tokens desde a compra e mais um no último dia: peso exato, reporte tardio não muda o corte
+  ---
+  duration_ms: 930.946792
+  type: 'test'
+  ...
+# Subtest: recuperação leva pesos não apurados e recebíveis, preservando pagamentos históricos sem duplicar tempo
+ok 27 - recuperação leva pesos não apurados e recebíveis, preservando pagamentos históricos sem duplicar tempo
+  ---
+  duration_ms: 992.390583
+  type: 'test'
+  ...
+# Subtest: tesouraria com saldo zero conserva royalty do estoque mantido antes da venda integral
+ok 28 - tesouraria com saldo zero conserva royalty do estoque mantido antes da venda integral
+  ---
+  duration_ms: 1884.868542
+  type: 'test'
+  ...
+# Subtest: sem transferência entre participantes, entre carteiras da mesma pessoa ou por allowance; recuperação continua permitida
+ok 29 - sem transferência entre participantes, entre carteiras da mesma pessoa ou por allowance; recuperação continua permitida
+  ---
+  duration_ms: 760.507375
+  type: 'test'
+  ...
+# Subtest: 29 de fevereiro mantém aniversário original e bloqueia compras após quatro anos
+ok 30 - 29 de fevereiro mantém aniversário original e bloqueia compras após quatro anos
+  ---
+  duration_ms: 1723.471417
+  type: 'test'
+  ...
+# Subtest: apuração atrasada com 150 titulares permanece abaixo de 2^24 gas por transação
+ok 31 - apuração atrasada com 150 titulares permanece abaixo de 2^24 gas por transação
+  ---
+  duration_ms: 20418.431875
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 118524.034791

@@ -1,0 +1,23 @@
+{
+  "simulations": 5000,
+  "seed_match": true,
+  "max_vp_difference": 7.275957614183426e-11,
+  "mean": 35062.0946456444,
+  "median": 34683.61285948726,
+  "p5_p25_p75_p95": [
+    22221.821223172115,
+    29348.70498216829,
+    40435.275424530366,
+    48836.27862275688
+  ],
+  "prob_under_price": 0.5104,
+  "prob_nominal_loss": 0.029,
+  "cached_cell_errors": [],
+  "sheets": [
+    "Valor do token",
+    "Wacc",
+    "Sensibilidade",
+    "Monte Carlo",
+    "MC Sorteios"
+  ]
+}

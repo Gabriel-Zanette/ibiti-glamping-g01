@@ -1,0 +1,642 @@
+{
+  "network": "ANVIL LOCAL · 31337",
+  "index": 15,
+  "total": 15,
+  "steps": [
+    {
+      "title": "Emissão e preço de teste",
+      "role": "ADMIN",
+      "code": "deploy(150) → setPrimaryPrice(34.874,14 tBRL)",
+      "note": "150 IBT indivisíveis. Reserva inicial de 50; teto de 20 por pessoa."
+    },
+    {
+      "title": "Registrar os participantes",
+      "role": "ADMIN",
+      "code": "registerWallet(USER1, pessoa1) + registerWallet(USER2, pessoa2)",
+      "note": "Pessoas diferentes; identificadores sintéticos. Nenhum documento pessoal é gravado."
+    },
+    {
+      "title": "Registrar abertura simulada",
+      "role": "ADMIN",
+      "code": "recordOpening(15/03/2027, referência)",
+      "note": "Data fictícia do ensaio. Oito semestres e quatro anos a partir deste marco."
+    },
+    {
+      "title": "Autorizar o pagamento de USER1",
+      "role": "USER1",
+      "code": "tBRL.approve(IBIToken, 69.748,28)",
+      "note": "Cada participante recebe moeda fictícia. A autorização cobre exatamente dois IBT."
+    },
+    {
+      "title": "Comprar 2 IBT no início",
+      "role": "USER1",
+      "code": "buyPrimary(2, referência única)",
+      "note": "Pagamento à tesouraria e entrega de IBT na mesma transação."
+    },
+    {
+      "title": "Rejeitar compra sem cadastro",
+      "role": "NÃO CADASTRADO",
+      "code": "buyPrimary.staticCall(1, referência)",
+      "note": "Uma simulação rejeitada não gera transação minerada nem cobrança de gas."
+    },
+    {
+      "title": "Comprar 2 IBT na metade",
+      "role": "USER2",
+      "code": "avançar Anvil → approve → buyPrimary(2, referência)",
+      "note": "Somente o relógio local avança. USER2 terá metade do tempo de USER1."
+    },
+    {
+      "title": "Rejeitar transferência secundária",
+      "role": "USER1",
+      "code": "transfer.staticCall(USER2, 1)",
+      "note": "Os dois estão cadastrados, mas transferências ordinárias estão desabilitadas."
+    },
+    {
+      "title": "Impedir apuração antecipada",
+      "role": "ADMIN",
+      "code": "reportRevenue.staticCall(150.000 tBRL, relatório)",
+      "note": "O semestre precisa terminar antes de ser apurado."
+    },
+    {
+      "title": "Apurar e financiar o semestre 1",
+      "role": "ADMIN",
+      "code": "fechar semestre → approve(22.500) → reportRevenue(150.000)",
+      "note": "15% da receita fictícia. Rateio por quantidade × tempo, incluindo a tesouraria."
+    },
+    {
+      "title": "Sacar a parcela de USER1",
+      "role": "USER1",
+      "code": "claimRoyalty(1) → 300 tBRL",
+      "note": "Dois IBT durante o semestre inteiro. Após o saque, o recebível fica zerado."
+    },
+    {
+      "title": "Sacar a parcela de USER2",
+      "role": "USER2",
+      "code": "claimRoyalty(1) → 150 tBRL",
+      "note": "Dois IBT durante metade do semestre. Mesma quantidade, menor tempo de posse."
+    },
+    {
+      "title": "Anunciar recuperação de acesso",
+      "role": "ADMIN",
+      "code": "requestRecovery(USER1, carteira nova, protocolo)",
+      "note": "Destino vazio, da mesma pessoa. Espera obrigatória de sete dias."
+    },
+    {
+      "title": "Rejeitar execução antecipada",
+      "role": "ADMIN",
+      "code": "reissue.staticCall(USER1, carteira nova)",
+      "note": "Antes do prazo, a movimentação definitiva é rejeitada."
+    },
+    {
+      "title": "Cancelar e conferir estado final",
+      "role": "ADMIN",
+      "code": "cancelRecovery(USER1)",
+      "note": "150 IBT; reserva de 50; USER1 e USER2 com 2 IBT; recebíveis sacados."
+    }
+  ],
+  "accounts": {
+    "admin": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "user1": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "user2": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
+  },
+  "token": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "balances": [
+    {
+      "ibt": "146",
+      "tbrl": "116996.56",
+      "due": "22050.0"
+    },
+    {
+      "ibt": "2",
+      "tbrl": "300.0",
+      "due": "0.0"
+    },
+    {
+      "ibt": "2",
+      "tbrl": "150.0",
+      "due": "0.0"
+    }
+  ],
+  "records": [
+    {
+      "label": "Recuperação antecipada rejeitada",
+      "kind": "eth_call-rejected",
+      "error": "RecoveryNotReady",
+      "chainId": 31337,
+      "transactionHash": null,
+      "note": "Simulação sem mineração ou gas pago"
+    },
+    {
+      "label": "Recuperação cancelada",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x4839d0894b51b8d2ab0b6261b9289400e06d02e3cef0d94d44991f37e87b5b18",
+      "blockNumber": 21,
+      "status": 1,
+      "gasUsed": "41586",
+      "events": [
+        {
+          "name": "RecoveryCancelled",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+          ]
+        }
+      ]
+    }
+  ],
+  "allRecords": [
+    {
+      "label": "Emissão de 150 IBT",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x5141a45d34d659a24036cc9adfb96c2cfaa61fecf829ef70ac2d0aff497cb542",
+      "blockNumber": 2,
+      "status": 1,
+      "gasUsed": "3906647",
+      "events": [
+        {
+          "name": "OwnershipTransferred",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+          ]
+        },
+        {
+          "name": "StablecoinSet",
+          "args": [
+            "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+          ]
+        },
+        {
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "150"
+          ]
+        },
+        {
+          "name": "Emission",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "150",
+            "50",
+            "20",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Preço definido",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xa97d51c1879293ef5d00a979811d27c2cee4b679005c1c7b753f1816ebe3d789",
+      "blockNumber": 3,
+      "status": 1,
+      "gasUsed": "47144",
+      "events": [
+        {
+          "name": "PrimaryPriceSet",
+          "args": [
+            "34874140000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 registrado",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xc5948a1c6b6b17192f1403717e3b36d7379d8ee6fc59908a427b90337e93fe2c",
+      "blockNumber": 4,
+      "status": 1,
+      "gasUsed": "53173",
+      "events": [
+        {
+          "name": "WalletRegistered",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xf7e95e3fa6a8ab38f8a889a74fc77175399fb5334bc736859b70d62464c91674"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER2 registrado",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xe84bed905d287da001a8200c06cd5e4e3a8b4a85d78f764913095a098df79b9c",
+      "blockNumber": 5,
+      "status": 1,
+      "gasUsed": "53161",
+      "events": [
+        {
+          "name": "WalletRegistered",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xfe76f558641601b11880020ecddd424007fdc3ae5b06d51f7b0aa7fce78ea0ef"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1805068800,
+      "iso": "2027-03-15T00:00:00.000Z"
+    },
+    {
+      "label": "Abertura simulada",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xaac2f382cbaae9ceca8ef9d14fcfaa36f837d82f258b890264cc1fa4721b2571",
+      "blockNumber": 7,
+      "status": 1,
+      "gasUsed": "491502",
+      "events": [
+        {
+          "name": "OpeningRecorded",
+          "args": [
+            "1805068800",
+            "1931299199",
+            "0x9e80de743d1d535ef41bbfed9ef72fd7ac8bee500d0e3b72a50b699bae3c3d9d"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Moeda de teste USER1",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x9a6eecc34ab610f20b81f6a5011df4bb44b9a77eaa814e5f178a14537478d21b",
+      "blockNumber": 8,
+      "status": 1,
+      "gasUsed": "68085",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Moeda de teste USER2",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x53171a3a5c206daa5872b45a244e67829e06248f219415d3d40c6ca9635cd03e",
+      "blockNumber": 9,
+      "status": 1,
+      "gasUsed": "50973",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0x0000000000000000000000000000000000000000",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 autoriza tBRL",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xa7b7021ffa8d0867442c0312b00d0e248288bd6ebbd04b885c6b928b0a0d1f38",
+      "blockNumber": 10,
+      "status": 1,
+      "gasUsed": "45945",
+      "events": [
+        {
+          "name": "Approval",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 compra 2 IBT",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xb1ff3a0fa3e04bfa28a736439e7977c90c2b5c4e2d7cd5a69a3c4027ce24532a",
+      "blockNumber": 11,
+      "status": 1,
+      "gasUsed": "314737",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "2"
+          ]
+        },
+        {
+          "name": "Transfer",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "69748280000"
+          ]
+        },
+        {
+          "name": "PrimaryPayment",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "69748280000"
+          ]
+        },
+        {
+          "name": "PrimaryPurchase",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "2",
+            "0xafef9115fa0bf9208ab9af1b0efa39a595f8f5fd04d27bf0da51dbbc04530414"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Compra sem cadastro rejeitada",
+      "kind": "eth_call-rejected",
+      "error": "WalletNotRegistered",
+      "chainId": 31337,
+      "transactionHash": null,
+      "note": "Simulação sem mineração ou gas pago"
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1813017600,
+      "iso": "2027-06-15T00:00:00.000Z"
+    },
+    {
+      "label": "USER2 autoriza tBRL",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xaf34167555886f0271430fbec1382abc2232622f75c56da690b8638b595cc56f",
+      "blockNumber": 13,
+      "status": 1,
+      "gasUsed": "45945",
+      "events": [
+        {
+          "name": "Approval",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "69748280000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER2 compra 2 IBT",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xdfb961ffb0f6ea9f0cb012498a06cf6499097b655ba09c9b6312dc410c4ded7b",
+      "blockNumber": 14,
+      "status": 1,
+      "gasUsed": "320927",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "2"
+          ]
+        },
+        {
+          "name": "Transfer",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "69748280000"
+          ]
+        },
+        {
+          "name": "PrimaryPayment",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "69748280000"
+          ]
+        },
+        {
+          "name": "PrimaryPurchase",
+          "args": [
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "2",
+            "0xf1ab0025367c9c6474750a0523de97d6e5f02ddd0a4a4c0d1beb086516ed96d8"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Transferência secundária rejeitada",
+      "kind": "eth_call-rejected",
+      "error": "SecondaryTransfersDisabled",
+      "chainId": 31337,
+      "transactionHash": null,
+      "note": "Simulação sem mineração ou gas pago"
+    },
+    {
+      "label": "Apuração antecipada rejeitada",
+      "kind": "eth_call-rejected",
+      "error": "PeriodNotClosed",
+      "chainId": 31337,
+      "transactionHash": null,
+      "note": "Simulação sem mineração ou gas pago"
+    },
+    {
+      "kind": "local-time-advance",
+      "timestamp": 1820966400,
+      "iso": "2027-09-15T00:00:00.000Z"
+    },
+    {
+      "label": "Autorizar depósito",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x5d39297b50ab26e92648d919e6eecf1df0d4c1b49a52356c6156110b8ec1f3a2",
+      "blockNumber": 16,
+      "status": 1,
+      "gasUsed": "45933",
+      "events": [
+        {
+          "name": "Approval",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "22500000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Apuração e depósito atômicos",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x5c55d3c71d200bf87dafeed1914534ac368620e5c203a525b18ee4de96b90268",
+      "blockNumber": 17,
+      "status": 1,
+      "gasUsed": "344717",
+      "events": [
+        {
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "22050000000"
+          ]
+        },
+        {
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        },
+        {
+          "name": "RoyaltyRegistered",
+          "args": [
+            "1",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        },
+        {
+          "name": "Transfer",
+          "args": [
+            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "22500000000"
+          ]
+        },
+        {
+          "name": "RevenueReported",
+          "args": [
+            "1",
+            "150000000000",
+            "22500000000",
+            "0xdf52cc8bbe1b57304ebdadf4c46327a99c3cda9721cbd0ef074f7f137d920a31",
+            "150",
+            "3",
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER1 saca 300 tBRL",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xbce186b1b9e77f4c287aef67a444bb93f873406ad7e14be23872debb5265e46a",
+      "blockNumber": 18,
+      "status": 1,
+      "gasUsed": "92949",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        },
+        {
+          "name": "RoyaltyClaimed",
+          "args": [
+            "1",
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "300000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "USER2 saca 150 tBRL",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x5ba6d23669af16fd55069f2439bcf2a60753242fb9bc431f9771d595bb6cb343",
+      "blockNumber": 19,
+      "status": 1,
+      "gasUsed": "92949",
+      "events": [
+        {
+          "name": "Transfer",
+          "args": [
+            "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        },
+        {
+          "name": "RoyaltyClaimed",
+          "args": [
+            "1",
+            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+            "150000000"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Recuperação anunciada",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0xf1ca94038064f0c2f50de4789d275877ac637b79b1f7427a9d6c0b44382f1dd9",
+      "blockNumber": 20,
+      "status": 1,
+      "gasUsed": "169748",
+      "events": [
+        {
+          "name": "RecoveryRequested",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+            "1821571200",
+            "0x06d3010ab6bd034eb41761b073cd6afd12ae06a6d3de3d714454aa4323c2b1d5"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Recuperação antecipada rejeitada",
+      "kind": "eth_call-rejected",
+      "error": "RecoveryNotReady",
+      "chainId": 31337,
+      "transactionHash": null,
+      "note": "Simulação sem mineração ou gas pago"
+    },
+    {
+      "label": "Recuperação cancelada",
+      "kind": "mined-transaction",
+      "chainId": 31337,
+      "hash": "0x4839d0894b51b8d2ab0b6261b9289400e06d02e3cef0d94d44991f37e87b5b18",
+      "blockNumber": 21,
+      "status": 1,
+      "gasUsed": "41586",
+      "events": [
+        {
+          "name": "RecoveryCancelled",
+          "args": [
+            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+            "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+          ]
+        }
+      ]
+    }
+  ],
+  "calendar": {
+    "opening": 1805068800,
+    "end": 1820966400
+  }
+}

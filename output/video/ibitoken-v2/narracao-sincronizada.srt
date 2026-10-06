@@ -1,0 +1,103 @@
+1
+00:00:00,000 --> 00:00:05,000
+Vamos demonstrar o IBIToken: publicação na Sepolia e operações no Anvil.
+
+2
+00:00:05,000 --> 00:00:13,000
+São cento e cinquenta tokens, reserva de cinquenta e teto de vinte por pessoa. Não há mercado secundário.
+
+3
+00:00:13,000 --> 00:00:18,000
+Esta é a fonte atual no Remix, preparada para a entrega oficial v2.
+
+4
+00:00:18,000 --> 00:00:23,000
+Compilamos com Solidity zero ponto oito ponto trinta e quatro, otimizador e via IR.
+
+5
+00:00:23,000 --> 00:00:31,000
+O administrador confirma pela MetaMask. Publicamos o contrato e configuramos o preço usando tBRL, moeda fictícia de teste.
+
+6
+00:00:31,000 --> 00:00:38,000
+O Etherscan mostra a criação bem-sucedida e a emissão de cento e cinquenta IBT, neste bloco.
+
+7
+00:00:38,000 --> 00:00:46,000
+O Sourcify confirma correspondência exata do código. Qualquer pessoa pode verificar, mas isso não substitui uma auditoria.
+
+8
+00:00:46,000 --> 00:00:51,000
+Agora usamos o Anvil local. Somente nesta rede o tempo será acelerado.
+
+9
+00:00:51,000 --> 00:00:56,000
+ADMIN é a tesouraria. USER1 e USER2 são contas locais de participantes diferentes.
+
+10
+00:00:56,000 --> 00:01:02,000
+O administrador registra as duas carteiras com identificadores distintos. Os documentos pessoais ficam fora da blockchain.
+
+11
+00:01:02,000 --> 00:01:08,000
+A abertura fictícia inicia quatro anos e oito semestres. Não é uma previsão de inauguração.
+
+12
+00:01:08,000 --> 00:01:14,000
+USER1 autoriza o gasto exato para comprar dois tokens. A moeda utilizada é de teste.
+
+13
+00:01:14,000 --> 00:01:20,000
+Na compra, pagamento e entrega dos tokens acontecem juntos. Uma falha reverte os dois movimentos.
+
+14
+00:01:20,000 --> 00:01:25,000
+A compra por uma carteira não cadastrada é rejeitada, sem transação minerada.
+
+15
+00:01:25,000 --> 00:01:31,000
+Na metade do semestre local, USER2 autoriza o pagamento e também compra dois tokens.
+
+16
+00:01:31,000 --> 00:01:36,000
+A transferência entre os participantes é rejeitada: o mercado secundário está desabilitado.
+
+17
+00:01:36,000 --> 00:01:41,000
+A apuração antecipada também é rejeitada. O semestre precisa ter terminado.
+
+18
+00:01:41,000 --> 00:01:49,000
+Depois do fechamento, o contrato aplica quinze por cento à receita fictícia e exige o depósito das parcelas.
+
+19
+00:01:49,000 --> 00:01:57,000
+USER1 participou o semestre inteiro; USER2, metade. Recebem trezentos e cento e cinquenta tBRL. A tesouraria também participa.
+
+20
+00:01:57,000 --> 00:02:02,000
+USER1 saca trezentos tBRL. Seu recebível fica zerado e os tokens permanecem.
+
+21
+00:02:02,000 --> 00:02:07,000
+USER2 saca cento e cinquenta tBRL, pela metade do tempo de participação.
+
+22
+00:02:07,000 --> 00:02:13,000
+Anunciamos recuperação para uma carteira vazia da mesma pessoa. O prazo obrigatório é de sete dias.
+
+23
+00:02:13,000 --> 00:02:18,000
+A execução imediata é rejeitada: ainda não terminou o prazo de recuperação.
+
+24
+00:02:18,000 --> 00:02:23,000
+Cancelamos a recuperação. Cada participante mantém seus dois tokens, sem movimentação definitiva.
+
+25
+00:02:23,000 --> 00:02:29,000
+Os JSONs preservam recibos e eventos, separando operações locais das evidências públicas da Sepolia.
+
+26
+00:02:29,000 --> 00:02:39,000
+Esta demonstração usa moeda e abertura fictícias. Identidade e receita dependem de controles externos. Governança por pilares, pausa seletiva e custódia continuam em aprimoramento.

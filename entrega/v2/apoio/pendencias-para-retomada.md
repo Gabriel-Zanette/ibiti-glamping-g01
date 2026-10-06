@@ -1,6 +1,10 @@
 # Pendências para retomada — IBITI
 
-Atualizado em 25/09/2026. Pedido de Gabriel: lembrar nas novas conversas deste repositório e em 26/09 às 09h. Esta lista não autoriza mudanças de condições econômicas ainda abertas. Validar o estado da fonte antes de repetir uma pendência.
+Atualizado em 26/09/2026. Pedido de Gabriel: lembrar nas novas conversas deste repositório e em 26/09 às 09h. Esta lista não autoriza mudanças de condições econômicas ainda abertas. Validar o estado da fonte antes de repetir uma pendência.
+
+## Entrega concluída em 26/09/2026
+
+O relatório revisado de Deploy e Evidências foi publicado em português, conforme a decisão expressa de Gabriel, na `main` do GitLab (commit `00fde23c8ab118ba5e644fd348a35ee93ba8cb8a`). Inclui identificação dos dois vídeos, distinção entre implantação pública e ciclo local, evidências das correções da v1 e anexos incorporados. As duas suítes de regressão executadas tiveram 31 testes aprovados. A implantação na Sepolia e a verificação de código já foram realizadas; o ciclo de compras, royalties e recuperação documentado continua local. Gabriel dispensou ampliar o coletor e preparar novas operações públicas nesta rodada; não reapresentar essas tarefas como necessárias para fechar esta entrega.
 
 ## Novas frentes solicitadas para a próxima retomada
 
@@ -86,8 +90,8 @@ Esses itens não têm a mesma exigência para um protótipo acadêmico e para um
 - Revisar com o colega o feedback do memorando; manter o PDF original e consolidar as reposições na versão editorial dele.
 - Conciliar whitepaper, textos financeiros e material de entrega com o contrato final; preservar documentos históricos claramente identificados.
 - Congelar a fonte final, executar toda a suíte apropriada e regenerar o pacote de entrega. ZIPs anteriores não passam a refletir alterações locais automaticamente.
-- Produzir novo deploy/evidências da versão escolhida e o relatório em inglês. O guia entregue nesta rodada é preparação, não operação pública executada.
-- Tratar publicamente o tempo: semestre e sete dias não podem ser acelerados em Sepolia; declarar a cobertura local/pública separadamente.
+- Deploy e relatório de evidências concluídos conforme o registro de 26/09 acima; a versão de entrega foi definida em português. Não reapresentar a produção do relatório como pendência.
+- A separação entre cobertura local e pública e a impossibilidade de acelerar semestre e sete dias na Sepolia já estão explicitadas no relatório revisado.
 - Confirmar visualmente com Gabriel a nova interface. A rodada automatizada verifica funcionamento e responsividade; a aceitação estética depende do uso dele.
 - Conferir o cursor de anotações no navegador do Codex. A incompatibilidade de estilos foi mitigada apenas na demo local na rodada anterior; o funcionamento da ferramenta do aplicativo ainda não foi confirmado pelo usuário.
 

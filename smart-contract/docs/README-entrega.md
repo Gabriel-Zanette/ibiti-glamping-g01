@@ -1,26 +1,17 @@
 # Implementação do Contrato Inteligente ERC-20 — versão 2
 
-IBITI Glamping · Grupo G01 · preparação da segunda entrega oficial, 25/09/2026.
+IBITI Glamping · Grupo G01 · segunda entrega acadêmica em preparação. A revisão interna v4 identifica o desenvolvimento destinado à versão oficial v2.
 
-A única versão oficial já publicada é a v1. Esta pasta reúne a fonte atual destinada à **v2**, ainda em preparação. “v4” em nomes de arquivos, package.json e registros é a revisão interna de desenvolvimento/testes. Não representa uma quarta publicação oficial nem atualização de endereços históricos.
+## Conteúdo
 
-## Começar por aqui
+- `smart-contract/`: contratos, bibliotecas licenciadas, scripts Remix, compilação e testes.
+- `offchain/`: portal, landing, cadastro, compras, livro de cotas e testes.
+- [Execução e contas de demonstração](docs/EXECUCAO.md).
+- [Modelo, evolução da v1 e limitações](docs/MODELO-E-LIMITES.md).
 
-- [Execução, Remix e contas de demonstração](smart-contract/docs/guia-v4.md).
-- [Inventário das mudanças on-chain e off-chain](docs/decisoes/2026-09-25-inventario-completo-token.md).
-- [Pendências e critérios de conclusão](docs/decisoes/2026-09-25-pendencias-para-retomada.md).
-- [Jornada e revisão das telas](docs/decisoes/2026-09-25-interface-progressiva.md).
-- [Feedback do memorando v2](docs/decisoes/2026-09-25-feedback-memorando-v2.md).
+## Executar
 
-## Estrutura executável
-
-`smart-contract/` contém contratos, bibliotecas, scripts Remix, testes e ferramentas. `offchain/` contém cadastro, administração, compras e livro de cotas. `guia-de-comunicacao/landing/` contém as páginas públicas e seus recursos, utilizadas pelo servidor. Esses módulos precisam permanecer juntos; não entregar apenas o Solidity nem remover a landing.
-
-`docs/` preserva decisões e a trajetória entre versões. Os documentos históricos identificados como tal, inclusive registros de publicação, não substituem os guias atuais. O whitepaper e o memorando finais ainda precisam de conciliação editorial; não se inclui um PDF antigo sob o nome de documento final novo.
-
-## Reproduzir
-
-Node.js 24+; executar da raiz desta pasta:
+Node.js 24+. Na raiz desta pasta:
 
 ```bash
 npm ci --prefix smart-contract
@@ -33,20 +24,12 @@ npm run typecheck --prefix offchain
 npm run demo:portal --prefix offchain
 ```
 
-A demonstração inicia a landing em `http://localhost:3000/`, com login em `/conta#entrar`; `DEMO_PORT` permite escolher outra porta. Cria rede Anvil e banco isolados, pessoas sintéticas, abertura simulada e moeda fictícia. Os perfis e senhas exclusivamente de teste estão no guia de execução. `Ctrl+C` encerra essa demonstração. Não é Sepolia nem operação comercial; não usar chaves de teste com recursos reais.
+Abrir `http://localhost:3000/`. A demonstração cria rede Anvil e banco isolados, com pessoas e moeda fictícias. Acessos e sequência de compra estão no guia. `Ctrl+C` encerra a demonstração. Manter as duas pastas irmãs para executar integrações.
 
-Solidity 0.8.34, EVM Osaka, otimizador 200 e viaIR habilitado; OpenZeppelin 5.6.1 vendorizada. Não há Hardhat.
+## Escopo
 
-## Modelo atual e limites
+150 IBT indivisíveis, reserva inicial de 50, teto agregado de 20 por pessoa, compra primária atômica, ausência de mercado secundário, royalties proporcionais ao tempo e oito semestres desde a abertura. Cotas de hospedagem ficam no serviço externo; cancelamento é manual.
 
-Emissão de 150 IBT indivisíveis; reserva inicial de 50; teto de 20 por pessoa; tesouraria separada de owner; royalties por quantidade × tempo; oito semestres civis e quatro anos desde a abertura; ausência de mercado secundário; recuperação da mesma pessoa anunciada com sete dias; compra em stablecoin atômica. Referência econômica: R$ 34.874,14/IBT; tBRL na demonstração é fictício.
+Governança conjunta, pausa seletiva, contestação integrada e custódia comercial permanecem pendentes, detalhadas no documento de modelo. Os testes locais não comprovam essas funcionalidades nem substituem evidências em rede pública.
 
-Waitlist com prazo de cinco dias úteis, três modalidades de custódia, compra após aprovação e conta integrada às cotas. Cancelamento de hospedagem é manual. A custódia sem extensão funciona no adaptador Anvil local; não equivale a contratar um custodiante real.
-
-Governança conjunta por pilares, pausas seletivas, recuperação/contestação integrada e tesouraria 2 de 3 continuam incompletas. Integrações comerciais de identidade, pagamento e hospedagem não estão prontas. A pasta permite revisar o formato e executar o estado atual, mas não sinaliza essas pendências como concluídas.
-
-## Integridade e histórico
-
-`MANIFEST.sha256` identifica o conteúdo do pacote; `FONTE.json` informa a base de origem e que se trata de preparação. O manifesto é a referência para as alterações locais incluídas; o commit-base sozinho não as representa. Registros em `smart-contract/deployments/` são históricos, não evidências de um novo deploy desta v2.
-
-Os arquivos `.env.example` e `.env.portal.example` são modelos sem segredos reais. Bancos, sessões, configurações privadas e node_modules ficam fora do pacote. Não editar cópias geradas nesta pasta; alterar os módulos canônicos e executar `npm run package:delivery --prefix smart-contract` no repositório de trabalho.
+`MANIFEST.sha256` identifica os arquivos; `FONTE.json` registra a origem e os ajustes de empacotamento. Históricos, planos internos, PDFs de referência, roteiros e vídeos ficam fora deste artefato. Evidências públicas estão na pasta própria de Deploy. A atualização desta cópia é feita pelo empacotador do repositório de trabalho.

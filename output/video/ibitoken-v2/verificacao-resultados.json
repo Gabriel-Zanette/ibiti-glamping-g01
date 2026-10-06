@@ -1,0 +1,11 @@
+{
+  "localStepsCompleted": 15,
+  "localStepsTotal": 15,
+  "balancesVerified": true,
+  "royaltiesVerified": true,
+  "guardsVerified": true,
+  "sourcifyExactMatch": true,
+  "contract": "0x021DD3c028FC0FFaA45F6D8cb0D0912fD1850520",
+  "chainIdSepolia": 11155111,
+  "chainIdLocal": 31337
+}
