@@ -1,0 +1,10 @@
+{
+  "name": "ibitoken-landing-metamask",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing acadêmica do IBIToken com consulta de carteira na Sepolia.",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "node --test"
+  }
+}
